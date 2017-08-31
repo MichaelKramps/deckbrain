@@ -13,28 +13,18 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '../views'));
 
 /***** Middleware *****/
-// force https
-app.use(function (req, res, next) {
-	if (req.secure) {
-		// request was via https, so do no special handling
-		next();
-	} else {
-		// request was via http, so redirect to https
-		res.redirect('https://' + req.hostname + req.originalUrl);
-	}
-});
+var middleware = require('./middleware');
+middleware.use(app);
 
 
 /***** IO *****/
 var socketIO = require('socket.io')(secureServer);
 var io = require('./io.js');
-io.Start(socketIO);
+io.start(socketIO);
 
 /***** Routing *****/
-app.get('/', function(req, res){
-	res.render('static-page');
-});
-
+var routes = require('./routes.js');
+routes.set(app);
 
 
 server.listen(config.ports.http, function(){
