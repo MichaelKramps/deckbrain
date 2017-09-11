@@ -24,7 +24,7 @@ io.start(socketIO);
 
 /***** Routing *****/
 var routes = require('./routes.js');
-routes.set(app);
+routes.set(app, express);
 
 
 server.listen(config.ports.http, function(){
