@@ -1,0 +1,24 @@
+{
+  "name": "asset-manager",
+  "version": "1.0.0",
+  "description": "Web app to manage assets and view cash flow",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.15.3",
+    "jquery": "^3.2.1",
+    "socket.io": "^2.0.3",
+    "watchify": "^3.9.0"
+  },
+  "devDependencies": {
+    "browserify": "^14.4.0",
+    "ejs": "^2.5.7",
+    "express": "^4.15.3",
+    "jquery": "^3.2.1"
+  },
+  "scripts": {
+    "build": "browserify js/games/robot-royale.js -o js/games/robot-royale-bundle.js"
+	"watch": "watchify js/games/robot-royale.js -o js/games/robot-royale-bundle.js"
+  },
+  "author": "Michael Kramps",
+  "license": "ISC"
+}
