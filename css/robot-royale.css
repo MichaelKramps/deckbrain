@@ -1,0 +1,11 @@
+#cards {
+	display: flex;
+	justify-content: space-around;
+}
+
+#cards div {
+	border: 1px solid black;
+	cursor: pointer;
+	cursor: hand;
+	padding: 1em;
+}

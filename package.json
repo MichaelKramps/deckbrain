@@ -16,7 +16,7 @@
     "jquery": "^3.2.1"
   },
   "scripts": {
-    "build": "browserify js/games/robot-royale.js -o js/games/robot-royale-bundle.js"
+    "build": "browserify js/games/robot-royale.js -o js/games/robot-royale-bundle.js",
 	"watch": "watchify js/games/robot-royale.js -o js/games/robot-royale-bundle.js"
   },
   "author": "Michael Kramps",
