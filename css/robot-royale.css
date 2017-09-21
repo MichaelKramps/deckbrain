@@ -1,3 +1,5 @@
+/* Drafting Phase */
+
 #cards {
 	display: flex;
 	justify-content: space-around;
@@ -7,5 +9,17 @@
 	border: 1px solid black;
 	cursor: pointer;
 	cursor: hand;
+	padding: 1em;
+}
+
+/* Battle Phase */
+
+.my-dashboard {
+	display: flex;
+	justify-content: space-around;
+}
+
+.robot {
+	border: 1px solid black;
 	padding: 1em;
 }

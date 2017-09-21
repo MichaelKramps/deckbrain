@@ -4,6 +4,11 @@ module.exports = challenges;
 
 var $ = require("jquery");
 
+var returnRobotHtml = function(){
+	var html = "<pre style=\"font: 6px/3px monospace;\">                                  <br>                @@                <br>                .                 <br>                `                 <br>                `                 <br>                `                 <br>            .:::;::::`            <br>           +@@@@@@@@@@,           <br>           @@@@@@@@@@@#           <br>           #@@  ,'  @@+           <br>           +@@      '@,           <br>           :@@  `,  @@`           <br>           `@@@@@@@@@@            <br>            @@@@@@@@@@            <br>       @@@@.@@@@@@@@@@,@@@@       <br>       @@@@:@@@@@@@@@@'@@@@       <br>       @@@@+@@@@@@@@@@#@@@#       <br>       @@@@@,@@@@@@@@.@@@@+       <br>   ....#@@@@@`,,,,,,`@@@@@+....   <br>  :@@@@+@@@@@@@@@@@@@@@@@@;@@@@,  <br>  :@@@@;@@@@@@@@@@@@@@@@@@:@@@@,  <br>  :@@  :@@@@@`@: @@@@@@@@@,  @@,  <br>  :@@  .@@@@@@@@#,,@@@:@@@`  @@,  <br>  :@@   @@@@@`.+.. @@@:@@@   @@,  <br>  :@@   @@@:@'##@@@,@..@@@   @@,  <br>  :@@   @@@+@,@@@@@@,@#@@@   @@,  <br>  :@@   @@@,@#@@@@@@#;@.@@   @@,  <br>  :@@   @@@@ @+@@@@@::'`@@   @@.  <br>  :@@   @@@@#@..@@@:@,.'@@   @@,  <br>  :@@   @@@@#@@@``@@@+@@@@   @@,  <br>  +@@   @@@@#,` @.@@@,@@@@   @@'  <br> @   @  @@@@@@@@@@@``@@@@@  @   # <br> #   `. #@@@@@@@@@@@@@@@@@ .    # <br>        '@@@@@@@@@@@@@@@@@        <br>        ,@@@@@@@@@@@@@@@@@        <br>        .+++++++++++++++++        <br>              .@@@@               <br>              .@@@@               <br>              .@@@@               <br>              .@@@@               <br>              .@@@@               <br>              `....               <br>           '##########;           <br>           '##########;           <br>           :'''''''''':           <br>           `         ``           <br>           :'''''''''':           <br>           '##########;           <br>                                  </pre>";
+	return html;
+};
+
 var returnHealthHtml = function(robot){
 	var html = '<div class="robot-health">Health: ';
 	html += robot.body.health;
@@ -52,11 +57,12 @@ var returnPowerHtml = function(robot){
 	return html;
 };
 
-challenges.showTeam = function(team){ // build the html that shows team and stats
+var returnTeamHtml = function(team){
 	var html = "";
 	for (var i = 0; i < team.length; i++){
 		var robotHtml = '<div class="robot">';
 		var thisRobot = team[i];
+		robotHtml += returnRobotHtml();
 		robotHtml += returnHealthHtml(thisRobot);
 		robotHtml += returnSpeedHtml(thisRobot);
 		robotHtml += returnDampenHtml(thisRobot);
@@ -66,5 +72,11 @@ challenges.showTeam = function(team){ // build the html that shows team and stat
 		robotHtml += '</div>';
 		html += robotHtml;
 	}
-	console.log(html);
+	return html;
+};
+
+challenges.showTeam = function(team){ // build the html that shows team and stats
+	$(".my-dashboard").empty();
+	var html = returnTeamHtml(team);
+	$(".my-dashboard").append(html);
 }
