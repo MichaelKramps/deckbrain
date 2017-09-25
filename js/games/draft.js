@@ -1,10 +1,6 @@
-var draft = {};
-
-module.exports = draft;
-
 var $ = require("jquery");
 var data = require("./data.js");
-var showTeam = require("./showTeam.js");
+var challenges = require("./challenges.js");
 var choicesMade = [];
 	
 var clearPreviousDraftPick = function(){
@@ -65,7 +61,7 @@ var draft = function(choices, round = 0){
 	if (round === choices.length) {
 		clearPreviousDraftPick();
 		var team = createAndReturnTeam();
-		showTeam(team); //Passes on to challenges.js
+		challenges(team);
 	}
 	
 	clearPreviousDraftPick();

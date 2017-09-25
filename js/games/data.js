@@ -30,4 +30,4 @@ data.availableChoices = [
 	{title: "What weapons will they carry?", cards: data.weapons}
 ];
 
-data.challengers = [];
+data.enemies = [];

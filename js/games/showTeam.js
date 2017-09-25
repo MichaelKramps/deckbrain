@@ -1,8 +1,5 @@
-var challenges = {};
-
-module.exports = challenges;
-
 var $ = require("jquery");
+var fight = require("./fight.js");
 
 var returnRobotHtml = function(){
 	var html = "<pre style=\"font: 6px/3px monospace;\">                                  <br>                @@                <br>                .                 <br>                `                 <br>                `                 <br>                `                 <br>            .:::;::::`            <br>           +@@@@@@@@@@,           <br>           @@@@@@@@@@@#           <br>           #@@  ,'  @@+           <br>           +@@      '@,           <br>           :@@  `,  @@`           <br>           `@@@@@@@@@@            <br>            @@@@@@@@@@            <br>       @@@@.@@@@@@@@@@,@@@@       <br>       @@@@:@@@@@@@@@@'@@@@       <br>       @@@@+@@@@@@@@@@#@@@#       <br>       @@@@@,@@@@@@@@.@@@@+       <br>   ....#@@@@@`,,,,,,`@@@@@+....   <br>  :@@@@+@@@@@@@@@@@@@@@@@@;@@@@,  <br>  :@@@@;@@@@@@@@@@@@@@@@@@:@@@@,  <br>  :@@  :@@@@@`@: @@@@@@@@@,  @@,  <br>  :@@  .@@@@@@@@#,,@@@:@@@`  @@,  <br>  :@@   @@@@@`.+.. @@@:@@@   @@,  <br>  :@@   @@@:@'##@@@,@..@@@   @@,  <br>  :@@   @@@+@,@@@@@@,@#@@@   @@,  <br>  :@@   @@@,@#@@@@@@#;@.@@   @@,  <br>  :@@   @@@@ @+@@@@@::'`@@   @@.  <br>  :@@   @@@@#@..@@@:@,.'@@   @@,  <br>  :@@   @@@@#@@@``@@@+@@@@   @@,  <br>  +@@   @@@@#,` @.@@@,@@@@   @@'  <br> @   @  @@@@@@@@@@@``@@@@@  @   # <br> #   `. #@@@@@@@@@@@@@@@@@ .    # <br>        '@@@@@@@@@@@@@@@@@        <br>        ,@@@@@@@@@@@@@@@@@        <br>        .+++++++++++++++++        <br>              .@@@@               <br>              .@@@@               <br>              .@@@@               <br>              .@@@@               <br>              .@@@@               <br>              `....               <br>           '##########;           <br>           '##########;           <br>           :'''''''''':           <br>           `         ``           <br>           :'''''''''':           <br>           '##########;           <br>                                  </pre>";
@@ -75,8 +72,10 @@ var returnTeamHtml = function(team){
 	return html;
 };
 
-challenges = function(team){ // build the html that shows team and stats
+var showTeam = function(team){ // build the html that shows team and stats
 	$(".my-dashboard").empty();
 	var html = returnTeamHtml(team);
 	$(".my-dashboard").append(html);
 }
+
+module.exports = showTeam;
