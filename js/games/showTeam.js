@@ -75,7 +75,7 @@ var returnTeamHtml = function(team){
 	return html;
 };
 
-challenges.showTeam = function(team){ // build the html that shows team and stats
+challenges = function(team){ // build the html that shows team and stats
 	$(".my-dashboard").empty();
 	var html = returnTeamHtml(team);
 	$(".my-dashboard").append(html);
