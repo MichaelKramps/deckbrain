@@ -53,9 +53,9 @@ var returnPowerHtml = function(robot){
 	return html;
 };
 
-var returnTeamHtml = function(team){
+var returnTeamHtml = function(){
 	var html = "";
-	for (var i = 0; i < team.length; i++){
+	for (var i = 0; i < 0; i++){
 		var robotHtml = '<div class="robot">';
 		var thisRobot = team[i];
 		robotHtml += returnRobotHtml();
@@ -71,10 +71,8 @@ var returnTeamHtml = function(team){
 	return html;
 };
 
-var showTeam = function(team){ // build the html that shows team and stats
-	$(".my-dashboard").empty();
-	var html = returnTeamHtml(team);
-	$(".my-dashboard").append(html);
+var fight = function(){ // build the html that shows team and stats
+	
 }
 
-module.exports = showTeam;
+module.exports = fight;
