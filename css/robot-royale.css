@@ -14,12 +14,11 @@
 
 /* Battle Phase */
 
-.my-dashboard {
+.my-dashboard, .enemy-dashboard {
 	display: flex;
 	justify-content: space-around;
 }
 
-.robot {
-	border: 1px solid black;
+.robot, .enemy {
 	padding: 1em;
 }
