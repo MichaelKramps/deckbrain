@@ -1,78 +1,28 @@
 var $ = require("jquery");
 
-var returnRobotHtml = function(){
-	var html = "<pre style=\"font: 6px/3px monospace;\">                                  <br>                @@                <br>                .                 <br>                `                 <br>                `                 <br>                `                 <br>            .:::;::::`            <br>           +@@@@@@@@@@,           <br>           @@@@@@@@@@@#           <br>           #@@  ,'  @@+           <br>           +@@      '@,           <br>           :@@  `,  @@`           <br>           `@@@@@@@@@@            <br>            @@@@@@@@@@            <br>       @@@@.@@@@@@@@@@,@@@@       <br>       @@@@:@@@@@@@@@@'@@@@       <br>       @@@@+@@@@@@@@@@#@@@#       <br>       @@@@@,@@@@@@@@.@@@@+       <br>   ....#@@@@@`,,,,,,`@@@@@+....   <br>  :@@@@+@@@@@@@@@@@@@@@@@@;@@@@,  <br>  :@@@@;@@@@@@@@@@@@@@@@@@:@@@@,  <br>  :@@  :@@@@@`@: @@@@@@@@@,  @@,  <br>  :@@  .@@@@@@@@#,,@@@:@@@`  @@,  <br>  :@@   @@@@@`.+.. @@@:@@@   @@,  <br>  :@@   @@@:@'##@@@,@..@@@   @@,  <br>  :@@   @@@+@,@@@@@@,@#@@@   @@,  <br>  :@@   @@@,@#@@@@@@#;@.@@   @@,  <br>  :@@   @@@@ @+@@@@@::'`@@   @@.  <br>  :@@   @@@@#@..@@@:@,.'@@   @@,  <br>  :@@   @@@@#@@@``@@@+@@@@   @@,  <br>  +@@   @@@@#,` @.@@@,@@@@   @@'  <br> @   @  @@@@@@@@@@@``@@@@@  @   # <br> #   `. #@@@@@@@@@@@@@@@@@ .    # <br>        '@@@@@@@@@@@@@@@@@        <br>        ,@@@@@@@@@@@@@@@@@        <br>        .+++++++++++++++++        <br>              .@@@@               <br>              .@@@@               <br>              .@@@@               <br>              .@@@@               <br>              .@@@@               <br>              `....               <br>           '##########;           <br>           '##########;           <br>           :'''''''''':           <br>           `         ``           <br>           :'''''''''':           <br>           '##########;           <br>                                  </pre>";
-	return html;
+var determineAttackOrder = function(team, enemy){
+	//assign each a random number based on speed, then sort
 };
 
-var returnHealthHtml = function(robot){
-	var html = '<div class="robot-health">Health: ';
-	html += robot.body.health;
-	html += '</div>';
+var showAttackOrder = function(attackOrder){
 	
-	return html;
 };
 
-var returnSpeedHtml = function(robot){
-	var html = '<div class="robot-speed">Speed: ';
-	html += robot.body.speed;
-	html += '</div>';
+var attack = function(attackOrder){
 	
-	return html;
 };
 
-var returnDampenHtml = function(robot){
-	var html = '<div class="robot-dampen">Dampen: ';
-	html += robot.armor.dampen;
-	html += '</div>';
+var fight = function(team, enemy, callback){
+	var attackOrder = determineAttackOrder(team, enemy);
+	showAttackOrder(attackOrder);
 	
-	return html;
-};
-
-var returnScrapHtml = function(robot){
-	var html = '<div class="robot-scrap">Scrap: ';
-	html += robot.armor.scrap;
-	html += '</div>';
+	attack(attackOrder); // listens for attack choices in order
 	
-	return html;
-};
-
-var returnSpreadHtml = function(robot){
-	var html = '<div class="robot-spread">Spread: ';
-	html += robot.weapon.spread;
-	html += '</div>';
-	
-	return html;
-};
-
-var returnPowerHtml = function(robot){
-	var html = '<div class="robot-power">Power: ';
-	html += robot.weapon.power;
-	html += '</div>';
-	
-	return html;
-};
-
-var returnTeamHtml = function(){
-	var html = "";
-	for (var i = 0; i < 0; i++){
-		var robotHtml = '<div class="robot">';
-		var thisRobot = team[i];
-		robotHtml += returnRobotHtml();
-		robotHtml += returnHealthHtml(thisRobot);
-		robotHtml += returnSpeedHtml(thisRobot);
-		robotHtml += returnDampenHtml(thisRobot);
-		robotHtml += returnScrapHtml(thisRobot);
-		robotHtml += returnSpreadHtml(thisRobot);
-		robotHtml += returnPowerHtml(thisRobot);
-		robotHtml += '</div>';
-		html += robotHtml;
+	if (false){ // enemies or team are exterminated
+		callback();
+	} else {
+		fight(callback);
 	}
-	return html;
 };
-
-var fight = function(){ // build the html that shows team and stats
-	
-}
 
 module.exports = fight;
