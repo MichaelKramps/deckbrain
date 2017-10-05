@@ -3,7 +3,7 @@ var showTeam = require("./showTeam.js");
 var showEnemy = require("./showEnemy.js");
 var fight = require("./fight.js");
 
-var challenges = function(team, enemyNum = 1, round = 1){
+var challenges = function(team, enemyNum = 3, round = 1){
 	if (enemyNum + 1 === data.enemies.length){
 		round += 1; // if all enemies have been killed, move on to next round
 	}
