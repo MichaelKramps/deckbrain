@@ -38,6 +38,7 @@ var listenForCardSelection = function(round){
 
 var createAndReturnRobot = function(){
 	var thisRobot = {};
+	thisRobot.name = "My robot";
 	thisRobot.body = data.bodies[choicesMade[1] - 1];
 	thisRobot.armor = data.armors[choicesMade[2] - 1];
 	thisRobot.weapon = data.weapons[choicesMade[3] - 1];

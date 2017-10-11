@@ -63,9 +63,18 @@ var returnEnemyHtml = function(enemy){
 	return html;
 };
 
-var showEnemy = function(enemy){ // build the html that shows team and stats
+var returnEnemyTeamHtml = function(enemyTeam){
+	var enemyTeamHtml = "";
+	for(var i = 0; i < enemyTeam.length; i++){
+		var thisEnemy = enemyTeam[i];
+		enemyTeamHtml += returnEnemyHtml(thisEnemy);
+	}
+	return enemyTeamHtml;
+};
+
+var showEnemy = function(enemyTeam){ // build the html that shows team and stats
 	$(".enemy-dashboard").empty();
-	var html = returnEnemyHtml(enemy);
+	var html = returnEnemyTeamHtml(enemyTeam);
 	$(".enemy-dashboard").append(html);
 }
 

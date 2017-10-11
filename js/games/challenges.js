@@ -8,10 +8,13 @@ var challenges = function(team, enemyNum = 0, round = 1){
 		enemyNum = 0;
 		round += 1; // if all enemies have been killed, move on to next round
 	}
-	var thisEnemy = data.enemies[enemyNum];
+	
+	var enemyTeam = data.enemies[enemyNum];
 	showTeam(team);
-	showEnemy(thisEnemy);
-	fight(team, thisEnemy, challenges(team, enemyNum + 1, round)); // after fight, move on to next enemy
+	showEnemy(enemyTeam);
+	
+	var callbackObject = {callback: challenges, team: team, enemyNum: enemyNum, round: round};
+	fight(team, enemyTeam, callbackObject); // after fight, move on to next enemy
 };
 
 module.exports = challenges;
