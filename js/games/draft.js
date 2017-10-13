@@ -36,9 +36,10 @@ var listenForCardSelection = function(round){
 	});
 };
 
-var createAndReturnRobot = function(){
+var createAndReturnRobot = function(i){
 	var thisRobot = {};
 	thisRobot.name = "My robot";
+	thisRobot.id = "r" + i;
 	thisRobot.body = data.bodies[choicesMade[1] - 1];
 	thisRobot.armor = data.armors[choicesMade[2] - 1];
 	thisRobot.weapon = data.weapons[choicesMade[3] - 1];
@@ -50,7 +51,7 @@ var createAndReturnTeam = function(){
 	var army = [];
 	var numberOfRobots = choicesMade[0];
 	for (var i = 0; i < numberOfRobots; i++){
-		army[i] = createAndReturnRobot();
+		army[i] = createAndReturnRobot(i);
 	}
 	return army;
 };
@@ -63,11 +64,11 @@ var draft = function(choices, round = 0){
 		clearPreviousDraftPick();
 		var team = createAndReturnTeam();
 		challenges(team);
+	} else {
+		clearPreviousDraftPick();
+		populateNewDraftPick(choices, round);
+		listenForCardSelection(round);
 	}
-	
-	clearPreviousDraftPick();
-	populateNewDraftPick(choices, round);
-	listenForCardSelection(round);
 };
 
 module.exports = draft;

@@ -1,17 +1,41 @@
 var $ = require("jquery");
 
+var showAttackChoices = function(unit){
+	if (unit.id[0] === "r") { // it's a friendly robot
+		var attackOptions = [{name: "Punch", id: "1", power: 6, spread: 0}, {name: unit.weapon.name, id: "2", power: unit.weapon.power, spread: unit.weapon.spread}];
+		for (var i = 0; i < attackOptions.length; i++) {
+			var attack = attackOptions[i];
+			var html = '<div id="' + attack.id + '" class="attack-option">' + attack.name + '</div>';
+			$("#" + unit.id).append(html).find("#" + attack.id).on("click", function(){
+				// remove both
+				
+				
+				// perform attack
+			});
+		}
+	} else { // it's an enemy
+		console.log("enemy");
+	}
+};
+
 var listenForAttacks = function(attackOrderObject, finalCallbackObject){
-	// Highlight in order list
+	if(attackOrderObject.attacker < attackOrderObject.attackOrderArray.length){
+		var thisUnit = attackOrderObject.attackOrderArray[attackOrderObject.attacker];
+		// Highlight in order list
+		$(".attacker-name").eq(attackOrderObject.attacker).addClass("attacking");
+		// Highlight character on battlefield
+		$("#" + thisUnit.id).addClass("attacking");
+		// Show attack Choices
+		showAttackChoices(thisUnit);
+		// Listen for attack choice
+		
+		// Perform attack action
+		
+		// callback
+	} else {
+		// fight() another round of attacks
+	}
 	
-	// Highlight character on battlefield
-	
-	// Show attack Choices
-	
-	// Listen for attack choice
-	
-	// Perform attack action
-	
-	// callback
 };
 
 var showAttackOrder = function(attackOrder, finalCallbackObject){
@@ -21,7 +45,9 @@ var showAttackOrder = function(attackOrder, finalCallbackObject){
 		var thisUnit = attackOrder[i];
 		var html = '<div class="attacker-name">' + thisUnit.name + '</div>';
 		$(".attack-order").append(html);
-		listenForAttacks({attackOrderArray: attackOrder, attacker: 0}, finalCallbackObject);
+		if (i === (attackOrder.length - 1)) { // if it's the last attacker
+			listenForAttacks({attackOrderArray: attackOrder, attacker: 0}, finalCallbackObject);
+		}
 	}
 };
 

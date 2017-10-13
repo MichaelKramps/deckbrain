@@ -49,7 +49,7 @@ var returnPowerHtml = function(enemy){
 };
 
 var returnEnemyHtml = function(enemy){
-	var html = '<div class="enemy"><pre style=\"font: 10px/8px monospace;\">';
+	var html = '<div id="' + enemy.id + '" class="enemy"><pre style=\"font: 10px/8px monospace;\">';
 	html += enemy.ascii;
 	html += '</pre>';
 	html += returnHealthHtml(enemy);

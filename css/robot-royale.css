@@ -22,3 +22,7 @@
 .robot, .enemy {
 	padding: 1em;
 }
+
+.attacking {
+	color: red;
+}

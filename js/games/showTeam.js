@@ -56,8 +56,8 @@ var returnPowerHtml = function(robot){
 var returnTeamHtml = function(team){
 	var html = "";
 	for (var i = 0; i < team.length; i++){
-		var robotHtml = '<div class="robot">';
 		var thisRobot = team[i];
+		var robotHtml = '<div id="' + thisRobot.id + '" class="robot">';
 		robotHtml += returnRobotHtml();
 		robotHtml += returnHealthHtml(thisRobot);
 		robotHtml += returnSpeedHtml(thisRobot);

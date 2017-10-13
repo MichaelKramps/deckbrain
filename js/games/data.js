@@ -18,9 +18,9 @@ data.armors = [
 ];
 
 data.weapons = [
-	{name: "Grenades", description: "Respectable damage to a few closeby enemies", spread: 3, power: 5},
-	{name: "Super Punch", description: "Huge amount of damage to one enemy", spread: 1, power: 12},
-	{name: "Napalm", description: "Some damage to lots of enemies", spread: 10, power: 2}
+	{name: "Grenades", description: "Respectable damage to a few closeby enemies", spread: 1, power: 5},
+	{name: "Super Punch", description: "Huge amount of damage to one enemy", spread: 0, power: 12},
+	{name: "Napalm", description: "Some damage to lots of enemies", spread: 4, power: 2}
 ];
 
 data.availableChoices = [
@@ -33,6 +33,7 @@ data.availableChoices = [
 data.enemies = [
 	[{
 		name: "Enemy 1",
+		id: "e0",
 		health: 30,
 		speed: 1,
 		dampen: 0,
@@ -43,6 +44,7 @@ data.enemies = [
 	}],
 	[{
 		name: "Enemy 2",
+		id: "e0",
 		health: 10,
 		speed: 8,
 		dampen: 2,
@@ -53,6 +55,7 @@ data.enemies = [
 	}],
 	[{
 		name: "Enemy 3",
+		id: "e0",
 		health: 30,
 		speed: 3,
 		dampen: 0,
@@ -63,6 +66,7 @@ data.enemies = [
 	}],
 	[{
 		name: "Enemy 4",
+		id: "e0",
 		health: 50,
 		speed: 1,
 		dampen: 3,
