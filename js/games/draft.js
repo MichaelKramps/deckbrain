@@ -40,9 +40,9 @@ var createAndReturnRobot = function(i){
 	var thisRobot = {};
 	thisRobot.name = "My robot";
 	thisRobot.id = "r" + i;
-	thisRobot.body = data.bodies[choicesMade[1] - 1];
-	thisRobot.armor = data.armors[choicesMade[2] - 1];
-	thisRobot.weapon = data.weapons[choicesMade[3] - 1];
+	thisRobot.body = $.extend({}, data.bodies[choicesMade[1] - 1]);
+	thisRobot.armor = $.extend({}, data.armors[choicesMade[2] - 1]);
+	thisRobot.weapon = $.extend({}, data.weapons[choicesMade[3] - 1]);
 	
 	return thisRobot;
 };

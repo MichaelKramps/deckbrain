@@ -3,7 +3,8 @@ var showTeam = require("./showTeam.js");
 var showEnemy = require("./showEnemy.js");
 
 var performAttack = function(attack, target, attackOrderObject, battlefield, finalCallbackObject){
-	console.log(attack);
+	console.log(target);
+	console.log(battlefield);
 	attackOrderObject.attacker += 1;
 	
 	if (target.id[0] === "e") { // target is an enemy
@@ -32,7 +33,10 @@ var showAttackChoices = function(unit, attackOrderObject, battlefield, finalCall
 			});
 		}
 	} else { // it's an enemy
-		console.log("enemy attack");
+		var attack = {name: "Enemy Attacks", power: unit.power, spread: unit.spread};
+		// determine target
+		var targetIndex = Math.floor(battlefield.team.length * Math.random());
+		performAttack(attack, battlefield.team[targetIndex], attackOrderObject, battlefield, finalCallbackObject);
 	}
 };
 
