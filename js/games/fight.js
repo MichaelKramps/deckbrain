@@ -8,7 +8,7 @@ var showAttackChoices = function(unit){
 			var html = '<div id="' + attack.id + '" class="attack-option">' + attack.name + '</div>';
 			$("#" + unit.id).append(html).find("#" + attack.id).on("click", function(){
 				// remove both
-				
+				$("#1, #2").remove();
 				
 				// perform attack
 			});
