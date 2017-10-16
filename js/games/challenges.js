@@ -14,7 +14,7 @@ var challenges = function(team, enemyNum = 0, round = 1){
 	showTeam(battlefield.team);
 	showEnemy(battlefield.enemyTeam);
 	
-	var callbackObject = {callback: challenges, battlefield: battlefield, round: round};
+	var callbackObject = {callback: challenges, enemyNum: enemyNum, round: round};
 	fight(battlefield, callbackObject); // after fight, move on to next enemy
 };
 

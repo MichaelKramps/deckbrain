@@ -1,6 +1,8 @@
 var $ = require("jquery");
 var showTeam = require("./showTeam.js");
 var showEnemy = require("./showEnemy.js");
+var draft = require("./draft.js");
+
 
 var performAttack = function(attack, target, attackOrderObject, battlefield, finalCallbackObject){
 	console.log(target);
@@ -40,21 +42,53 @@ var showAttackChoices = function(unit, attackOrderObject, battlefield, finalCall
 	}
 };
 
-var listenForAttacks = function(attackOrderObject, battlefield, finalCallbackObject){
-	if(attackOrderObject.attacker < attackOrderObject.attackOrderArray.length){
-		var thisUnit = attackOrderObject.attackOrderArray[attackOrderObject.attacker];
-		// Remove old highlight then highlight new attacker
-		$(".attacking").removeClass("attacking");
-		$(".attacker-name").eq(attackOrderObject.attacker).addClass("attacking");
-		// Highlight character on battlefield
-		$("#" + thisUnit.id).addClass("attacking");
-		// Show attack Choices
-		showAttackChoices(thisUnit, attackOrderObject, battlefield, finalCallbackObject);
-	} else {
-		console.log("last attacker");
-		// fight() another round of attacks
+var enemiesAreDead = function(enemyTeam){
+	var enemySurvives = false;
+	for (var i = 0; i < enemyTeam.length; i++) {
+		var thisEnemy = enemyTeam[i];
+		if (thisEnemy.health > 0) {
+			enemySurvives = true;
+			return !enemySurvives;
+		}
 	}
+	return !enemySurvives;
+};
+
+var myTeamIsDead = function(myTeam){
+	var teamSurvives = false;
+	for (var i = 0; i < myTeam.length; i++) {
+		var thisUnit = myTeam[i];
+		if (thisUnit.body.health > 0) {
+			teamSurvives = true;
+			return !teamSurvives;
+		}
+	}
+	return !teamSurvives;
+};
+
+var listenForAttacks = function(attackOrderObject, battlefield, finalCallbackObject){
 	
+	if (enemiesAreDead(battlefield.enemyTeam)) { // enemies are dead
+		// move to next round
+		finalCallbackObject.enemyNum += 1;
+		finalCallbackObject.callback(battlefield.team, finalCallbackObject.enemyNum, finalCallbackObject.round);
+	} else if (myTeamIsDead(battlefield.team)) {
+		// draft again
+		draft(data.availableChoices);
+	} else { // battle is still raging
+		if(attackOrderObject.attacker < attackOrderObject.attackOrderArray.length){
+			var thisUnit = attackOrderObject.attackOrderArray[attackOrderObject.attacker];
+			// Remove old highlight then highlight new attacker
+			$(".attacking").removeClass("attacking");
+			$(".attacker-name").eq(attackOrderObject.attacker).addClass("attacking");
+			// Highlight character on battlefield
+			$("#" + thisUnit.id).addClass("attacking");
+			// Show attack Choices
+			showAttackChoices(thisUnit, attackOrderObject, battlefield, finalCallbackObject);
+		} else {
+			createAttackOrderArray(attackOrderObject.attackOrderArray, battlefield, finalCallbackObject);
+		}
+	}
 };
 
 var showAttackOrder = function(attackOrderArray, battlefield, finalCallbackObject){
@@ -79,8 +113,8 @@ var orderAttackers = function(attackOrderArray, battlefield, finalCallbackObject
 	);
 };
 
-var createAttackOrderArray = function(battlefield, finalCallbackObject){
-	var attackOrderArray = battlefield.team.concat(battlefield.enemyTeam);
+var createAttackOrderArray = function(attackOrderArray, battlefield, finalCallbackObject){
+	var attackOrderArray = attackOrderArray.length > 0 ? attackOrderArray : battlefield.team.concat(battlefield.enemyTeam);
 	for(var i = 0; i < attackOrderArray.length; i++){
 		var thisUnit = attackOrderArray[i];
 		var thisSpeed = thisUnit.speed ? thisUnit.speed : thisUnit.body.speed;
@@ -92,7 +126,7 @@ var createAttackOrderArray = function(battlefield, finalCallbackObject){
 };
 
 var fight = function(battlefield, finalCallbackObject){
-	createAttackOrderArray(battlefield, finalCallbackObject);
+	createAttackOrderArray([], battlefield, finalCallbackObject);
 };
 
 module.exports = fight;
