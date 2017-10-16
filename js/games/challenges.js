@@ -1,3 +1,4 @@
+var $ = require("jquery");
 var data = require("./data.js");
 var showTeam = require("./showTeam.js");
 var showEnemy = require("./showEnemy.js");
@@ -9,7 +10,9 @@ var challenges = function(team, enemyNum = 0, round = 1){
 		round += 1; // if all enemies have been killed, move on to next round
 	}
 	
-	var enemyTeam = data.enemies[enemyNum];
+	console.log(data.enemies);
+	var rawEnemyTeam = data.enemies[enemyNum];
+	var enemyTeam = JSON.parse(JSON.stringify(rawEnemyTeam)); // must copy so we can change stats without affecting data.js
 	var battlefield = {team: team, enemyTeam: enemyTeam};
 	showTeam(battlefield.team);
 	showEnemy(battlefield.enemyTeam);

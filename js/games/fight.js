@@ -5,8 +5,6 @@ var draft = require("./draft.js");
 
 
 var performAttack = function(attack, target, attackOrderObject, battlefield, finalCallbackObject){
-	console.log(target);
-	console.log(battlefield);
 	attackOrderObject.attacker += 1;
 	
 	if (target.id[0] === "e") { // target is an enemy
@@ -69,7 +67,7 @@ var myTeamIsDead = function(myTeam){
 var listenForAttacks = function(attackOrderObject, battlefield, finalCallbackObject){
 	
 	if (enemiesAreDead(battlefield.enemyTeam)) { // enemies are dead
-		// move to next round
+		// move to next enemy
 		finalCallbackObject.enemyNum += 1;
 		finalCallbackObject.callback(battlefield.team, finalCallbackObject.enemyNum, finalCallbackObject.round);
 	} else if (myTeamIsDead(battlefield.team)) {
