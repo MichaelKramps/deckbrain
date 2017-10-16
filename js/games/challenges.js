@@ -10,11 +10,12 @@ var challenges = function(team, enemyNum = 0, round = 1){
 	}
 	
 	var enemyTeam = data.enemies[enemyNum];
-	showTeam(team);
-	showEnemy(enemyTeam);
+	var battlefield = {team: team, enemyTeam: enemyTeam};
+	showTeam(battlefield.team);
+	showEnemy(battlefield.enemyTeam);
 	
-	var callbackObject = {callback: challenges, team: team, enemyNum: enemyNum, round: round};
-	fight(team, enemyTeam, callbackObject); // after fight, move on to next enemy
+	var callbackObject = {callback: challenges, battlefield: battlefield, round: round};
+	fight(battlefield, callbackObject); // after fight, move on to next enemy
 };
 
 module.exports = challenges;
