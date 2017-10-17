@@ -4,21 +4,21 @@ var showEnemy = require("./showEnemy.js");
 var draft = require("./draft.js");
 
 
-var performAttack = function(attack, target, attackOrderObject, battlefield, finalCallbackObject){
-	attackOrderObject.attacker += 1;
+var performAttack = function(attack, target, gameObject){
+	gameObject.attacker += 1;
 	
 	if (target.id[0] === "e") { // target is an enemy
 		target.health -= attack.power;
-		showEnemy(battlefield.enemyTeam);
-		listenForAttacks(attackOrderObject, battlefield, finalCallbackObject);
+		showEnemy(gameObject.battlefield.enemyTeam);
+		listenForAttacks(gameObject);
 	} else { // target is a friendly robot
 		target.body.health -= attack.power;
-		showTeam(battlefield.team);
-		listenForAttacks(attackOrderObject, battlefield, finalCallbackObject);
+		showTeam(gameObject.battlefield.team);
+		listenForAttacks(gameObject);
 	}
 };
 
-var showAttackChoices = function(unit, attackOrderObject, battlefield, finalCallbackObject){
+var showAttackChoices = function(unit, gameObject){
 	if (unit.id[0] === "r") { // it's a friendly robot
 		var attackOptions = [{name: "Punch", id: "1", power: 6, spread: 0}, {name: unit.weapon.name, id: "2", power: unit.weapon.power, spread: unit.weapon.spread}];
 		for (var i = 0; i < attackOptions.length; i++) {
@@ -29,14 +29,14 @@ var showAttackChoices = function(unit, attackOrderObject, battlefield, finalCall
 				$("#1, #2").remove(); // ***** magic numbers
 				
 				// perform attack
-				performAttack(event.data.attack, battlefield.enemyTeam[0], attackOrderObject, battlefield, finalCallbackObject);
+				performAttack(event.data.attack, gameObject.battlefield.enemyTeam[0], gameObject);
 			});
 		}
 	} else { // it's an enemy
 		var attack = {name: "Enemy Attacks", power: unit.power, spread: unit.spread};
 		// determine target
-		var targetIndex = Math.floor(battlefield.team.length * Math.random());
-		performAttack(attack, battlefield.team[targetIndex], attackOrderObject, battlefield, finalCallbackObject);
+		var targetIndex = Math.floor(gameObject.battlefield.team.length * Math.random());
+		performAttack(attack, gameObject.battlefield.team[targetIndex], gameObject);
 	}
 };
 
@@ -64,67 +64,66 @@ var myTeamIsDead = function(myTeam){
 	return !teamSurvives;
 };
 
-var listenForAttacks = function(attackOrderObject, battlefield, finalCallbackObject){
+var listenForAttacks = function(gameObject){
 	
-	if (enemiesAreDead(battlefield.enemyTeam)) { // enemies are dead
+	if (enemiesAreDead(gameObject.battlefield.enemyTeam)) { // enemies are dead
 		// move to next enemy
-		finalCallbackObject.enemyNum += 1;
-		finalCallbackObject.callback(battlefield.team, finalCallbackObject.enemyNum, finalCallbackObject.round);
-	} else if (myTeamIsDead(battlefield.team)) {
+		gameObject.enemyNum += 1;
+		gameObject.challenges(gameObject.battlefield.team, gameObject.enemyNum, gameObject.round);
+	} else if (myTeamIsDead(gameObject.battlefield.team)) {
 		// draft again
 		draft(data.availableChoices);
 	} else { // battle is still raging
-		if(attackOrderObject.attacker < attackOrderObject.attackOrderArray.length){
-			var thisUnit = attackOrderObject.attackOrderArray[attackOrderObject.attacker];
+		if(gameObject.attacker < gameObject.attackOrder.length){
+			var thisUnit = gameObject.attackOrder[gameObject.attacker];
 			// Remove old highlight then highlight new attacker
 			$(".attacking").removeClass("attacking");
-			$(".attacker-name").eq(attackOrderObject.attacker).addClass("attacking");
+			$(".attacker-name").eq(gameObject.attacker).addClass("attacking");
 			// Highlight character on battlefield
 			$("#" + thisUnit.id).addClass("attacking");
 			// Show attack Choices
-			showAttackChoices(thisUnit, attackOrderObject, battlefield, finalCallbackObject);
+			showAttackChoices(thisUnit, gameObject);
 		} else {
-			createAttackOrderArray(attackOrderObject.attackOrderArray, battlefield, finalCallbackObject);
+			createAttackOrderArray(gameObject);
 		}
 	}
 };
 
-var showAttackOrder = function(attackOrderArray, battlefield, finalCallbackObject){
+var showAttackOrder = function(gameObject){
 	$(".attack-order").empty();
-	for(var i = 0; i < attackOrderArray.length; i++){
-		var thisUnit = attackOrderArray[i];
+	for(var i = 0; i < gameObject.attackOrder.length; i++){
+		var thisUnit = gameObject.attackOrder[i];
 		var html = '<div class="attacker-name">' + thisUnit.name + '</div>';
 		$(".attack-order").append(html);
-		if (i === (attackOrderArray.length - 1)) { // if it's the last attacker
-			listenForAttacks({attackOrderArray: attackOrderArray, attacker: 0}, battlefield, finalCallbackObject);
+		if (i === (gameObject.attackOrder.length - 1)) { // if it's the last attacker
+			gameObject.attacker = 0;
+			listenForAttacks(gameObject);
 		}
 	}
 };
 
-var orderAttackers = function(attackOrderArray, battlefield, finalCallbackObject){
-	showAttackOrder(
-		attackOrderArray.sort(function(a, b){
-			return (b.roundSpeed - a.roundSpeed);
-		})
-		,battlefield
-		,finalCallbackObject
-	);
+var orderAttackers = function(gameObject){
+	if(gameObject.attackOrder.sort(function(a, b){
+		return (b.roundSpeed - a.roundSpeed);
+	})) {
+		showAttackOrder(gameObject);
+	}
 };
 
-var createAttackOrderArray = function(attackOrderArray, battlefield, finalCallbackObject){
-	var attackOrderArray = attackOrderArray.length > 0 ? attackOrderArray : battlefield.team.concat(battlefield.enemyTeam);
-	for(var i = 0; i < attackOrderArray.length; i++){
-		var thisUnit = attackOrderArray[i];
+var createAttackOrderArray = function(gameObject){
+	gameObject.attackOrder = gameObject.attackOrder ? gameObject.attackOrder : gameObject.battlefield.team.concat(gameObject.battlefield.enemyTeam);
+	for(var i = 0; i < gameObject.attackOrder.length; i++){
+		var thisUnit = gameObject.attackOrder[i];
 		var thisSpeed = thisUnit.speed ? thisUnit.speed : thisUnit.body.speed;
 		thisUnit.roundSpeed = (Math.pow(thisSpeed, 2) * Math.random());
-		if(i === (attackOrderArray.length - 1)){
-			orderAttackers(attackOrderArray, battlefield, finalCallbackObject);
+		if(i === (gameObject.attackOrder.length - 1)){
+			orderAttackers(gameObject);
 		}
 	}
 };
 
-var fight = function(battlefield, finalCallbackObject){
-	createAttackOrderArray([], battlefield, finalCallbackObject);
+var fight = function(gameObject){
+	createAttackOrderArray(gameObject);
 };
 
 module.exports = fight;
