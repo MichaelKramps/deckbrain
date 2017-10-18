@@ -27,7 +27,7 @@ var performAttack = function(attack, target, gameObject){
 
 var showAttackChoices = function(unit, gameObject){
 	if (unit.id[0] === "r") { // it's a friendly robot
-		var attackOptions = [{name: "Punch", id: "1", power: 6, spread: 0}, {name: unit.weapon.name, id: "2", power: unit.weapon.power, spread: unit.weapon.spread}];
+		var attackOptions = [{name: "Punch", id: "1", power: 2, spread: 0}, {name: unit.weapon.name, id: "2", power: unit.weapon.power, spread: unit.weapon.spread}];
 		$("#" + unit.id).append('<div id="attack-options"></div>')
 		for (var i = 0; i < attackOptions.length; i++) {
 			var attack = attackOptions[i];
