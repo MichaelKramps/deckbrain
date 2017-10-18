@@ -28,16 +28,17 @@ var performAttack = function(attack, target, gameObject){
 var showAttackChoices = function(unit, gameObject){
 	if (unit.id[0] === "r") { // it's a friendly robot
 		var attackOptions = [{name: "Punch", id: "1", power: 6, spread: 0}, {name: unit.weapon.name, id: "2", power: unit.weapon.power, spread: unit.weapon.spread}];
+		$("#" + unit.id).append('<div id="attack-options"></div>')
 		for (var i = 0; i < attackOptions.length; i++) {
 			var attack = attackOptions[i];
 			var html = '<div id="' + attack.id + '" class="attack-option">' + attack.name + '</div>';
-			$("#" + unit.id).append(html).find("#" + attack.id).on("click", {attack: attack}, function(event){
+			$("#attack-options").append(html).find("#" + attack.id).on("click", {attack: attack}, function(event){
 				// remove both elements and attack
 				var callback = function(){
 					performAttack(event.data.attack, gameObject.battlefield.enemyTeam[0], gameObject);
 				};
 				$.when(
-					$("#1, #2").remove()
+					$("#attack-options").remove()
 				).then(
 					setTimeout(callback, 100)
 				);
