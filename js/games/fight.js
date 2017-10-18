@@ -13,8 +13,15 @@ var performAttack = function(attack, target, gameObject){
 		listenForAttacks(gameObject);
 	} else { // target is a friendly robot
 		target.body.health -= attack.power;
-		showTeam(gameObject.battlefield.team);
-		listenForAttacks(gameObject);
+		var callback = function(){
+			alert("Enemy attacks " + target.name + " for " + attack.power + " damage!");
+			listenForAttacks(gameObject);
+		};
+		$.when(
+			showTeam(gameObject.battlefield.team)
+		).then(
+			setTimeout(callback, 900)
+		);
 	}
 };
 
@@ -25,11 +32,15 @@ var showAttackChoices = function(unit, gameObject){
 			var attack = attackOptions[i];
 			var html = '<div id="' + attack.id + '" class="attack-option">' + attack.name + '</div>';
 			$("#" + unit.id).append(html).find("#" + attack.id).on("click", {attack: attack}, function(event){
-				// remove both
-				$("#1, #2").remove(); // ***** magic numbers
-				
-				// perform attack
-				performAttack(event.data.attack, gameObject.battlefield.enemyTeam[0], gameObject);
+				// remove both elements and attack
+				var callback = function(){
+					performAttack(event.data.attack, gameObject.battlefield.enemyTeam[0], gameObject);
+				};
+				$.when(
+					$("#1, #2").remove()
+				).then(
+					setTimeout(callback, 100)
+				);
 			});
 		}
 	} else { // it's an enemy

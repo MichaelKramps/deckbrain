@@ -26,3 +26,9 @@
 .attacking {
 	color: red;
 }
+
+.attack-option {
+	border: 1px solid blue;
+	cursor: pointer;
+	cursor: hand;
+}
