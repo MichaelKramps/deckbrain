@@ -31,6 +31,7 @@ var showAttackChoices = function(unit, gameObject){
 		$("#" + unit.id).append('<div id="attack-options"></div>')
 		for (var i = 0; i < attackOptions.length; i++) {
 			var attack = attackOptions[i];
+			var numTargets = ;
 			var html = '<div id="' + attack.id + '" class="attack-option">' + attack.name + '</div>';
 			$("#attack-options").append(html).find("#" + attack.id).on("click", {attack: attack}, function(event){
 				// remove both elements and attack
