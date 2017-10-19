@@ -38,9 +38,6 @@ var createTargetArray = function(attack, target, gameObject){
 			var targetIndex = gameObject.battlefield.myTeam.findIndex(indexFinder);
 			var startIndex = (targetIndex - attack.spread) < 0 ? 0 : (targetIndex - attack.spread);
 			var endIndex = targetIndex + attack.spread + 1;
-			console.log("target: " + targetIndex);
-			console.log("start: " + startIndex);
-			console.log("end: " + endIndex);
 			if (endIndex >= (gameObject.battlefield.myTeam.length)) { // attack hits last robot on team
 				var targetArray = gameObject.battlefield.myTeam.slice(startIndex);
 				performAttack(attack, target, targetArray, gameObject);
