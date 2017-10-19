@@ -1,27 +1,65 @@
 var $ = require("jquery");
-var showTeam = require("./showTeam.js");
-var showEnemy = require("./showEnemy.js");
+var showTeams = require("./showTeams.js");
 var draft = require("./draft.js");
 
 
-var performAttack = function(attack, target, gameObject){
+var performAttack = function(attack, target, targetArray, gameObject){
 	gameObject.attacker += 1;
 	
-	if (target.id[0] === "e") { // target is an enemy
-		target.health -= attack.power;
-		showEnemy(gameObject.battlefield.enemyTeam);
-		listenForAttacks(gameObject);
-	} else { // target is a friendly robot
-		target.body.health -= attack.power;
-		var callback = function(){
+	var first = function(){
+		for (var i = 0; i < targetArray.length; i++){
+			var thisUnit = targetArray[i];
+			thisUnit.body.health -= attack.power; // take dampen into account
+		}
+		showTeams(gameObject);
+	};
+	var second = function(){
+		if (target.id[0] === "r"){
 			alert("Enemy attacks " + target.name + " for " + attack.power + " damage!");
-			listenForAttacks(gameObject);
+		}
+		listenForAttacks(gameObject);
+	};
+	$.when(
+		first()
+	).then(
+		setTimeout(second, 900)
+	);
+};
+
+var createTargetArray = function(attack, target, gameObject){
+	var targetArray = [];
+	if (attack.spread === 0) {
+		performAttack(attack, target, [target], gameObject);
+	} else { // attack has spread
+		var indexFinder = function(thisTarget){
+			return thisTarget.id === target.id;
 		};
-		$.when(
-			showTeam(gameObject.battlefield.team)
-		).then(
-			setTimeout(callback, 900)
-		);
+		if (target.id[0] === "r") { // target is friendly
+			var targetIndex = gameObject.battlefield.myTeam.findIndex(indexFinder);
+			var startIndex = (targetIndex - attack.spread) < 0 ? 0 : (targetIndex - attack.spread);
+			var endIndex = targetIndex + attack.spread + 1;
+			console.log("target: " + targetIndex);
+			console.log("start: " + startIndex);
+			console.log("end: " + endIndex);
+			if (endIndex >= (gameObject.battlefield.myTeam.length)) { // attack hits last robot on team
+				var targetArray = gameObject.battlefield.myTeam.slice(startIndex);
+				performAttack(attack, target, targetArray, gameObject);
+			} else {
+				var targetArray = gameObject.battlefield.myTeam.slice(startIndex, endIndex);
+				performAttack(attack, target, targetArray, gameObject); 
+			}
+		} else { // target is an enemy
+			var targetIndex = gameObject.battlefield.enemyTeam.findIndex(indexFinder);
+			var startIndex = (targetIndex - attack.spread) < 0 ? 0 : (targetIndex - attack.spread);
+			var endIndex = targetIndex + attack.spread + 1;
+			if (endIndex >= (gameObject.battlefield.enemyTeam.length)) { // attack hits last enemy
+				var targetArray = gameObject.battlefield.enemyTeam.slice(startIndex);
+				performAttack(attack, target, targetArray, gameObject);
+			} else {
+				var targetArray = gameObject.battlefield.enemyTeam.slice(startIndex, endIndex);
+				performAttack(attack, target, targetArray, gameObject); 
+			}
+		}
 	}
 };
 
@@ -31,12 +69,11 @@ var showAttackChoices = function(unit, gameObject){
 		$("#" + unit.id).append('<div id="attack-options"></div>')
 		for (var i = 0; i < attackOptions.length; i++) {
 			var attack = attackOptions[i];
-			var numTargets = ;
 			var html = '<div id="' + attack.id + '" class="attack-option">' + attack.name + '</div>';
 			$("#attack-options").append(html).find("#" + attack.id).on("click", {attack: attack}, function(event){
 				// remove both elements and attack
 				var callback = function(){
-					performAttack(event.data.attack, gameObject.battlefield.enemyTeam[0], gameObject);
+					createTargetArray(event.data.attack, gameObject.battlefield.enemyTeam[0], gameObject);
 				};
 				$.when(
 					$("#attack-options").remove()
@@ -46,29 +83,17 @@ var showAttackChoices = function(unit, gameObject){
 			});
 		}
 	} else { // it's an enemy
-		var attack = {name: "Enemy Attacks", power: unit.power, spread: unit.spread};
+		var attack = {name: "Enemy Attacks", power: unit.weapon.power, spread: unit.weapon.spread};
 		// determine target
-		var targetIndex = Math.floor(gameObject.battlefield.team.length * Math.random());
-		performAttack(attack, gameObject.battlefield.team[targetIndex], gameObject);
+		var targetIndex = Math.floor(gameObject.battlefield.myTeam.length * Math.random());
+		createTargetArray(attack, gameObject.battlefield.myTeam[targetIndex], gameObject);
 	}
 };
 
-var enemiesAreDead = function(enemyTeam){
-	var enemySurvives = false;
-	for (var i = 0; i < enemyTeam.length; i++) {
-		var thisEnemy = enemyTeam[i];
-		if (thisEnemy.health > 0) {
-			enemySurvives = true;
-			return !enemySurvives;
-		}
-	}
-	return !enemySurvives;
-};
-
-var myTeamIsDead = function(myTeam){
+var teamIsDead = function(team){
 	var teamSurvives = false;
-	for (var i = 0; i < myTeam.length; i++) {
-		var thisUnit = myTeam[i];
+	for (var i = 0; i < team.length; i++) {
+		var thisUnit = team[i];
 		if (thisUnit.body.health > 0) {
 			teamSurvives = true;
 			return !teamSurvives;
@@ -79,11 +104,11 @@ var myTeamIsDead = function(myTeam){
 
 var listenForAttacks = function(gameObject){
 	
-	if (enemiesAreDead(gameObject.battlefield.enemyTeam)) { // enemies are dead
+	if (teamIsDead(gameObject.battlefield.enemyTeam)) { // enemies are dead
 		// move to next enemy
 		gameObject.enemyNum += 1;
-		gameObject.challenges(gameObject.battlefield.team, gameObject.enemyNum, gameObject.round);
-	} else if (myTeamIsDead(gameObject.battlefield.team)) {
+		gameObject.challenges(gameObject.battlefield.myTeam, gameObject.enemyNum, gameObject.round);
+	} else if (teamIsDead(gameObject.battlefield.myTeam)) {
 		// draft again
 		draft(data.availableChoices);
 	} else { // battle is still raging
@@ -124,11 +149,10 @@ var orderAttackers = function(gameObject){
 };
 
 var createAttackOrderArray = function(gameObject){
-	gameObject.attackOrder = gameObject.attackOrder ? gameObject.attackOrder : gameObject.battlefield.team.concat(gameObject.battlefield.enemyTeam);
+	gameObject.attackOrder = gameObject.attackOrder ? gameObject.attackOrder : gameObject.battlefield.myTeam.concat(gameObject.battlefield.enemyTeam);
 	for(var i = 0; i < gameObject.attackOrder.length; i++){
 		var thisUnit = gameObject.attackOrder[i];
-		var thisSpeed = thisUnit.speed ? thisUnit.speed : thisUnit.body.speed;
-		thisUnit.roundSpeed = (Math.pow(thisSpeed, 2) * Math.random());
+		thisUnit.roundSpeed = (Math.pow(thisUnit.body.speed, 2) * Math.random());
 		if(i === (gameObject.attackOrder.length - 1)){
 			orderAttackers(gameObject);
 		}

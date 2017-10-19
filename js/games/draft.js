@@ -65,8 +65,8 @@ var createAndReturnTeam = function(){
 var draft = function(choices, round = 0){
 	if (round === choices.length) {
 		clearPreviousDraftPick();
-		var team = createAndReturnTeam();
-		challenges(team);
+		var myTeam = createAndReturnTeam();
+		challenges(myTeam);
 	} else {
 		clearPreviousDraftPick();
 		populateNewDraftPick(choices, round);
