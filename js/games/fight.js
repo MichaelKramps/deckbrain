@@ -9,7 +9,7 @@ var performAttack = function(attack, target, targetArray, gameObject){
 	var first = function(){
 		for (var i = 0; i < targetArray.length; i++){
 			var thisUnit = targetArray[i];
-			thisUnit.body.health -= attack.power; // take dampen into account
+			thisUnit.body.health -= Math.round(thisUnit.armor.dampen * attack.power);
 		}
 		showTeams(gameObject);
 	};
