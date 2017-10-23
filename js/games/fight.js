@@ -29,6 +29,8 @@ var performAttack = function(attackObject, targetArray, gameObject){
 };
 
 var createTargetArray = function(attackObject, gameObject){
+	$(".attacking").removeClass("attacking");
+	
 	var targetArray = [];
 	if (attackObject.attack.spread === 0) {
 		performAttack(attackObject, [attackObject.target], gameObject);
@@ -62,6 +64,24 @@ var createTargetArray = function(attackObject, gameObject){
 	}
 };
 
+listenForTarget = function(attackObject, gameObject){
+	if (gameObject.battlefield.enemyTeam.length === 1) { // only one legal target
+		attackObject.target = gameObject.battlefield.enemyTeam[0];
+		createTargetArray(attackObject, gameObject);
+	} else { // multiple legal targets
+		// make cursor a crosshair and highlight possible targets
+		$("body").css("cursor", "crosshair");
+		$(".enemy").addClass("legal-target").on("click", function(){
+			$("body").css("cursor", "auto");
+			$(".enemy").removeClass("legal-target").unbind();
+			var enemyIndex = parseInt(this.id[1]);
+			
+			attackObject.target = gameObject.battlefield.enemyTeam[enemyIndex];
+			createTargetArray(attackObject, gameObject);
+		});
+	}
+};
+
 var showAttackChoices = function(unit, gameObject){
 	attackObject = {attacker: unit};
 	if (unit.id[0] === "r") { // it's a friendly robot
@@ -74,8 +94,7 @@ var showAttackChoices = function(unit, gameObject){
 				// remove both elements and attack
 				var callback = function(){
 					attackObject.attack = event.data.attack;
-					attackObject.target = gameObject.battlefield.enemyTeam[0];
-					createTargetArray(attackObject, gameObject);
+					listenForTarget(attackObject, gameObject);
 				};
 				$.when(
 					$("#attack-options").remove()
@@ -113,14 +132,12 @@ var listenForAttacks = function(gameObject){
 		// move to next enemy
 		gameObject.enemyNum += 1;
 		gameObject.challenges(gameObject.battlefield.myTeam, gameObject.enemyNum, gameObject.round);
-	} else if (teamIsDead(gameObject.battlefield.myTeam)) {
+	} else if (teamIsDead(gameObject.battlefield.myTeam)) { // my team is dead
 		// draft again
 		draft(data.availableChoices);
 	} else { // battle is still raging
 		if(gameObject.attacker < gameObject.attackOrder.length){
 			var thisUnit = gameObject.attackOrder[gameObject.attacker];
-			// Remove old highlight then highlight new attacker
-			$(".attacking").removeClass("attacking");
 			$(".attacker-name").eq(gameObject.attacker).addClass("attacking");
 			// Highlight character on battlefield
 			$("#" + thisUnit.id).addClass("attacking");
