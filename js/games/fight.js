@@ -3,19 +3,21 @@ var showTeams = require("./showTeams.js");
 var draft = require("./draft.js");
 
 
-var performAttack = function(attack, target, targetArray, gameObject){
+var performAttack = function(attackObject, targetArray, gameObject){
 	gameObject.attacker += 1;
 	
 	var first = function(){
 		for (var i = 0; i < targetArray.length; i++){
 			var thisUnit = targetArray[i];
-			thisUnit.body.health -= Math.round(thisUnit.armor.dampen * attack.power);
+			var attackValue = Math.round(thisUnit.armor.dampen * attackObject.attack.power); // dampen
+			thisUnit.body.health -= attackValue;
+			attackObject.attacker.body.health += Math.round(attackObject.attacker.armor.scrap * attackValue); // scrap
 		}
 		showTeams(gameObject);
 	};
 	var second = function(){
-		if (target.id[0] === "r"){
-			alert("Enemy attacks " + target.name + " for " + attack.power + " damage!");
+		if (attackObject.target.id[0] === "r"){
+			alert("Enemy attacks " + attackObject.target.name + " for " + attackObject.attack.power + " damage!");
 		}
 		listenForAttacks(gameObject);
 	};
@@ -26,41 +28,42 @@ var performAttack = function(attack, target, targetArray, gameObject){
 	);
 };
 
-var createTargetArray = function(attack, target, gameObject){
+var createTargetArray = function(attackObject, gameObject){
 	var targetArray = [];
-	if (attack.spread === 0) {
-		performAttack(attack, target, [target], gameObject);
+	if (attackObject.attack.spread === 0) {
+		performAttack(attackObject, [attackObject.target], gameObject);
 	} else { // attack has spread
 		var indexFinder = function(thisTarget){
-			return thisTarget.id === target.id;
+			return thisTarget.id === attackObject.target.id;
 		};
-		if (target.id[0] === "r") { // target is friendly
+		if (attackObject.target.id[0] === "r") { // target is friendly
 			var targetIndex = gameObject.battlefield.myTeam.findIndex(indexFinder);
-			var startIndex = (targetIndex - attack.spread) < 0 ? 0 : (targetIndex - attack.spread);
-			var endIndex = targetIndex + attack.spread + 1;
+			var startIndex = (targetIndex - attackObject.attack.spread) < 0 ? 0 : (targetIndex - attackObject.attack.spread);
+			var endIndex = targetIndex + attackObject.attack.spread + 1;
 			if (endIndex >= (gameObject.battlefield.myTeam.length)) { // attack hits last robot on team
 				var targetArray = gameObject.battlefield.myTeam.slice(startIndex);
-				performAttack(attack, target, targetArray, gameObject);
+				performAttack(attackObject, targetArray, gameObject);
 			} else {
 				var targetArray = gameObject.battlefield.myTeam.slice(startIndex, endIndex);
-				performAttack(attack, target, targetArray, gameObject); 
+				performAttack(attackObject, targetArray, gameObject); 
 			}
 		} else { // target is an enemy
 			var targetIndex = gameObject.battlefield.enemyTeam.findIndex(indexFinder);
-			var startIndex = (targetIndex - attack.spread) < 0 ? 0 : (targetIndex - attack.spread);
-			var endIndex = targetIndex + attack.spread + 1;
+			var startIndex = (targetIndex - attackObject.attack.spread) < 0 ? 0 : (targetIndex - attackObject.attack.spread);
+			var endIndex = targetIndex + attackObject.attack.spread + 1;
 			if (endIndex >= (gameObject.battlefield.enemyTeam.length)) { // attack hits last enemy
 				var targetArray = gameObject.battlefield.enemyTeam.slice(startIndex);
-				performAttack(attack, target, targetArray, gameObject);
+				performAttack(attackObject, targetArray, gameObject);
 			} else {
 				var targetArray = gameObject.battlefield.enemyTeam.slice(startIndex, endIndex);
-				performAttack(attack, target, targetArray, gameObject); 
+				performAttack(attackObject, targetArray, gameObject); 
 			}
 		}
 	}
 };
 
 var showAttackChoices = function(unit, gameObject){
+	attackObject = {attacker: unit};
 	if (unit.id[0] === "r") { // it's a friendly robot
 		var attackOptions = [{name: "Punch", id: "1", power: 2, spread: 0}, {name: unit.weapon.name, id: "2", power: unit.weapon.power, spread: unit.weapon.spread}];
 		$("#" + unit.id).append('<div id="attack-options"></div>')
@@ -70,7 +73,9 @@ var showAttackChoices = function(unit, gameObject){
 			$("#attack-options").append(html).find("#" + attack.id).on("click", {attack: attack}, function(event){
 				// remove both elements and attack
 				var callback = function(){
-					createTargetArray(event.data.attack, gameObject.battlefield.enemyTeam[0], gameObject);
+					attackObject.attack = event.data.attack;
+					attackObject.target = gameObject.battlefield.enemyTeam[0];
+					createTargetArray(attackObject, gameObject);
 				};
 				$.when(
 					$("#attack-options").remove()
@@ -83,7 +88,10 @@ var showAttackChoices = function(unit, gameObject){
 		var attack = {name: "Enemy Attacks", power: unit.weapon.power, spread: unit.weapon.spread};
 		// determine target
 		var targetIndex = Math.floor(gameObject.battlefield.myTeam.length * Math.random());
-		createTargetArray(attack, gameObject.battlefield.myTeam[targetIndex], gameObject);
+		
+		attackObject.attack = attack;
+		attackObject.target = gameObject.battlefield.myTeam[targetIndex];
+		createTargetArray(attackObject, gameObject);
 	}
 };
 
