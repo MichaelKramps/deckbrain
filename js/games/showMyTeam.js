@@ -5,6 +5,14 @@ var returnRobotHtml = function(){
 	return html;
 };
 
+var returnNameHtml = function(robot){
+	var html = '<div class="robot-name">';
+	html += robot.name;
+	html += '</div>';
+	
+	return html;
+};
+
 var returnHealthHtml = function(robot){
 	var html = '<div class="robot-health">Health: ';
 	html += robot.body.health;
@@ -19,6 +27,7 @@ var returnTeamHtml = function(team){
 		var thisRobot = team[i];
 		var robotHtml = '<div id="' + thisRobot.id + '" class="robot">';
 		robotHtml += returnRobotHtml();
+		robotHtml += returnNameHtml(thisRobot);
 		robotHtml += returnHealthHtml(thisRobot);
 		robotHtml += '</div>';
 		html += robotHtml;

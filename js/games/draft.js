@@ -83,20 +83,6 @@ var howManyRobots = function(choices){
 	}
 };
 
-/* var createAndReturnRobot = function(i, teamSize){
-	var thisRobot = {};
-	thisRobot.name = "My robot";
-	thisRobot.id = "r" + i;
-	thisRobot.body = $.extend({}, data.bodies[choicesMade[1] - 1]);
-	thisRobot.body.health = Math.round(thisRobot.body.health/teamSize) === 0 ? 1 : Math.round(thisRobot.body.health/teamSize);
-	thisRobot.armor = $.extend({}, data.armors[choicesMade[2] - 1]);
-	thisRobot.armor.scrap = Math.round(thisRobot.armor.scrap/teamSize) === 0 ? 1 : Math.round(thisRobot.armor.scrap/teamSize);
-	thisRobot.weapon = $.extend({}, data.weapons[choicesMade[3] - 1]);
-	thisRobot.weapon.power = Math.round(thisRobot.weapon.power/teamSize) === 0 ? 1 : Math.round(thisRobot.weapon.power/teamSize);
-	
-	return thisRobot;
-}; */
-
 ///////////////////////////////////////////
 // Starting point for the draft function //
 ///////////////////////////////////////////
