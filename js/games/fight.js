@@ -1,6 +1,7 @@
 var $ = require("jquery");
 var showTeams = require("./showTeams.js");
 var draft = require("./draft.js");
+var data = require("./data.js");
 
 
 var performAttack = function(attackObject, targetArray, gameObject){

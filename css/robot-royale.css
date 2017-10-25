@@ -23,6 +23,12 @@
 	padding: 1em;
 }
 
+.attack-order {
+	position: fixed;
+	top: 0;
+	right: 0;
+}
+
 .attacking {
 	color: dodgerblue;
 }

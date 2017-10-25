@@ -44,12 +44,14 @@ data.enemyWeapons = [
 	{name: "Enemy 4", power: 2, spread: 4}
 ];
 
-data.availableChoices = [
-	{title: "How many robots do you want on your team?", cards: data.number},
-	{title: "What type of body will your robot team have?", cards: data.bodies},
-	{title: "What type of armor will your robot team have", cards: data.armors},
-	{title: "What weapons will they carry?", cards: data.weapons}
-];
+data.availableChoices = {
+	draftChoices: [
+		{title: "How many robots do you want on your team?", cards: data.number},
+		{title: "What type of body will this robot have?", cards: data.bodies},
+		{title: "What type of armor will this robot equip?", cards: data.armors},
+		{title: "What weapon will this robot wield?", cards: data.weapons}
+	]
+};
 
 data.enemies = [
 	[{
@@ -92,4 +94,37 @@ data.enemies = [
 		weapon: data.enemyWeapons[3],
 		ascii: "              /|                                           |\\<br>             /||             ^               ^             ||\\<br>            / \\\\__          //               \\\\          __// \\<br>           /  |_  \\         | \\   /     \\   / |         /  _|  \\<br>          /  /  \\  \\         \\  \\/ \\---/ \\/  /         /  /     \\<br>         /  /    |  \\         \\  \\/\\   /\\/  /         /  |       \\<br>        /  /     \\   \\__       \\ ( 0\\ /0 ) /       __/   /        \\<br>       /  /       \\     \\___    \\ \\_/|\\_/ /    ___/     /\\         \\<br>      /  /         \\_)      \\___ \\/-\\|/-\\/ ___/      (_/\\ \\      `  \\<br>     /  /           /\\__)       \\/  oVo  \\/       (__/   ` \\      `  \\<br>    /  /           /,   \\__)    (_/\\ _ /\\_)    (__/         `      \\  \\<br>   /  '           //       \\__)  (__V_V__)  (__/                    \\  \\<br>  /  '  '        /'           \\   |{___}|   /         .              \\  \\<br> /  '  /        /              \\/ |{___}| \\/\\          `              \\  \\<br>/     /        '       .        \\/{_____}\\/  \\          \\    `         \\  \\<br>     /                ,         /{_______}\\   \\          \\    \\         \\<br>                     /         /{___/_\\___}\\   `          \\    `<br><br>                         Adrian Elhart"
 	}]
+];
+	
+data.robotNames = [
+	"CyberJohn",
+	"Isut",
+	"Sona",
+	"Mechael",
+	"42696C6C",
+	"Kevin",
+	"Axel",
+	"L.O.V.E",
+	"Silver Slick",
+	"Samdroid",
+	"Tinker",
+	"Mr. Robot",
+	"Magic Fist",
+	"Ogo",
+	"Builderino",
+	"Tron 3:16",
+	"Brobot",
+	"Pip",
+	"Hot Mama Cheese",
+	"Frodo",
+	"Dominatrices",
+	"Tim",
+	"Eloise",
+	"Tuck",
+	"Frump",
+	"The Governor",
+	"Angela",
+	"Holy Binary",
+	"Hex",
+	"Mike Planeswalker",
 ];
