@@ -44,6 +44,17 @@ data.enemyWeapons = [
 	{name: "Enemy 4", power: 2, spread: 4}
 ];
 
+// body is torso, armor is helmet, weapon is right arm, item is left arm
+
+data.items = [
+	{},
+	{},
+	{},
+	{},
+	{},
+	{},
+];
+
 data.availableChoices = {
 	draftChoices: [
 		{title: "How many robots do you want on your team?", cards: data.number},

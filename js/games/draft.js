@@ -58,7 +58,7 @@ var draftThisRobot = function(choices, robotNum){
 			choices.robots[robotNum - 1] = $.extend({}, choices.thisRobot);
 			draft(choices, (robotNum + 1));
 		} else {
-			pickPart(choices, robotNum)
+			pickPart(choices, robotNum);
 		}
 	} else {
 		choices.partNum = 1;

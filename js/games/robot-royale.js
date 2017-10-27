@@ -1,7 +1,10 @@
 var data = require("./data.js");
-var draft = require("./draft.js");
+var drawMap = require("./drawMap.js");
 
-draft(data.availableChoices);
+// have them enter a code and then remove/hide all items they don't have permission to use yet
+// maybe pick a username and pair a code with that?
+
+drawMap();
 
 // Game Ideas
 //
