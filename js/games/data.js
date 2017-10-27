@@ -139,3 +139,12 @@ data.robotNames = [
 	"Hex",
 	"Mike Planeswalker",
 ];
+
+data.levels = [ // code % 2741 gives the most recent unlock, I can get a better algorithm later
+	{name: "Grandma's basement", unlock: 1},
+	{name: "School fair", unlock: 2},
+	{name: "Catastrophic failure!", unlock: 3},
+	{name: "AI", unlock: 4},
+	{name: "Uprising", unlock: 5},
+	{name: "Sergeant Dan", unlock: 6}
+];

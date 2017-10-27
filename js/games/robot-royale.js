@@ -4,7 +4,7 @@ var drawMap = require("./drawMap.js");
 // have them enter a code and then remove/hide all items they don't have permission to use yet
 // maybe pick a username and pair a code with that?
 
-drawMap();
+drawMap(data.levels, 6);
 
 // Game Ideas
 //

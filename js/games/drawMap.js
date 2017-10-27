@@ -9,10 +9,17 @@ var clearScreen = function(){
 	$("#cards").empty();
 };
 
-var drawMap = function(levels = false, progress = false){
+var drawMap = function(levels, unlockCode){
 	clearScreen();
 	
-	//draft(data.availableChoices);
+	$("#title").append("Unlocked Levels");
+	
+	for (var i = 0; i < unlockCode; i++) {
+		var thisLevel = levels[i];
+		$("#cards").append("<div id='l" + i + "'>" + thisLevel.name + "</div>").find("#l" + i).on("click", function(){
+			draft(data.availableChoices); // need to update to be level specific
+		});
+	}
 };
 
 module.exports = drawMap;
