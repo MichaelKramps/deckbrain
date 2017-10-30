@@ -12,10 +12,10 @@ data.bodies = [
 ];
 
 data.enemyBodies = [
-	{name: "Enemy 1", health: 30, speed: 1},
-	{name: "Enemy 2", health: 20, speed: 10},
-	{name: "Enemy 3", health: 30, speed: 3},
-	{name: "Enemy 4", health: 50, speed: 2}
+	{name: "Standard", health: 30, speed: 1},
+	{name: "Formula Uno", health: 20, speed: 7},
+	{name: "Flyer", health: 30, speed: 3},
+	{name: "Scales", health: 50, speed: 2}
 ];
 
 data.armors = [

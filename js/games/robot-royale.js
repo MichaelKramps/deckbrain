@@ -1,10 +1,20 @@
-var data = require("./data.js");
+var levels = require("./levels.js");
 var drawMap = require("./drawMap.js");
+var utils = require("./utils.js");
 
 // have them enter a code and then remove/hide all items they don't have permission to use yet
 // maybe pick a username and pair a code with that?
 
-drawMap(data.levels, 6);
+var unlockCode = utils.getUnlockCode();
+
+if (unlockCode){
+	drawMap(levels, unlockCode);
+} else {
+	document.cookie = "unlockCode=1";
+	drawMap(levels, 1);
+}
+
+
 
 // Game Ideas
 //
