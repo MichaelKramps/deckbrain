@@ -33,7 +33,7 @@ data.enemyArmors = [
 
 data.weapons = [
 	{name: "Grenades", description: "Respectable damage to a few closeby enemies", spread: 1, power: 5},
-	{name: "Super Punch", description: "Huge amount of damage to one enemy", spread: 0, power: 12},
+	{name: "Super Punch", description: "Huge amount of damage to one enemy", spread: 0, power: 120},
 	{name: "Napalm", description: "Some damage to lots of enemies", spread: 4, power: 2}
 ];
 

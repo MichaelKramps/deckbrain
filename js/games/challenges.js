@@ -1,21 +1,26 @@
-var $ = require("jquery");
-var data = require("./data.js");
+var levels = require("./levels.js");
+var utils = require("./utils.js");
+var drawMap = require("./drawMap.js");
 var showTeams = require("./showTeams.js");
 var fight = require("./fight.js");
 
-var challenges = function(myTeam, enemyNum = 0, round = 1){
-	if (enemyNum === data.enemies.length){
+var challenges = function(myTeam, enemyNum = 0){
+	var level = levels[utils.getLevel()];
+	
+	if (enemyNum === level.enemies.length){ // moving on to the next challenge
 		enemyNum = 0;
-		round += 1; // if all enemies have been killed, move on to next round
+		drawMap.draw(levels, utils.getLevel() + 2);
+		
+	} else { // fighting a new enemy in this challenge
+	
+		var rawEnemyTeam = level.enemies[enemyNum];
+		var enemyTeam = JSON.parse(JSON.stringify(rawEnemyTeam)); // must copy so we can change stats without affecting data.js
+		var battlefield = {myTeam: myTeam, enemyTeam: enemyTeam};
+		var gameObject = {battlefield: battlefield, enemyNum: enemyNum, challenges: challenges};
+		
+		showTeams(gameObject);
+		fight(gameObject); // after fight, move on to next enemy
 	}
-	
-	var rawEnemyTeam = data.enemies[enemyNum];
-	var enemyTeam = JSON.parse(JSON.stringify(rawEnemyTeam)); // must copy so we can change stats without affecting data.js
-	var battlefield = {myTeam: myTeam, enemyTeam: enemyTeam};
-	var gameObject = {battlefield: battlefield, enemyNum: enemyNum, round: round, challenges: challenges};
-	
-	showTeams(gameObject);
-	fight(gameObject); // after fight, move on to next enemy
 };
 
 module.exports = challenges;

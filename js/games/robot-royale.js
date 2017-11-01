@@ -8,10 +8,10 @@ var utils = require("./utils.js");
 var unlockCode = utils.getUnlockCode();
 
 if (unlockCode){
-	drawMap(levels, unlockCode);
+	drawMap.draw(levels, unlockCode);
 } else {
 	document.cookie = "unlockCode=1";
-	drawMap(levels, 1);
+	drawMap.draw(levels, 1);
 }
 
 

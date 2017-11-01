@@ -8,10 +8,19 @@ var returnHealthHtml = function(enemy){
 	return html;
 };
 
+var returnNameHtml = function(enemy){
+	var html = '<div class="enemy-name">';
+	html += enemy.name;
+	html += '</div>';
+	
+	return html;
+};
+
 var returnEnemyHtml = function(enemy){
 	var html = '<div id="' + enemy.id + '" class="enemy"><pre style=\"font: 10px/8px monospace;\">';
 	html += enemy.ascii;
 	html += '</pre>';
+	html += returnNameHtml(enemy);
 	html += returnHealthHtml(enemy);
 	html += '</div>';
 	
