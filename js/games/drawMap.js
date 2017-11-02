@@ -35,7 +35,6 @@ drawMap.draw = function(levels, unlockCode){
 	updateUnlockCode(unlockCode);
 	
 	$("#title").append("Unlocked Levels");
-	console.log(unlockCode);
 	
 	for (var i = 0; i < unlockCode; i++) {
 		var thisLevel = levels[i];
@@ -44,7 +43,7 @@ drawMap.draw = function(levels, unlockCode){
 			var id = $(this).attr("id");
 			var num = id[1];
 			utils.setLevel(num);
-			draft(data.availableChoices); // need to update to be level specific
+			draft(data.availableChoices);
 		});
 	}
 };

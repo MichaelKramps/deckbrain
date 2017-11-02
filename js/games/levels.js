@@ -62,7 +62,7 @@ var levels = [
 		},
 		{ // 1.1
 			name: "Tumners",
-			id: "e0",
+			id: "e1",
 			body: data.enemyBodies[0],
 			armor: data.enemyArmors[0],
 			weapon: data.enemyWeapons[0],
@@ -70,7 +70,7 @@ var levels = [
 		},
 		{ // 1.3
 			name: "Random Bat",
-			id: "e0",
+			id: "e2",
 			body: data.enemyBodies[2],
 			armor: data.enemyArmors[2],
 			weapon: data.enemyWeapons[2],
@@ -87,7 +87,7 @@ var levels = [
 		},
 		{ // 1.2
 			name: "Tock",
-			id: "e0",
+			id: "e1",
 			body: data.enemyBodies[1],
 			armor: data.enemyArmors[1],
 			weapon: data.enemyWeapons[1],
