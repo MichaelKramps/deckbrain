@@ -14,15 +14,25 @@ var clearScreen = function(){
 	$("#cards").empty();
 };
 
+var isBetterUnlockCode = function(unlockCode){
+	var currentUnlockCode = utils.getUnlockCode();
+	if (currentUnlockCode >= unlockCode){ // we already have a better unlock code
+		return false;
+	} else { // we just got a better unlock code
+		return true;
+	}
+};
+
+var updateUnlockCode = function(unlockCode){
+	if (isBetterUnlockCode(unlockCode)){
+		utils.setUnlockCode(unlockCode);
+	}
+};
+
 drawMap.draw = function(levels, unlockCode){
 	clearScreen();
 	
-	var currentUnlockCode = utils.getUnlockCode();
-	if (currentUnlockCode >= unlockCode){ // we already have a better unlock code
-		unlockCode = currentUnlockCode;
-	} else { // we just got a better unlock code
-		utils.setUnlockCode(unlockCode);
-	}
+	updateUnlockCode(unlockCode);
 	
 	$("#title").append("Unlocked Levels");
 	console.log(unlockCode);
