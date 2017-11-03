@@ -36,7 +36,7 @@ var bottomFourLines = function(robot){
 };
 
 var returnRobotHtml = function(robot){
-	var html = "<pre style=\"font: 10px/8px monospace;\">";
+	var html = "<pre style=\"font: 12px/10px monospace;\">";
 	html += topTwoLines(robot);
 	html += bottomFourLines(robot);
 	html += "</pre>";
