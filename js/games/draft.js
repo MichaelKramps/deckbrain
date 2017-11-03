@@ -42,6 +42,9 @@ var pickPart = function(choices, robotNum){
 					choices.thisRobot.weapon = $.extend({}, data.weapons[choiceNumber]);
 					choices.thisRobot.weapon.power = Math.round(choices.thisRobot.weapon.power/choices.numRobots) === 0 ? 1 : Math.round(choices.thisRobot.weapon.power/choices.numRobots);
 					break;
+				case 4:
+					choices.thisRobot.item = $.extend({}, data.items[choiceNumber]);
+					break;
 			}
 			choices.partNum += 1;
 			draftThisRobot(choices, robotNum);

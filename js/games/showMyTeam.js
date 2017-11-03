@@ -1,7 +1,45 @@
 var $ = require("jquery");
 
-var returnRobotHtml = function(){
-	var html = "<pre style=\"font: 6px/3px monospace;\">                                  <br>                @@                <br>                .                 <br>                `                 <br>                `                 <br>                `                 <br>            .:::;::::`            <br>           +@@@@@@@@@@,           <br>           @@@@@@@@@@@#           <br>           #@@  ,'  @@+           <br>           +@@      '@,           <br>           :@@  `,  @@`           <br>           `@@@@@@@@@@            <br>            @@@@@@@@@@            <br>       @@@@.@@@@@@@@@@,@@@@       <br>       @@@@:@@@@@@@@@@'@@@@       <br>       @@@@+@@@@@@@@@@#@@@#       <br>       @@@@@,@@@@@@@@.@@@@+       <br>   ....#@@@@@`,,,,,,`@@@@@+....   <br>  :@@@@+@@@@@@@@@@@@@@@@@@;@@@@,  <br>  :@@@@;@@@@@@@@@@@@@@@@@@:@@@@,  <br>  :@@  :@@@@@`@: @@@@@@@@@,  @@,  <br>  :@@  .@@@@@@@@#,,@@@:@@@`  @@,  <br>  :@@   @@@@@`.+.. @@@:@@@   @@,  <br>  :@@   @@@:@'##@@@,@..@@@   @@,  <br>  :@@   @@@+@,@@@@@@,@#@@@   @@,  <br>  :@@   @@@,@#@@@@@@#;@.@@   @@,  <br>  :@@   @@@@ @+@@@@@::'`@@   @@.  <br>  :@@   @@@@#@..@@@:@,.'@@   @@,  <br>  :@@   @@@@#@@@``@@@+@@@@   @@,  <br>  +@@   @@@@#,` @.@@@,@@@@   @@'  <br> @   @  @@@@@@@@@@@``@@@@@  @   # <br> #   `. #@@@@@@@@@@@@@@@@@ .    # <br>        '@@@@@@@@@@@@@@@@@        <br>        ,@@@@@@@@@@@@@@@@@        <br>        .+++++++++++++++++        <br>              .@@@@               <br>              .@@@@               <br>              .@@@@               <br>              .@@@@               <br>              .@@@@               <br>              `....               <br>           '##########;           <br>           '##########;           <br>           :'''''''''':           <br>           `         ``           <br>           :'''''''''':           <br>           '##########;           <br>                                  </pre>";
+var topTwoLines = function(robot){
+	var topTwoHtml = "";
+	topTwoHtml += robot.item.ascii[0];
+	topTwoHtml += robot.armor.ascii[0];
+	topTwoHtml += robot.weapon.ascii[0];
+	topTwoHtml += "<br>";
+	topTwoHtml += robot.item.ascii[1];
+	topTwoHtml += robot.armor.ascii[1];
+	topTwoHtml += robot.weapon.ascii[1];
+	topTwoHtml += "<br>";
+	
+	return topTwoHtml;
+};
+
+var bottomFourLines = function(robot){
+	bottomFourHtml = "";
+	bottomFourHtml += robot.item.ascii[2];
+	bottomFourHtml += robot.body.ascii[0];
+	bottomFourHtml += robot.weapon.ascii[2];
+	bottomFourHtml += "<br>";
+	bottomFourHtml += robot.item.ascii[3];
+	bottomFourHtml += robot.body.ascii[1];
+	bottomFourHtml += robot.weapon.ascii[3];
+	bottomFourHtml += "<br>";
+	bottomFourHtml += robot.item.ascii[4];
+	bottomFourHtml += robot.body.ascii[2];
+	bottomFourHtml += robot.weapon.ascii[4];
+	bottomFourHtml += "<br>";
+	bottomFourHtml += robot.item.ascii[5];
+	bottomFourHtml += robot.body.ascii[3];
+	bottomFourHtml += robot.weapon.ascii[5];
+	
+	return bottomFourHtml;
+};
+
+var returnRobotHtml = function(robot){
+	var html = "<pre style=\"font: 10px/8px monospace;\">";
+	html += topTwoLines(robot);
+	html += bottomFourLines(robot);
+	html += "</pre>";
 	return html;
 };
 
@@ -26,7 +64,7 @@ var returnTeamHtml = function(team){
 	for (var i = 0; i < team.length; i++){
 		var thisRobot = team[i];
 		var robotHtml = '<div id="' + thisRobot.id + '" class="robot">';
-		robotHtml += returnRobotHtml();
+		robotHtml += returnRobotHtml(thisRobot);
 		robotHtml += returnNameHtml(thisRobot);
 		robotHtml += returnHealthHtml(thisRobot);
 		robotHtml += '</div>';
