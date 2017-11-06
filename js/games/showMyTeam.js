@@ -1,3 +1,7 @@
+var showTeam = {};
+
+module.exports = showTeam;
+
 var $ = require("jquery");
 
 var topTwoLines = function(robot){
@@ -73,10 +77,26 @@ var returnTeamHtml = function(team){
 	return html;
 };
 
-var showTeam = function(team){ // build the html that shows team and stats
+var showCurrentRobot = function(robot){
+	$(".my-dashboard").append("<div class='current'></div>");
+	var html = returnRobotHtml(robot);
+	$(".my-dashboard .current").append(html);
+};
+
+var showDraftedRobots = function(team){
+	$(".my-dashboard").append("<div class='drafted'></div>");
+	var html = returnTeamHtml(team);
+	$(".my-dashboard .drafted").append(html);
+};
+
+showTeam.showDraft = function(robot, team){
+	$(".my-dashboard").empty();
+	showCurrentRobot(robot);
+	showDraftedRobots(team);
+}
+
+showTeam.show = function(team){ // build the html that shows team and stats
 	$(".my-dashboard").empty();
 	var html = returnTeamHtml(team);
 	$(".my-dashboard").append(html);
-}
-
-module.exports = showTeam;
+};

@@ -1,6 +1,8 @@
 var $ = require("jquery");
 var data = require("./data.js");
+var ascii = require("./ascii.js");
 var challenges = require("./challenges.js");
+var showMyTeam = require("./showMyTeam.js");
 	
 var clearPreviousDraftPick = function(){
 	$("#title").empty();
@@ -23,6 +25,7 @@ var pickPart = function(choices, robotNum){
 	clearPreviousDraftPick();
 	var thisPart = choices.draftChoices[choices.partNum];
 	$("#title").append(thisPart.title);
+	showMyTeam.showDraft(choices.thisRobot, choices.robots);
 	
 	var cardsArray = thisPart.cards;
 	for (var i = 0; i < cardsArray.length; i++){
@@ -53,19 +56,29 @@ var pickPart = function(choices, robotNum){
 };
 
 var draftThisRobot = function(choices, robotNum){
+	var blankRobot = {
+		body: {ascii: $.extend({}, ascii.bodies.blank)},
+		armor: {ascii: $.extend({}, ascii.armors.blank)},
+		weapon: {ascii: $.extend({}, ascii.weapons.blank)},
+		item: {ascii: $.extend({}, ascii.items.blank)}
+	}
+	
+	
     if (choices.partNum){ // we've already made a pick
 		if (choices.partNum === data.availableChoices.draftChoices.length){ // we're finished picking for this robot
 			choices.partNum = 1;
 			choices.thisRobot.id = "r" + robotNum;
 			choices.thisRobot.name = data.robotNames[Math.floor(Math.random() * data.robotNames.length)];
 			choices.robots[robotNum - 1] = $.extend({}, choices.thisRobot);
+			choices.thisRobot = $.extend({}, blankRobot); // reset the robot
 			draft(choices, (robotNum + 1));
 		} else {
 			pickPart(choices, robotNum);
 		}
 	} else {
 		choices.partNum = 1;
-		choices.thisRobot = {};
+
+		choices.thisRobot = $.extend({}, blankRobot);
 		pickPart(choices, robotNum);
 	}
 };
