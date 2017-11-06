@@ -87,7 +87,7 @@ var showAttackChoices = function(unit, gameObject){
 	attackObject = {attacker: unit};
 	if (unit.id[0] === "r") { // it's a friendly robot
 		var attackOptions = [{name: "Punch", id: "1", power: 2, spread: 0}, {name: unit.weapon.name, id: "2", power: unit.weapon.power, spread: unit.weapon.spread}];
-		$("#" + unit.id).append('<div id="attack-options"></div>')
+		$("#" + unit.id).append('<div id="attack-options"></div>');
 		for (var i = 0; i < attackOptions.length; i++) {
 			var attack = attackOptions[i];
 			var html = '<div id="' + attack.id + '" class="attack-option">' + attack.name + '</div>';
@@ -104,6 +104,9 @@ var showAttackChoices = function(unit, gameObject){
 				);
 			});
 		}
+		
+		// also add item ability here
+		
 	} else { // it's an enemy
 		var attack = {name: "Enemy Attacks", power: unit.weapon.power, spread: unit.weapon.spread};
 		// determine target

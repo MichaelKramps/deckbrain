@@ -38,7 +38,6 @@ drawMap.draw = function(levels, unlockCode){
 	
 	for (var i = 0; i < unlockCode; i++) {
 		var thisLevel = levels[i];
-		console.log(thisLevel);
 		$("#cards").append("<div id='l" + i + "'>" + thisLevel.name + "</div>").find("#l" + i).on("click", function(){
 			var id = $(this).attr("id");
 			var num = id[1];

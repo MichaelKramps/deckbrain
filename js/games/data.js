@@ -3,6 +3,7 @@ var data = {};
 module.exports = data;
 
 var ascii = require("./ascii.js");
+var itemActions = require("./itemActions.js");
 
 data.numberRobots = 0;
 data.number = [{name: "1 Robot"}, {name: "2 Robots"}, {name: "3 Robots"}, {name: "4 Robots"}];
@@ -105,26 +106,38 @@ data.enemyWeapons = [
 data.items = [
 	{
 		name: "Sandwiches", // Item to heal passively
+		description: "Eat a sandwich to heal yourself",
+		action: itemActions.sandwiches,
 		ascii: ascii.items.sandwiches
 	},
 	{
 		name: "Springs", // Item to always hit first
+		description: "Make sure you are first to attack each round",
+		action: itemActions.springs,
 		ascii: ascii.items.springs
 	},
 	{
 		name: "Nets", // Item to weaken enemy attacks
+		description: "Disrupt your enemies attacks",
+		action: itemActions.nets,
 		ascii: ascii.items.nets
 	},
 	{
 		name: "Jackets", // Item to improve defense
+		description: "You can absorb some of your enemies' attacks",
+		action: itemActions.jackets,
 		ascii: ascii.items.jackets
 	},
 	{
 		name: "Smelling Salts", // Item with chance to revive ally
+		description: "Provides a chance to revive an ally",
+		action: itemActions.smellingSalts,
 		ascii: ascii.items.smellingSalts
 	},
 	{
 		name: "Chemicals", // Item to attack passively
+		description: "Poisons opponents to deal damage each turn",
+		action: itemActions.chemicals,
 		ascii: ascii.items.chemicals
 	},
 ];
