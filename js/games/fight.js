@@ -25,7 +25,7 @@ var performAttack = function(attackObject, targetArray, gameObject){
 	$.when(
 		first()
 	).then(
-		setTimeout(second, 900)
+		setTimeout(second, 400)
 	);
 };
 
@@ -65,6 +65,10 @@ var createTargetArray = function(attackObject, gameObject){
 	}
 };
 
+
+// need to take into account friendly targets also
+// maybe three possibilities (enemy legal, friendly legal and all legal)
+// maybe need a more elegant solution
 listenForTarget = function(attackObject, gameObject){
 	if (gameObject.battlefield.enemyTeam.length === 1) { // only one legal target
 		attackObject.target = gameObject.battlefield.enemyTeam[0];
@@ -86,7 +90,7 @@ listenForTarget = function(attackObject, gameObject){
 var showAttackChoices = function(unit, gameObject){
 	attackObject = {attacker: unit};
 	if (unit.id[0] === "r") { // it's a friendly robot
-		var attackOptions = [{name: "Punch", id: "1", power: 2, spread: 0}, {name: unit.weapon.name, id: "2", power: unit.weapon.power, spread: unit.weapon.spread}];
+		var attackOptions = [{name: "Punch", id: "1", power: 6, spread: 0}, {name: unit.weapon.name, id: "2", power: unit.weapon.power, spread: unit.weapon.spread}];
 		$("#" + unit.id).append('<div id="attack-options"></div>');
 		for (var i = 0; i < attackOptions.length; i++) {
 			var attack = attackOptions[i];
@@ -105,7 +109,7 @@ var showAttackChoices = function(unit, gameObject){
 			});
 		}
 		
-		// also add item ability here
+		// also add item ability here (if active ability)
 		
 	} else { // it's an enemy
 		var attack = {name: "Enemy Attacks", power: unit.weapon.power, spread: unit.weapon.spread};

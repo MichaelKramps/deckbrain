@@ -105,39 +105,45 @@ data.enemyWeapons = [
 
 data.items = [
 	{
-		name: "Sandwiches", // Item to heal passively
+		name: "Sandwiches", // Item to heal target
 		description: "Eat a sandwich to heal yourself",
 		action: itemActions.sandwiches,
+		passive: false,
 		ascii: ascii.items.sandwiches
 	},
 	{
 		name: "Springs", // Item to always hit first
 		description: "Make sure you are first to attack each round",
 		action: itemActions.springs,
+		passive: true,
 		ascii: ascii.items.springs
 	},
 	{
 		name: "Nets", // Item to weaken enemy attacks
 		description: "Disrupt your enemies attacks",
 		action: itemActions.nets,
+		passive: false,
 		ascii: ascii.items.nets
 	},
 	{
 		name: "Jackets", // Item to improve defense
 		description: "You can absorb some of your enemies' attacks",
 		action: itemActions.jackets,
+		passive: false,
 		ascii: ascii.items.jackets
 	},
 	{
 		name: "Smelling Salts", // Item with chance to revive ally
 		description: "Provides a chance to revive an ally",
 		action: itemActions.smellingSalts,
+		passive: false,
 		ascii: ascii.items.smellingSalts
 	},
 	{
 		name: "Chemicals", // Item to attack passively
 		description: "Poisons opponents to deal damage each turn",
 		action: itemActions.chemicals,
+		passive: true,
 		ascii: ascii.items.chemicals
 	},
 ];
