@@ -108,23 +108,20 @@ data.items = [
 		name: "Sandwiches", // Item to heal target
 		description: "Eat a sandwich to heal yourself",
 		action: itemActions.sandwiches,
-		passive: false,
 		targets: "friendlies",
 		ascii: ascii.items.sandwiches
 	},
 	{
-		name: "Springs", // Item to always hit first
+		name: "Springs", // Item to improve speed
 		description: "Make sure you are first to attack each round",
 		action: itemActions.springs,
-		passive: true,
-		targets: null,
+		targets: "friendlies",
 		ascii: ascii.items.springs
 	},
 	{
 		name: "Nets", // Item to weaken enemy attacks
 		description: "Disrupt your enemies attacks",
 		action: itemActions.nets,
-		passive: false,
 		targets: "enemies",
 		ascii: ascii.items.nets
 	},
@@ -132,7 +129,6 @@ data.items = [
 		name: "Jackets", // Item to improve defense
 		description: "You can absorb some of your enemies' attacks",
 		action: itemActions.jackets,
-		passive: false,
 		targets: "friendlies",
 		ascii: ascii.items.jackets
 	},
@@ -140,7 +136,6 @@ data.items = [
 		name: "Smelling Salts", // Item with chance to revive ally
 		description: "Provides a chance to revive an ally",
 		action: itemActions.smellingSalts,
-		passive: false,
 		targets: "friendlies",
 		ascii: ascii.items.smellingSalts
 	},
@@ -148,7 +143,6 @@ data.items = [
 		name: "Chemicals", // Item to attack passively
 		description: "Poisons opponents to deal damage each turn",
 		action: itemActions.chemicals,
-		passive: true,
 		targets: "enemies",
 		ascii: ascii.items.chemicals
 	},
