@@ -109,6 +109,7 @@ data.items = [
 		description: "Eat a sandwich to heal yourself",
 		action: itemActions.sandwiches,
 		passive: false,
+		targets: "friendlies",
 		ascii: ascii.items.sandwiches
 	},
 	{
@@ -116,6 +117,7 @@ data.items = [
 		description: "Make sure you are first to attack each round",
 		action: itemActions.springs,
 		passive: true,
+		targets: null,
 		ascii: ascii.items.springs
 	},
 	{
@@ -123,6 +125,7 @@ data.items = [
 		description: "Disrupt your enemies attacks",
 		action: itemActions.nets,
 		passive: false,
+		targets: "enemies",
 		ascii: ascii.items.nets
 	},
 	{
@@ -130,6 +133,7 @@ data.items = [
 		description: "You can absorb some of your enemies' attacks",
 		action: itemActions.jackets,
 		passive: false,
+		targets: "friendlies",
 		ascii: ascii.items.jackets
 	},
 	{
@@ -137,6 +141,7 @@ data.items = [
 		description: "Provides a chance to revive an ally",
 		action: itemActions.smellingSalts,
 		passive: false,
+		targets: "friendlies",
 		ascii: ascii.items.smellingSalts
 	},
 	{
@@ -144,6 +149,7 @@ data.items = [
 		description: "Poisons opponents to deal damage each turn",
 		action: itemActions.chemicals,
 		passive: true,
+		targets: "enemies",
 		ascii: ascii.items.chemicals
 	},
 ];

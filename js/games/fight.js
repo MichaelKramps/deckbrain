@@ -10,7 +10,7 @@ var performAttack = function(attackObject, targetArray, gameObject){
 	var first = function(){
 		for (var i = 0; i < targetArray.length; i++){
 			var thisUnit = targetArray[i];
-			var attackValue = Math.round(thisUnit.armor.dampen * attackObject.attack.power); // dampen
+			var attackValue = Math.round(thisUnit.armor.dampen * attackObject.weapon.power); // dampen
 			thisUnit.body.health -= attackValue;
 			attackObject.attacker.body.health += Math.round(attackObject.attacker.armor.scrap * attackValue); // scrap
 		}
@@ -18,7 +18,7 @@ var performAttack = function(attackObject, targetArray, gameObject){
 	};
 	var second = function(){
 		if (attackObject.target.id[0] === "r"){
-			alert("Enemy attacks " + attackObject.target.name + " for " + attackObject.attack.power + " damage!");
+			alert("Enemy attacks " + attackObject.target.name + " for " + attackObject.weapon.power + " damage!");
 		}
 		listenForAttacks(gameObject);
 	};
@@ -33,43 +33,50 @@ var createTargetArray = function(attackObject, gameObject){
 	$(".attacking").removeClass("attacking");
 	
 	var targetArray = [];
-	if (attackObject.attack.spread === 0) {
-		performAttack(attackObject, [attackObject.target], gameObject);
-	} else { // attack has spread
-		var indexFinder = function(thisTarget){
-			return thisTarget.id === attackObject.target.id;
-		};
-		if (attackObject.target.id[0] === "r") { // target is friendly
-			var targetIndex = gameObject.battlefield.myTeam.findIndex(indexFinder);
-			var startIndex = (targetIndex - attackObject.attack.spread) < 0 ? 0 : (targetIndex - attackObject.attack.spread);
-			var endIndex = targetIndex + attackObject.attack.spread + 1;
-			if (endIndex >= (gameObject.battlefield.myTeam.length)) { // attack hits last robot on team
-				var targetArray = gameObject.battlefield.myTeam.slice(startIndex);
-				performAttack(attackObject, targetArray, gameObject);
-			} else {
-				var targetArray = gameObject.battlefield.myTeam.slice(startIndex, endIndex);
-				performAttack(attackObject, targetArray, gameObject); 
-			}
-		} else { // target is an enemy
-			var targetIndex = gameObject.battlefield.enemyTeam.findIndex(indexFinder);
-			var startIndex = (targetIndex - attackObject.attack.spread) < 0 ? 0 : (targetIndex - attackObject.attack.spread);
-			var endIndex = targetIndex + attackObject.attack.spread + 1;
-			if (endIndex >= (gameObject.battlefield.enemyTeam.length)) { // attack hits last enemy
-				var targetArray = gameObject.battlefield.enemyTeam.slice(startIndex);
-				performAttack(attackObject, targetArray, gameObject);
-			} else {
-				var targetArray = gameObject.battlefield.enemyTeam.slice(startIndex, endIndex);
-				performAttack(attackObject, targetArray, gameObject); 
+	
+	if (attackObject.item) {
+		if (attackObject.item.spread) {
+			
+		} else {
+			gameObject.attacker += 1;
+			var callback = function(){listenForAttacks(gameObject)};
+			attackObject.item.action([attackObject.target], callback);
+		}
+	} else {
+		if (attackObject.weapon.spread === 0) {
+			performAttack(attackObject, [attackObject.target], gameObject);
+		} else { // attack has spread
+			var indexFinder = function(thisTarget){
+				return thisTarget.id === attackObject.target.id;
+			};
+			if (attackObject.target.id[0] === "r") { // target is friendly
+				var targetIndex = gameObject.battlefield.myTeam.findIndex(indexFinder);
+				var startIndex = (targetIndex - attackObject.weapon.spread) < 0 ? 0 : (targetIndex - attackObject.weapon.spread);
+				var endIndex = targetIndex + attackObject.weapon.spread + 1;
+				if (endIndex >= (gameObject.battlefield.myTeam.length)) { // attack hits last robot on team
+					var targetArray = gameObject.battlefield.myTeam.slice(startIndex);
+					performAttack(attackObject, targetArray, gameObject);
+				} else {
+					var targetArray = gameObject.battlefield.myTeam.slice(startIndex, endIndex);
+					performAttack(attackObject, targetArray, gameObject); 
+				}
+			} else { // target is an enemy
+				var targetIndex = gameObject.battlefield.enemyTeam.findIndex(indexFinder);
+				var startIndex = (targetIndex - attackObject.weapon.spread) < 0 ? 0 : (targetIndex - attackObject.weapon.spread);
+				var endIndex = targetIndex + attackObject.weapon.spread + 1;
+				if (endIndex >= (gameObject.battlefield.enemyTeam.length)) { // attack hits last enemy
+					var targetArray = gameObject.battlefield.enemyTeam.slice(startIndex);
+					performAttack(attackObject, targetArray, gameObject);
+				} else {
+					var targetArray = gameObject.battlefield.enemyTeam.slice(startIndex, endIndex);
+					performAttack(attackObject, targetArray, gameObject); 
+				}
 			}
 		}
 	}
 };
 
-
-// need to take into account friendly targets also
-// maybe three possibilities (enemy legal, friendly legal and all legal)
-// maybe need a more elegant solution
-listenForTarget = function(attackObject, gameObject){
+var listenForEnemyTargets = function(attackObject, gameObject){
 	if (gameObject.battlefield.enemyTeam.length === 1) { // only one legal target
 		attackObject.target = gameObject.battlefield.enemyTeam[0];
 		createTargetArray(attackObject, gameObject);
@@ -79,44 +86,85 @@ listenForTarget = function(attackObject, gameObject){
 		$(".enemy").addClass("legal-target").on("click", function(){
 			$("body").css("cursor", "auto");
 			$(".enemy").removeClass("legal-target").unbind();
-			var enemyIndex = parseInt(this.id[1]);
+			var targetIndex = parseInt(this.id[1]);
 			
-			attackObject.target = gameObject.battlefield.enemyTeam[enemyIndex];
+			attackObject.target = gameObject.battlefield.enemyTeam[targetIndex];
 			createTargetArray(attackObject, gameObject);
 		});
 	}
 };
 
+var listenForFriendlyTargets = function(actionObject, gameObject){
+	if (gameObject.battlefield.myTeam.length === 1) { // only one legal target
+		actionObject.target = gameObject.battlefield.myTeam[0];
+		createTargetArray(actionObject, gameObject);
+	} else { // multiple legal targets
+		// make cursor a crosshair and highlight possible targets
+		$("body").css("cursor", "crosshair");
+		$(".robot").addClass("legal-friendly-target").on("click", function(){
+			$("body").css("cursor", "auto");
+			$(".robot").removeClass("legal-friendly-target").unbind();
+			var targetIndex = parseInt(this.id[1]);
+			
+			actionObject.target = gameObject.battlefield.myTeam[targetIndex];
+			createTargetArray(actionObject, gameObject);
+		});
+	}
+};
+
+var determineLegalTargets = function(actionObject, gameObject){
+	switch(actionObject.item.targets){
+		case "enemies":
+			listenForEnemyTargets(actionObject, gameObject);
+			break;
+		case "friendlies":
+			listenForFriendlyTargets(actionObject, gameObject);
+			break;
+		case "all":
+			listeForAnyTarget(actionObject, gameObject);
+			break;
+	}
+}
+
 var showAttackChoices = function(unit, gameObject){
 	attackObject = {attacker: unit};
 	if (unit.id[0] === "r") { // it's a friendly robot
-		var attackOptions = [{name: "Punch", id: "1", power: 6, spread: 0}, {name: unit.weapon.name, id: "2", power: unit.weapon.power, spread: unit.weapon.spread}];
-		$("#" + unit.id).append('<div id="attack-options"></div>');
-		for (var i = 0; i < attackOptions.length; i++) {
-			var attack = attackOptions[i];
-			var html = '<div id="' + attack.id + '" class="attack-option">' + attack.name + '</div>';
-			$("#attack-options").append(html).find("#" + attack.id).on("click", {attack: attack}, function(event){
-				// remove both elements and attack
-				var callback = function(){
-					attackObject.attack = event.data.attack;
-					listenForTarget(attackObject, gameObject);
-				};
-				$.when(
-					$("#attack-options").remove()
-				).then(
-					setTimeout(callback, 100)
-				);
-			});
-		}
 		
-		// also add item ability here (if active ability)
+		$("#" + unit.id).append('<div id="attack-options"></div>');
+				
+		var weaponAttackHtml = '<div id="weapon" class="attack-option">' + unit.weapon.name + '</div>';
+		$("#attack-options").append(weaponAttackHtml).find("#weapon").on("click", function(){
+			// remove both elements and attack
+			var callback = function(){
+				attackObject.weapon = unit.weapon;
+				listenForEnemyTargets(attackObject, gameObject);
+			};
+			$.when(
+				$("#attack-options").remove()
+			).then(
+				setTimeout(callback, 100)
+			);
+		});
+		
+		var itemActionHtml = '<div id="item" class="attack-option">' + unit.item.name + '</div>';
+		$("#attack-options").append(itemActionHtml).find("#item").on("click", function(){
+			// remove both elements and attack
+			var callback = function(){
+				attackObject.item = unit.item;
+				determineLegalTargets(attackObject, gameObject);
+			};
+			$.when(
+				$("#attack-options").remove()
+			).then(
+				setTimeout(callback, 100)
+			);
+		});
+		
 		
 	} else { // it's an enemy
-		var attack = {name: "Enemy Attacks", power: unit.weapon.power, spread: unit.weapon.spread};
-		// determine target
 		var targetIndex = Math.floor(gameObject.battlefield.myTeam.length * Math.random());
 		
-		attackObject.attack = attack;
+		attackObject.weapon = unit.weapon;
 		attackObject.target = gameObject.battlefield.myTeam[targetIndex];
 		createTargetArray(attackObject, gameObject);
 	}
