@@ -2,7 +2,8 @@ var $ = require("jquery");
 
 var returnHealthHtml = function(enemy){
 	var html = '<div class="enemy-health">Health: ';
-	html += enemy.body.health;
+	var health = enemy.body.health < 0 ? 0 : enemy.body.health;
+	html += health;
 	html += '</div>';
 	
 	return html;

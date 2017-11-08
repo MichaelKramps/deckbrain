@@ -104,7 +104,7 @@ var listenForFriendlyTargets = function(actionObject, gameObject){
 		$(".robot").addClass("legal-friendly-target").on("click", function(){
 			$("body").css("cursor", "auto");
 			$(".robot").removeClass("legal-friendly-target").unbind();
-			var targetIndex = parseInt(this.id[1]);
+			var targetIndex = parseInt(this.id[1]) - 1;
 			
 			actionObject.target = gameObject.battlefield.myTeam[targetIndex];
 			createTargetArray(actionObject, gameObject);

@@ -57,7 +57,8 @@ var returnNameHtml = function(robot){
 
 var returnHealthHtml = function(robot){
 	var html = '<div class="robot-health">Health: ';
-	html += robot.body.health;
+	var health = robot.body.health < 0 ? 0 : robot.body.health;
+	html += health;
 	html += '</div>';
 	
 	return html;
