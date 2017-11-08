@@ -226,8 +226,15 @@ var orderAttackers = function(gameObject){
 	}
 };
 
+var filterAttackArray = function(unitArray){
+	var filteredArray = unitArray.filter(function(unit){
+		return unit.body.health > 0;
+	})
+	return filteredArray;
+};
+
 var createAttackOrderArray = function(gameObject){
-	gameObject.attackOrder = gameObject.attackOrder ? gameObject.attackOrder : gameObject.battlefield.myTeam.concat(gameObject.battlefield.enemyTeam);
+	gameObject.attackOrder = gameObject.attackOrder ? filterAttackArray(gameObject.attackOrder) : filterAttackArray(gameObject.battlefield.myTeam.concat(gameObject.battlefield.enemyTeam));
 	for(var i = 0; i < gameObject.attackOrder.length; i++){
 		var thisUnit = gameObject.attackOrder[i];
 		thisUnit.roundSpeed = (Math.pow(thisUnit.body.speed, 2) * Math.random());
