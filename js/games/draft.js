@@ -1,6 +1,7 @@
 var $ = require("jquery");
 var data = require("./data.js");
 var ascii = require("./ascii.js");
+var utils = require("./utils.js");
 var challenges = require("./challenges.js");
 var showMyTeam = require("./showMyTeam.js");
 	
@@ -17,8 +18,24 @@ var returnCardHTML = function(card, id){
 	return html;
 };
 
-var listenForAndReturnDraftPick = function(availabeChoices){
+var filterLockedCards = function(choice){
+	var cardUnlockCode;
+	var unlockedCards = choice.cards.slice();
 	
+	switch (choice.code) {
+		case "body":
+			cardUnlockCode = utils.bodyCode();
+		case "armor":
+			cardUnlockCode = utils.armorCode();
+		case "weapon":
+			cardUnlockCode = utils.weaponCode();
+		case "item":
+			cardUnlockCode = utils.itemCode();
+	}
+	
+	return unlockedCards.filter(function(card){
+		return card.unlock <= cardUnlockCode;
+	});
 };
 
 var pickPart = function(choices, robotNum){
@@ -27,7 +44,7 @@ var pickPart = function(choices, robotNum){
 	$("#title").append(thisPart.title);
 	showMyTeam.showDraft(choices.thisRobot, choices.robots);
 	
-	var cardsArray = thisPart.cards;
+	var cardsArray = filterLockedCards(thisPart);
 	for (var i = 0; i < cardsArray.length; i++){
 		var thisCard = cardsArray[i];
 		$("#cards").append(returnCardHTML(thisCard, i)).find("#" + i).on("click", function(){

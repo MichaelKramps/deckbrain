@@ -10,10 +10,19 @@ data.number = [{name: "1 Robot"}, {name: "2 Robots"}, {name: "3 Robots"}, {name:
 
 data.bodies = [
 	{
+		name: "Marshmallow",
+		description: "You really need to toughen up",
+		health: 50,
+		speed: 1,
+		unlock: 1,
+		ascii: ascii.bodies.marshmallow
+	},
+	{
 		name: "Tank",
 		description: "You can take one heck of a beating",
 		health: 200,
 		speed: 1,
+		unlock: 2,
 		ascii: ascii.bodies.tank
 	},
 	{
@@ -21,6 +30,7 @@ data.bodies = [
 		description: "Good luck landing a punch on this guy",
 		health: 40,
 		speed: 10,
+		unlock: 3,
 		ascii: ascii.bodies.thief
 	},
 	{
@@ -28,6 +38,7 @@ data.bodies = [
 		description: "Well rounded fighter. Mobile and tough.",
 		health: 100,
 		speed: 4,
+		unlock: 4,
 		ascii: ascii.bodies.fighter
 	}
 ];
@@ -45,6 +56,7 @@ data.armors = [
 		description: "Use your defeated opponents' scrap metal to repair yourself",
 		dampen: 1,
 		scrap: 0.8,
+		unlock: 1,
 		ascii: ascii.armors.scavenger
 	},
 	{
@@ -52,6 +64,7 @@ data.armors = [
 		description: "Lessens the effect of all attacks against you",
 		dampen: 0.4,
 		scrap: 0,
+		unlock: 2,
 		ascii: ascii.armors.platinumPlate
 	},
 	{
@@ -59,6 +72,7 @@ data.armors = [
 		description: "Attacks are slightly less effective and you can sometimes repair yourself",
 		dampen: 0.8,
 		scrap: 0.4,
+		unlock: 3,
 		ascii: ascii.armors.magneticPlate
 	}
 ];
@@ -76,6 +90,7 @@ data.weapons = [
 		description: "Respectable damage to a few closeby enemies",
 		spread: 1,
 		power: 5,
+		unlock: 1,
 		ascii: ascii.weapons.grenades
 	},
 	{
@@ -83,6 +98,7 @@ data.weapons = [
 		description: "Huge amount of damage to one enemy",
 		spread: 0,
 		power: 120,
+		unlock: 2,
 		ascii: ascii.weapons.superPunch
 	},
 	{
@@ -90,6 +106,7 @@ data.weapons = [
 		description: "Some damage to lots of enemies",
 		spread: 4,
 		power: 2,
+		unlock: 3,
 		ascii: ascii.weapons.napalm
 	}
 ];
@@ -109,6 +126,7 @@ data.items = [
 		description: "Eat a sandwich to heal yourself",
 		action: itemActions.sandwiches,
 		targets: "friendlies",
+		unlock: 1,
 		ascii: ascii.items.sandwiches
 	},
 	{
@@ -116,6 +134,7 @@ data.items = [
 		description: "Make sure you are first to attack each round",
 		action: itemActions.springs,
 		targets: "friendlies",
+		unlock: 1,
 		ascii: ascii.items.springs
 	},
 	{
@@ -123,6 +142,7 @@ data.items = [
 		description: "Disrupt your enemies attacks",
 		action: itemActions.nets,
 		targets: "enemies",
+		unlock: 2,
 		ascii: ascii.items.nets
 	},
 	{
@@ -130,31 +150,34 @@ data.items = [
 		description: "You can absorb some of your enemies' attacks",
 		action: itemActions.jackets,
 		targets: "friendlies",
+		unlock: 3,
 		ascii: ascii.items.jackets
-	},
-	{
-		name: "Smelling Salts", // Item with chance to revive ally
-		description: "Provides a chance to revive an ally",
-		action: itemActions.smellingSalts,
-		targets: "friendlies",
-		ascii: ascii.items.smellingSalts
 	},
 	{
 		name: "Chemicals", // Item to attack passively
 		description: "Poisons opponents to deal damage each turn",
 		action: itemActions.chemicals,
 		targets: "enemies",
+		unlock: 4,
 		ascii: ascii.items.chemicals
+	},
+	{
+		name: "Smelling Salts", // Item with chance to revive ally
+		description: "Provides a chance to revive an ally",
+		action: itemActions.smellingSalts,
+		targets: "friendlies",
+		unlock: 5,
+		ascii: ascii.items.smellingSalts
 	},
 ];
 
 data.availableChoices = {
 	draftChoices: [
-		{title: "How many robots do you want on your team?", cards: data.number},
-		{title: "What type of body will this robot have?", cards: data.bodies},
-		{title: "What type of armor will this robot equip?", cards: data.armors},
-		{title: "What weapon will this robot wield?", cards: data.weapons},
-		{title: "What item will this robot carry?", cards: data.items}
+		{title: "How many robots do you want on your team?", code: "robots", cards: data.number},
+		{title: "What type of body will this robot have?", code: "body", cards: data.bodies},
+		{title: "What type of armor will this robot equip?", code: "armor", cards: data.armors},
+		{title: "What weapon will this robot wield?", code: "weapon", cards: data.weapons},
+		{title: "What item will this robot carry?", code: "item", cards: data.items}
 	]
 };
 	

@@ -133,28 +133,28 @@ utils.updateUnlockCode = function(unlockCode){
 	}
 };
 
-utils.levelCode = function(unlockCode){
-	var unlockObject = createAndReturnUnlockObject(unlockCode);
+utils.levelCode = function(){
+	var unlockObject = createAndReturnUnlockObject(utils.getUnlockCode());
 	return unlockObject.level;
 };
 
-utils.armorCode = function(unlockCode){
-	var unlockObject = createAndReturnUnlockObject(unlockCode);
+utils.armorCode = function(){
+	var unlockObject = createAndReturnUnlockObject(utils.getUnlockCode());
 	return unlockObject.armor;
 };
 
-utils.bodyCode = function(unlockCode){
-	var unlockObject = createAndReturnUnlockObject(unlockCode);
+utils.bodyCode = function(){
+	var unlockObject = createAndReturnUnlockObject(utils.getUnlockCode());
 	return unlockObject.body;
 };
 
-utils.itemCode = function(unlockCode){
-	var unlockObject = createAndReturnUnlockObject(unlockCode);
+utils.itemCode = function(){
+	var unlockObject = createAndReturnUnlockObject(utils.getUnlockCode());
 	return unlockObject.item;
 };
 
-utils.weaponCode = function(unlockCode){
-	var unlockObject = createAndReturnUnlockObject(unlockCode);
+utils.weaponCode = function(){
+	var unlockObject = createAndReturnUnlockObject(utils.getUnlockCode());
 	return unlockObject.weapon;
 };
 
@@ -163,16 +163,8 @@ utils.setUnlockCode = function (unlockCode) {
 }
 
 utils.getUnlockCode = function () {
-	return parseInt(utils.getCookie("unlockCode"));
+	return utils.getCookie("unlockCode");
 };
-
-utils.setLevel = function (level) {
-	document.cookie = "level=" + level;
-}
-
-utils.getLevel = function () {
-	return parseInt(utils.getCookie("level"));
-}
 
 
 // password generation

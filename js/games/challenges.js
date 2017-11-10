@@ -5,7 +5,7 @@ var showTeams = require("./showTeams.js");
 var fight = require("./fight.js");
 
 var challenges = function(myTeam, enemyNum = 0){
-	var level = levels[utils.getLevel()];
+	var level = levels[utils.levelCode()];
 	
 	if (enemyNum === level.enemies.length){ // moving on to the next challenge
 		enemyNum = 0;

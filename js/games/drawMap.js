@@ -21,12 +21,12 @@ drawMap.draw = function(levels, unlockCode){
 	
 	$("#title").append("Unlocked Levels");
 	
-	for (var i = 0; i < utils.levelCode(unlockCode); i++) {
+	var levelCode = utils.levelCode(unlockCode);
+	for (var i = 0; i < levelCode; i++) {
 		var thisLevel = levels[i];
 		$("#cards").append("<div id='l" + i + "'>" + thisLevel.name + "</div>").find("#l" + i).on("click", function(){
 			var id = $(this).attr("id");
 			var num = id[1];
-			utils.setLevel(num);
 			draft(data.availableChoices);
 		});
 	}
