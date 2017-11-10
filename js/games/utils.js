@@ -65,19 +65,19 @@ var createAndReturnLast36 = function (first10, unlockObject) {
 	for (var i = 0; i < encode.length; i++) { // generate first 10 characters randomly
 		switch (i) {
 			case decode[first10[0]]:
-				string += unlockObject.level;
+				string += encode[unlockObject.level];
 				break;
 			case decode[first10[3]]:
-				string += unlockObject.armor;
+				string += encode[unlockObject.armor];
 				break;
 			case decode[first10[4]]:
-				string += unlockObject.body;
+				string += encode[unlockObject.body];
 				break;
 			case decode[first10[7]]:
-				string += unlockObject.item;
+				string += encode[unlockObject.item];
 				break;
 			case decode[first10[9]]:
-				string += unlockObject.weapon;
+				string += encode[unlockObject.weapon];
 				break;
 			default:
 				var randomIndex = Math.floor(Math.random() * encode.length);
@@ -97,12 +97,30 @@ var createAndReturnUnlockCode = function (unlockObject) {
 	return unlockCode;
 }
 
+var createAndReturnUnlockObject = function (unlockCode) {
+	unlockObject = {};
+	
+	var levelIndex = decode[unlockCode[0]];
+	var armorIndex = decode[unlockCode[3]];
+	var bodyIndex = decode[unlockCode[4]];
+	var itemIndex = decode[unlockCode[7]];
+	var weaponIndex = decode[unlockCode[9]];
+	
+	unlockObject.level = decode[unlockCode[levelIndex + 10]];
+	unlockObject.armor = decode[unlockCode[armorIndex + 10]];
+	unlockObject.body = decode[unlockCode[bodyIndex + 10]];
+	unlockObject.item = decode[unlockCode[itemIndex + 10]];
+	unlockObject.weapon = decode[unlockCode[weaponIndex + 10]];
+	
+	return unlockObject;
+}
+
 utils.setUnlockCode = function (unlockCode) {
 	document.cookie = "unlockCode=" + unlockCode;
 }
 
 utils.getUnlockCode = function () {
-	createAndReturnUnlockCode({level: "9", armor: "a", body: "4", item: "s", weapon: "4"});
+	createAndReturnUnlockObject(createAndReturnUnlockCode({level: 9, armor: 11, body: 4, item: 29, weapon: 14}));
 	return parseInt(utils.getCookie("unlockCode"));
 };
 
