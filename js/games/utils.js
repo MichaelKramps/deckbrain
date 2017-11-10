@@ -88,7 +88,7 @@ var createAndReturnLast36 = function (first10, unlockObject) {
 	return string;
 }
 
-var createAndReturnUnlockCode = function (unlockObject) {
+utils.createAndReturnUnlockCode = function (unlockObject) {
 	var first10 = createAndReturnFirst10();
 	var last36 = createAndReturnLast36(first10, unlockObject);
 	
@@ -112,15 +112,57 @@ var createAndReturnUnlockObject = function (unlockCode) {
 	unlockObject.item = decode[unlockCode[itemIndex + 10]];
 	unlockObject.weapon = decode[unlockCode[weaponIndex + 10]];
 	
+	console.log(unlockObject);
+	
 	return unlockObject;
 }
+
+var isBetterUnlockCode = function(unlockCode){
+	var currentUnlockObject = createAndReturnUnlockObject(utils.getUnlockCode());
+	var newUnlockObject = createAndReturnUnlockObject(unlockCode);
+	if (currentUnlockObject.level >= newUnlockObject.level){ // we already have a better unlock code
+		return false;
+	} else { // we just got a better unlock code
+		return true;
+	}
+};
+
+utils.updateUnlockCode = function(unlockCode){
+	if (isBetterUnlockCode(unlockCode)){
+		utils.setUnlockCode(unlockCode);
+	}
+};
+
+utils.levelCode = function(unlockCode){
+	var unlockObject = createAndReturnUnlockObject(unlockCode);
+	return unlockObject.level;
+};
+
+utils.armorCode = function(unlockCode){
+	var unlockObject = createAndReturnUnlockObject(unlockCode);
+	return unlockObject.armor;
+};
+
+utils.bodyCode = function(unlockCode){
+	var unlockObject = createAndReturnUnlockObject(unlockCode);
+	return unlockObject.body;
+};
+
+utils.itemCode = function(unlockCode){
+	var unlockObject = createAndReturnUnlockObject(unlockCode);
+	return unlockObject.item;
+};
+
+utils.weaponCode = function(unlockCode){
+	var unlockObject = createAndReturnUnlockObject(unlockCode);
+	return unlockObject.weapon;
+};
 
 utils.setUnlockCode = function (unlockCode) {
 	document.cookie = "unlockCode=" + unlockCode;
 }
 
 utils.getUnlockCode = function () {
-	createAndReturnUnlockObject(createAndReturnUnlockCode({level: 9, armor: 11, body: 4, item: 29, weapon: 14}));
 	return parseInt(utils.getCookie("unlockCode"));
 };
 
