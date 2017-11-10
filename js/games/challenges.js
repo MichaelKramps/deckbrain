@@ -9,7 +9,13 @@ var challenges = function(myTeam, enemyNum = 0){
 	
 	if (enemyNum === level.enemies.length){ // moving on to the next challenge
 		enemyNum = 0;
-		drawMap.draw(levels, utils.getLevel() + 2);
+		
+		// create new unlock code and set cookie
+		
+		// show reward for defeating this challenge
+		
+		
+		// drawMap.draw(levels, utils.getLevel() + 2);
 		
 	} else { // fighting a new enemy in this challenge
 	

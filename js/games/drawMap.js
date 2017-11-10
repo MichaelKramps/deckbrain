@@ -27,6 +27,7 @@ drawMap.draw = function(levels, unlockCode){
 		$("#cards").append("<div id='l" + i + "'>" + thisLevel.name + "</div>").find("#l" + i).on("click", function(){
 			var id = $(this).attr("id");
 			var num = id[1];
+			utils.setLevel(num);
 			draft(data.availableChoices);
 		});
 	}

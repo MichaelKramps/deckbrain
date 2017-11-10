@@ -166,6 +166,14 @@ utils.getUnlockCode = function () {
 	return utils.getCookie("unlockCode");
 };
 
+utils.setLevel = function (level) { // This is the level currently being played, not the level code
+	document.cookie = "level=" + level;
+}
+
+utils.getLevel = function () { // This is the level currently being played, not the level code
+	return parseInt(utils.getCookie("level"));
+}
+
 
 // password generation
 // 
