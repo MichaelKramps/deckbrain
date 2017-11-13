@@ -89,7 +89,7 @@ data.weapons = [
 		name: "Grenades",
 		description: "Respectable damage to a few closeby enemies",
 		spread: 1,
-		power: 500,
+		power: 5,
 		unlock: 1,
 		ascii: ascii.weapons.grenades
 	},

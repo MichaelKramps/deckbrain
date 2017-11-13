@@ -1,5 +1,6 @@
 var $ = require("jquery");
-var showTeams = require("./showTeams.js");
+var showMyTeam = require("./showMyTeam.js");
+var showEnemyTeam = require("./showEnemyTeam.js");
 var draft = require("./draft.js");
 var data = require("./data.js");
 var levels = require("./levels.js");
@@ -20,19 +21,29 @@ var performAttack = function(attackObject, targetArray, gameObject){
 			
 			attacksArray[i] = {id: thisUnit.id, attackValue: attackValue};
 		}
-		showTeams(gameObject);
+		if (targetArray[0].id[0] === "r") {
+			showMyTeam.show(gameObject.battlefield.myTeam);
+		} else {
+			showEnemyTeam(gameObject.battlefield.enemyTeam);
+		}
 	};
 	var second = function(){
 		for (var i = 0; i < attacksArray.length; i++) {
 			var thisUnit = attacksArray[i];
-			$("#" + thisUnit.id + " .robot-health").append("<span class='damage-dealt'> -" + thisUnit.attackValue + "</span>").find(".damage-dealt").fadeOut(3000);
+			console.log(thisUnit);
+			if (thisUnit.id[0] === "r") {
+				$("#" + thisUnit.id + " .robot-health").append("<span class='damage-dealt'> -" + thisUnit.attackValue + "</span>").find(".damage-dealt").fadeOut(3000);
+			} else {
+				console.log("here");
+				$("#" + thisUnit.id + " .enemy-health").append("<span class='damage-dealt'> -" + thisUnit.attackValue + "</span>").find(".damage-dealt").fadeOut(3000);
+			}
 		}
-		listenForAttacks(gameObject);
+		listenForAttacks(gameObject)
 	};
 	$.when(
 		first()
 	).then(
-		setTimeout(second, 400)
+		second()
 	);
 };
 
