@@ -2,6 +2,9 @@ var $ = require("jquery");
 var showTeams = require("./showTeams.js");
 var draft = require("./draft.js");
 var data = require("./data.js");
+var levels = require("./levels.js");
+var drawMap = require("./drawMap.js");
+var utils = require("./utils.js");
 
 
 var performAttack = function(attackObject, targetArray, gameObject){
@@ -185,12 +188,14 @@ var teamIsDead = function(team){
 var listenForAttacks = function(gameObject){
 	
 	if (teamIsDead(gameObject.battlefield.enemyTeam)) { // enemies are dead
+		$(".attack-order").empty();
 		// move to next enemy
 		gameObject.enemyNum += 1;
 		gameObject.challenges(gameObject.battlefield.myTeam, gameObject.enemyNum, gameObject.round);
 	} else if (teamIsDead(gameObject.battlefield.myTeam)) { // my team is dead
 		// draft again
-		draft(data.availableChoices);
+		$(".attack-order").empty();
+		drawMap.draw(levels, utils.getUnlockCode());
 	} else { // battle is still raging
 		if(gameObject.attacker < gameObject.attackOrder.length){
 			var thisUnit = gameObject.attackOrder[gameObject.attacker];
