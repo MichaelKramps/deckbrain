@@ -34,11 +34,15 @@
 }
 
 .attack-option {
-	border: 1px solid tomato;
+	border: 1px solid green;
 	cursor: pointer;
 	cursor: hand;
 }
 
 .legal-target {
 	color: red;
+}
+
+div .damage-dealt {
+	color: tomato;
 }

@@ -14,8 +14,6 @@ var challenges = function(myTeam, enemyNum = 0){
 		// create new unlock code and set cookie
 		var unlockCode = utils.getUnlockCode();
 		var unlockObject = utils.createAndReturnUnlockObject(unlockCode);
-		console.log(utils.getLevel());
-		console.log(unlockObject);
 		if ((utils.getLevel() + 1) === unlockObject.level) { // if you just beat the highest unlocked level
 			unlockObject.level += 1;
 			// show reward for defeating this challenge

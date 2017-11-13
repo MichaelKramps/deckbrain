@@ -9,19 +9,23 @@ var utils = require("./utils.js");
 
 var performAttack = function(attackObject, targetArray, gameObject){
 	gameObject.attacker += 1;
+	var attacksArray = [];
 	
 	var first = function(){
 		for (var i = 0; i < targetArray.length; i++){
 			var thisUnit = targetArray[i];
 			var attackValue = Math.round(thisUnit.armor.dampen * attackObject.weapon.power); // dampen
-			thisUnit.body.health -= attackValue;
+			thisUnit.body.health = (thisUnit.body.health - attackValue) < 0 ? 0 : (thisUnit.body.health - attackValue);
 			attackObject.attacker.body.health += Math.round(attackObject.attacker.armor.scrap * attackValue); // scrap
+			
+			attacksArray[i] = {id: thisUnit.id, attackValue: attackValue};
 		}
 		showTeams(gameObject);
 	};
 	var second = function(){
-		if (attackObject.target.id[0] === "r"){
-			alert("Enemy attacks " + attackObject.target.name + " for " + attackObject.weapon.power + " damage!");
+		for (var i = 0; i < attacksArray.length; i++) {
+			var thisUnit = attacksArray[i];
+			$("#" + thisUnit.id + " .robot-health").append("<span class='damage-dealt'> -" + thisUnit.attackValue + "</span>").find(".damage-dealt").fadeOut(3000);
 		}
 		listenForAttacks(gameObject);
 	};
