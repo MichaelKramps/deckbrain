@@ -97,7 +97,7 @@ utils.createAndReturnUnlockCode = function (unlockObject) {
 	return unlockCode;
 }
 
-var createAndReturnUnlockObject = function (unlockCode) {
+utils.createAndReturnUnlockObject = function (unlockCode) {
 	unlockObject = {};
 	
 	var levelIndex = decode[unlockCode[0]];
@@ -112,14 +112,12 @@ var createAndReturnUnlockObject = function (unlockCode) {
 	unlockObject.item = decode[unlockCode[itemIndex + 10]];
 	unlockObject.weapon = decode[unlockCode[weaponIndex + 10]];
 	
-	console.log(unlockObject);
-	
 	return unlockObject;
 }
 
 var isBetterUnlockCode = function(unlockCode){
-	var currentUnlockObject = createAndReturnUnlockObject(utils.getUnlockCode());
-	var newUnlockObject = createAndReturnUnlockObject(unlockCode);
+	var currentUnlockObject = utils.createAndReturnUnlockObject(utils.getUnlockCode());
+	var newUnlockObject = utils.createAndReturnUnlockObject(unlockCode);
 	if (currentUnlockObject.level >= newUnlockObject.level){ // we already have a better unlock code
 		return false;
 	} else { // we just got a better unlock code
@@ -134,27 +132,27 @@ utils.updateUnlockCode = function(unlockCode){
 };
 
 utils.levelCode = function(){
-	var unlockObject = createAndReturnUnlockObject(utils.getUnlockCode());
+	var unlockObject = utils.createAndReturnUnlockObject(utils.getUnlockCode());
 	return unlockObject.level;
 };
 
 utils.armorCode = function(){
-	var unlockObject = createAndReturnUnlockObject(utils.getUnlockCode());
+	var unlockObject = utils.createAndReturnUnlockObject(utils.getUnlockCode());
 	return unlockObject.armor;
 };
 
 utils.bodyCode = function(){
-	var unlockObject = createAndReturnUnlockObject(utils.getUnlockCode());
+	var unlockObject = utils.createAndReturnUnlockObject(utils.getUnlockCode());
 	return unlockObject.body;
 };
 
 utils.itemCode = function(){
-	var unlockObject = createAndReturnUnlockObject(utils.getUnlockCode());
+	var unlockObject = utils.createAndReturnUnlockObject(utils.getUnlockCode());
 	return unlockObject.item;
 };
 
 utils.weaponCode = function(){
-	var unlockObject = createAndReturnUnlockObject(utils.getUnlockCode());
+	var unlockObject = utils.createAndReturnUnlockObject(utils.getUnlockCode());
 	return unlockObject.weapon;
 };
 
