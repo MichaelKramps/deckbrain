@@ -164,28 +164,10 @@ utils.getUnlockCode = function () {
 	return utils.getCookie("unlockCode");
 };
 
-utils.setLevel = function (level) { // This is the level currently being played, not the level code
+utils.setActiveLevel = function (level) { // This is the level currently being played, not the level code
 	document.cookie = "level=" + level;
 }
 
-utils.getLevel = function () { // This is the level currently being played, not the level code
+utils.getActiveLevel = function () { // This is the level currently being played, not the level code
 	return parseInt(utils.getCookie("level"));
 }
-
-
-// password generation
-// 
-// fourth character determines the location of level unlock code
-// 
-// First 10 values are randomly generated (L00AB00I0W)
-// 0's have no information
-// L = Level unlock code location
-// A = Armor unlock code location
-// B = Body unlock code location
-// I = Item unlock code location
-// W = Weapon unlock code location
-// 
-// unlock codes are two characters 0-z (base 36 numbers)
-// 
-// These codes will become an integer and be compared to
-// the unlock codes given to each item/level

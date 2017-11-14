@@ -38,6 +38,26 @@ var filterLockedCards = function(choice){
 	});
 };
 
+var assignStatsBasedOnPick = function (choices, choiceNumber) {
+	switch (choices.partNum) {
+		case 1:
+			choices.thisRobot.body = $.extend({}, data.bodies[choiceNumber]);
+			choices.thisRobot.body.health = Math.round(choices.thisRobot.body.health/choices.numRobots) === 0 ? 1 : Math.round(choices.thisRobot.body.health/choices.numRobots);
+			break;
+		case 2:
+			choices.thisRobot.armor = $.extend({}, data.armors[choiceNumber]);
+			choices.thisRobot.armor.scrap = Math.round(choices.thisRobot.armor.scrap/choices.numRobots) === 0 ? 1 : Math.round(choices.thisRobot.armor.scrap/choices.numRobots);
+			break;
+		case 3:
+			choices.thisRobot.weapon = $.extend({}, data.weapons[choiceNumber]);
+			choices.thisRobot.weapon.power = Math.round(choices.thisRobot.weapon.power/choices.numRobots) === 0 ? 1 : Math.round(choices.thisRobot.weapon.power/choices.numRobots);
+			break;
+		case 4:
+			choices.thisRobot.item = $.extend({}, data.items[choiceNumber]);
+			break;
+	}
+};
+
 var pickPart = function(choices, robotNum){
 	clearPreviousDraftPick();
 	var thisPart = choices.draftChoices[choices.partNum];
@@ -49,23 +69,7 @@ var pickPart = function(choices, robotNum){
 		var thisCard = cardsArray[i];
 		$("#cards").append(returnCardHTML(thisCard, i)).find("#" + i).on("click", function(){
 			var choiceNumber = parseInt($(this).attr("id"));
-			switch (choices.partNum) {
-				case 1:
-					choices.thisRobot.body = $.extend({}, data.bodies[choiceNumber]);
-					choices.thisRobot.body.health = Math.round(choices.thisRobot.body.health/choices.numRobots) === 0 ? 1 : Math.round(choices.thisRobot.body.health/choices.numRobots);
-					break;
-				case 2:
-					choices.thisRobot.armor = $.extend({}, data.armors[choiceNumber]);
-					choices.thisRobot.armor.scrap = Math.round(choices.thisRobot.armor.scrap/choices.numRobots) === 0 ? 1 : Math.round(choices.thisRobot.armor.scrap/choices.numRobots);
-					break;
-				case 3:
-					choices.thisRobot.weapon = $.extend({}, data.weapons[choiceNumber]);
-					choices.thisRobot.weapon.power = Math.round(choices.thisRobot.weapon.power/choices.numRobots) === 0 ? 1 : Math.round(choices.thisRobot.weapon.power/choices.numRobots);
-					break;
-				case 4:
-					choices.thisRobot.item = $.extend({}, data.items[choiceNumber]);
-					break;
-			}
+			assignStatsBasedOnPick(choices, choiceNumber);
 			choices.partNum += 1;
 			draftThisRobot(choices, robotNum);
 		});
@@ -101,7 +105,6 @@ var draftThisRobot = function(choices, robotNum){
 };
 
 var howManyRobots = function(choices){
-	clearPreviousDraftPick();
 	var thisChoice = choices.draftChoices[0];
 	$("#title").append(thisChoice.title);
 	

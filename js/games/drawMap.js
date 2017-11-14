@@ -15,10 +15,9 @@ var clearScreen = function(){
 };
 
 drawMap.draw = function(levels, unlockCode){
-	clearScreen();
-	
 	utils.updateUnlockCode(unlockCode);
 	
+	clearScreen();
 	$("#title").append("Unlocked Levels");
 	
 	var levelCode = utils.levelCode(unlockCode);
@@ -27,7 +26,7 @@ drawMap.draw = function(levels, unlockCode){
 		$("#cards").append("<div id='l" + i + "'>" + thisLevel.name + "</div>").find("#l" + i).on("click", function(){
 			var id = $(this).attr("id");
 			var num = id[1];
-			utils.setLevel(num);
+			utils.setActiveLevel(num);
 			draft(data.availableChoices);
 		});
 	}

@@ -6,7 +6,12 @@ var ascii = require("./ascii.js");
 var itemActions = require("./itemActions.js");
 
 data.numberRobots = 0;
-data.number = [{name: "1 Robot"}, {name: "2 Robots"}, {name: "3 Robots"}, {name: "4 Robots"}];
+data.number = [
+	{name: "1 Robot"},
+	{name: "2 Robots"},
+	{name: "3 Robots"},
+	{name: "4 Robots"}
+];
 
 data.bodies = [
 	{

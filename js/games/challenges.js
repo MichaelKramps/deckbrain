@@ -6,7 +6,7 @@ var showTeams = require("./showTeams.js");
 var fight = require("./fight.js");
 
 var challenges = function(myTeam, enemyNum = 0){
-	var level = levels[utils.getLevel()];
+	var level = levels[utils.getActiveLevel()];
 	
 	if (enemyNum === level.enemies.length){ // moving on to the next challenge
 		enemyNum = 0;
@@ -14,7 +14,7 @@ var challenges = function(myTeam, enemyNum = 0){
 		// create new unlock code and set cookie
 		var unlockCode = utils.getUnlockCode();
 		var unlockObject = utils.createAndReturnUnlockObject(unlockCode);
-		if ((utils.getLevel() + 1) === unlockObject.level) { // if you just beat the highest unlocked level
+		if ((utils.getActiveLevel() + 1) === unlockObject.level) { // if you just beat the highest unlocked level
 			unlockObject.level += 1;
 			// show reward for defeating this challenge
 			reward.createAndShow(unlockObject);
