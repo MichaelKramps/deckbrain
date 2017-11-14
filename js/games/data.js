@@ -17,15 +17,26 @@ data.bodies = [
 	{
 		name: "Marshmallow",
 		description: "You really need to toughen up",
-		health: 50,
+		health: 30,
+		maxHealth: 30,
 		speed: 1,
 		unlock: 1,
 		ascii: ascii.bodies.marshmallow
 	},
 	{
+		name: "Stick Man",
+		description: "You're fast, but you can't take a hit",
+		health: 20,
+		maxHealth: 20,
+		speed: 5,
+		unlock: 1,
+		ascii: ascii.bodies.stickMan
+	},
+	{
 		name: "Tank",
 		description: "You can take one heck of a beating",
 		health: 200,
+		maxHealth: 200,
 		speed: 1,
 		unlock: 2,
 		ascii: ascii.bodies.tank
@@ -34,6 +45,7 @@ data.bodies = [
 		name: "Thief",
 		description: "Good luck landing a punch on this guy",
 		health: 40,
+		maxHealth: 40,
 		speed: 10,
 		unlock: 3,
 		ascii: ascii.bodies.thief
@@ -42,26 +54,50 @@ data.bodies = [
 		name: "Fighter",
 		description: "Well rounded fighter. Mobile and tough.",
 		health: 100,
+		maxHealth: 100,
 		speed: 4,
 		unlock: 4,
 		ascii: ascii.bodies.fighter
 	}
 ];
 
-data.enemyBodies = [
-	{name: "Standard", health: 30, speed: 1},
-	{name: "Formula Uno", health: 20, speed: 7},
-	{name: "Flyer", health: 30, speed: 3},
-	{name: "Scales", health: 50, speed: 2}
-];
+data.enemyBodies = {
+	"standard": {health: 10, maxHealth: 10, speed: 1},
+	"formulaUno": {health: 8, maxHealth: 8, speed: 7},
+	"flyer": {health: 15, maxHealth: 15, speed: 3},
+	"scales": {health: 25, maxHealth: 25, speed: 2},
+	"guy": {health: 17, maxHealth: 17, speed: 4},
+	"blob": {health: 30, maxHealth: 30, speed: 1},
+	"deer": {health: 10, maxHealth: 10, speed: 8},
+	"pilot": {health: 7, maxHealth: 7, speed: 10},
+	"roller": {health: 20, maxHealth: 20, speed: 3},
+	"hover": {health: 12, maxHealth: 12, speed: 5},
+	"maker": {health: 25, maxHealth: 25, speed: 3}
+};
 
 data.armors = [
+	{
+		name: "Baseball hat",
+		description: "At least it keeps the sun out of your eyes",
+		dampen: 1,
+		scrap: 0,
+		unlock: 1,
+		ascii: ascii.armors.baseballHat
+	},
+	{
+		name: "Turban",
+		description: "You look tougher",
+		dampen: 0.95,
+		scrap: 0,
+		unlock: 1,
+		ascii: ascii.armors.turban
+	},
 	{
 		name: "Scavenger",
 		description: "Use your defeated opponents' scrap metal to repair yourself",
 		dampen: 1,
 		scrap: 0.8,
-		unlock: 1,
+		unlock: 2,
 		ascii: ascii.armors.scavenger
 	},
 	{
@@ -69,7 +105,7 @@ data.armors = [
 		description: "Lessens the effect of all attacks against you",
 		dampen: 0.4,
 		scrap: 0,
-		unlock: 2,
+		unlock: 3,
 		ascii: ascii.armors.platinumPlate
 	},
 	{
@@ -77,33 +113,54 @@ data.armors = [
 		description: "Attacks are slightly less effective and you can sometimes repair yourself",
 		dampen: 0.8,
 		scrap: 0.4,
-		unlock: 3,
+		unlock: 4,
 		ascii: ascii.armors.magneticPlate
 	}
 ];
 
-data.enemyArmors = [
-	{name: "Enemy 1", dampen: 1, scrap: 0},
-	{name: "Enemy 2", dampen: 0.8, scrap: 0.5},
-	{name: "Enemy 3", dampen: 0.9, scrap: 0.1},
-	{name: "Enemy 4", dampen: 0.7, scrap: 0.4}
-];
+data.enemyArmors = {
+	"bare": {dampen: 1, scrap: 0},
+	"jacket": {dampen: 0.9, scrap: 0},
+	"magneticJacket": {dampen: 0.9, scrap: 0.1},
+	"leatherJacket": {dampen: 0.8, scrap: 0},
+	"mail": {dampen: 0.7, scrap: 0},
+	"magneticMail": {dampen: 0.8, scrap: 0.2},
+	"ironMail": {dampen: 0.6, scrap: 0},
+	"electromagnet": {dampen: 0, scrap: 0.5},
+	"armor": {dampen: 0.5, scrap: 0},
+};
 
 data.weapons = [
+	{
+		name: "Punch",
+		description: "Hit an enemy with your brute strength",
+		spread: 0,
+		power: 3,
+		unlock: 1,
+		ascii: ascii.weapons.grenades
+	},
+	{
+		name: "Slap",
+		description: "Weak attack to a few closeby enemies",
+		spread: 1,
+		power: 1,
+		unlock: 1,
+		ascii: ascii.weapons.grenades
+	},
 	{
 		name: "Grenades",
 		description: "Respectable damage to a few closeby enemies",
 		spread: 1,
 		power: 5,
-		unlock: 1,
+		unlock: 2,
 		ascii: ascii.weapons.grenades
 	},
 	{
 		name: "Super Punch",
 		description: "Huge amount of damage to one enemy",
 		spread: 0,
-		power: 120,
-		unlock: 2,
+		power: 12,
+		unlock: 3,
 		ascii: ascii.weapons.superPunch
 	},
 	{
@@ -111,17 +168,24 @@ data.weapons = [
 		description: "Some damage to lots of enemies",
 		spread: 4,
 		power: 2,
-		unlock: 3,
+		unlock: 4,
 		ascii: ascii.weapons.napalm
 	}
 ];
 
-data.enemyWeapons = [
-	{name: "Enemy 1", power: 2, spread: 1},
-	{name: "Enemy 2", power: 3, spread: 0},
-	{name: "Enemy 3", power: 1, spread: 1},
-	{name: "Enemy 4", power: 2, spread: 4}
-];
+data.enemyWeapons = {
+	"hit": {power: 2, spread: 0},
+	"slap": {power: 1, spread: 1},
+	"punch": {power: 4, spread: 0},
+	"breathFire": {power: 3, spread: 2},
+	"hardPunch": {power: 6, spread: 0},
+	"kick": {power: 8, spread: 0},
+	"roundhouse": {power: 10, spread: 0},
+	"superPunch": {power: 12, spread: 0},
+	"grenades": {power: 5, spread: 1},
+	"meteor": {power: 16, spread: 0},
+	"meteorShower": {power: 8, spread: 2}
+};
 
 // body is torso, armor is helmet, weapon is right arm, item is left arm
 

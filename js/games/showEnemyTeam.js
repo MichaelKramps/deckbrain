@@ -2,7 +2,7 @@ var $ = require("jquery");
 
 var returnHealthHtml = function(enemy){
 	var html = '<div class="enemy-health">Health: ';
-	html += enemy.body.health;
+	html += (enemy.body.health + "/" + enemy.body.maxHealth);
 	html += '</div>';
 	
 	return html;

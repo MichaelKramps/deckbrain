@@ -30,11 +30,9 @@ var performAttack = function(attackObject, targetArray, gameObject){
 	var second = function(){
 		for (var i = 0; i < attacksArray.length; i++) {
 			var thisUnit = attacksArray[i];
-			console.log(thisUnit);
 			if (thisUnit.id[0] === "r") {
 				$("#" + thisUnit.id + " .robot-health").append("<span class='damage-dealt'> -" + thisUnit.attackValue + "</span>").find(".damage-dealt").fadeOut(3000);
 			} else {
-				console.log("here");
 				$("#" + thisUnit.id + " .enemy-health").append("<span class='damage-dealt'> -" + thisUnit.attackValue + "</span>").find(".damage-dealt").fadeOut(3000);
 			}
 		}
@@ -51,7 +49,6 @@ var createTargetArray = function(attackObject, gameObject){
 	$(".attacking").removeClass("attacking");
 	
 	var targetArray = [];
-	
 	if (attackObject.item) {
 		if (attackObject.item.spread) {
 			
@@ -205,8 +202,9 @@ var listenForAttacks = function(gameObject){
 	if (teamIsDead(gameObject.battlefield.enemyTeam)) { // enemies are dead
 		$(".attack-order").empty();
 		// move to next enemy
+		console.log("enemies are dead");
 		gameObject.enemyNum += 1;
-		gameObject.challenges(gameObject.battlefield.myTeam, gameObject.enemyNum, gameObject.round);
+		gameObject.challenges(gameObject.battlefield.myTeam, gameObject.enemyNum);
 	} else if (teamIsDead(gameObject.battlefield.myTeam)) { // my team is dead
 		// draft again
 		$(".attack-order").empty();

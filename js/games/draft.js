@@ -43,10 +43,10 @@ var assignStatsBasedOnPick = function (choices, choiceNumber) {
 		case 1:
 			choices.thisRobot.body = $.extend({}, data.bodies[choiceNumber]);
 			choices.thisRobot.body.health = Math.round(choices.thisRobot.body.health/choices.numRobots) === 0 ? 1 : Math.round(choices.thisRobot.body.health/choices.numRobots);
+			choices.thisRobot.body.maxHealth = Math.round(choices.thisRobot.body.maxHealth/choices.numRobots) === 0 ? 1 : Math.round(choices.thisRobot.body.maxHealth/choices.numRobots);
 			break;
 		case 2:
 			choices.thisRobot.armor = $.extend({}, data.armors[choiceNumber]);
-			choices.thisRobot.armor.scrap = Math.round(choices.thisRobot.armor.scrap/choices.numRobots) === 0 ? 1 : Math.round(choices.thisRobot.armor.scrap/choices.numRobots);
 			break;
 		case 3:
 			choices.thisRobot.weapon = $.extend({}, data.weapons[choiceNumber]);

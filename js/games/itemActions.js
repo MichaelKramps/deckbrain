@@ -3,7 +3,12 @@ var itemActions = {};
 module.exports = itemActions;
 
 itemActions.sandwiches = function(targetArray, callback){
-	targetArray[0].body.health += 10;
+	var target = targetArray[0];
+	if ((target.body.health + 10) > target.body.maxHealth) {
+		target.body.health = target.body.maxHealth
+	} else {
+		target.body.health += 10;
+	}
 	callback();
 };
 

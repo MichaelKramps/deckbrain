@@ -4,47 +4,23 @@ var ascii = require("./ascii.js");
 var levels = [
 	{ // level 1
 	name: "Grandma's basement",
-	unlock: 1, // code % 2741 gives the most recent unlock, I can get a better algorithm later
+	unlock: 1,
 	enemies: [
 		[{ // 1.1
-			name: "Tumners",
-			id: "e0",
-			body: data.enemyBodies[0],
-			armor: data.enemyArmors[0],
-			weapon: data.enemyWeapons[0],
-			ascii: ascii.enemies.satyr
-		}],
-		[{ // 1.2
-			name: "Tick",
-			id: "e0",
-			body: data.enemyBodies[1],
-			armor: data.enemyArmors[1],
-			weapon: data.enemyWeapons[1],
-			ascii: ascii.enemies.crocodile
-		},
-		{
-			name: "Tock",
-			id: "e1",
-			body: data.enemyBodies[1],
-			armor: data.enemyArmors[1],
-			weapon: data.enemyWeapons[1],
-			ascii: ascii.enemies.crocodile
-		}],
-		[{ // 1.3
 			name: "Random Bat",
 			id: "e0",
-			body: data.enemyBodies[2],
-			armor: data.enemyArmors[2],
-			weapon: data.enemyWeapons[2],
+			body: data.enemyBodies.formulaUno,
+			armor: data.enemyArmors.bare,
+			weapon: data.enemyWeapons.hit,
 			ascii: ascii.enemies.bat
 		}],
-		[{ // 1.4
+		[{ // 1.2
 			name: "Fat Bat",
 			id: "e0",
-			body: data.enemyBodies[3],
-			armor: data.enemyArmors[3],
-			weapon: data.enemyWeapons[3],
-			ascii: ascii.enemies.dragon
+			body: data.enemyBodies.standard,
+			armor: data.enemyArmors.jacket,
+			weapon: data.enemyWeapons.punch,
+			ascii: ascii.enemies.fatBat
 		}]
 	]
 	},
@@ -55,44 +31,29 @@ var levels = [
 		[{ // 1.2
 			name: "Tick",
 			id: "e0",
-			body: data.enemyBodies[1],
-			armor: data.enemyArmors[1],
-			weapon: data.enemyWeapons[1],
+			body: data.enemyBodies.formulaUno,
+			armor: data.enemyArmors.leatherJacket,
+			weapon: data.enemyWeapons.hit,
 			ascii: ascii.enemies.crocodile
 		},
 		{ // 1.1
-			name: "Tumners",
+			name: "Tock",
 			id: "e1",
-			body: data.enemyBodies[0],
-			armor: data.enemyArmors[0],
-			weapon: data.enemyWeapons[0],
-			ascii: ascii.enemies.satyr
-		},
-		{ // 1.3
-			name: "Random Bat",
-			id: "e2",
-			body: data.enemyBodies[2],
-			armor: data.enemyArmors[2],
-			weapon: data.enemyWeapons[2],
-			ascii: ascii.enemies.bat
+			body: data.enemyBodies.formulaUno,
+			armor: data.enemyArmors.leatherJacket,
+			weapon: data.enemyWeapons.slap,
+			ascii: ascii.enemies.crocodile
 		}],
 		[
 		{ // 1.4
 			name: "Fat Bat",
 			id: "e0",
-			body: data.enemyBodies[3],
-			armor: data.enemyArmors[3],
-			weapon: data.enemyWeapons[3],
-			ascii: ascii.enemies.dragon
-		},
-		{ // 1.2
-			name: "Tock",
-			id: "e1",
-			body: data.enemyBodies[1],
-			armor: data.enemyArmors[1],
-			weapon: data.enemyWeapons[1],
-			ascii: ascii.enemies.crocodile
-		}]
+			body: data.enemyBodies.standard,
+			armor: data.enemyArmors.jacket,
+			weapon: data.enemyWeapons.punch,
+			ascii: ascii.enemies.fatBat
+		}
+		]
 	]
 	},
 	{ // level 3
