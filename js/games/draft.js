@@ -25,13 +25,18 @@ var filterLockedCards = function(choice){
 	switch (choice.code) {
 		case "body":
 			cardUnlockCode = utils.bodyCode();
+			break;
 		case "armor":
 			cardUnlockCode = utils.armorCode();
+			break;
 		case "weapon":
 			cardUnlockCode = utils.weaponCode();
+			break;
 		case "item":
 			cardUnlockCode = utils.itemCode();
+			break;
 	}
+	console.log(cardUnlockCode);
 	
 	return unlockedCards.filter(function(card){
 		return card.unlock <= cardUnlockCode;

@@ -8,6 +8,11 @@ var levels = require("./levels.js");
 var utils = require("./utils.js");
 var drawMap = require("./drawMap.js");
 
+var clearScreen = function(){
+	$(".enemy-dashboard").empty();
+	$(".my-dashboard").empty();
+};
+
 var findReward = function(rewardList, unlockValue){
 	for (var i = 0; i < rewardList.length; i++) {
 		var thisReward = rewardList[i];
@@ -42,6 +47,8 @@ var showReward = function (type, reward) {
 };
 
 reward.createAndShow = function(unlockObject){
+	clearScreen();
+	
 	var randomNum = Math.random();
 	
 	if (randomNum < 0.25) {

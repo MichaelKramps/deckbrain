@@ -137,7 +137,7 @@ data.weapons = [
 		spread: 0,
 		power: 3,
 		unlock: 1,
-		ascii: ascii.weapons.grenades
+		ascii: ascii.weapons.punch
 	},
 	{
 		name: "Slap",
@@ -145,14 +145,22 @@ data.weapons = [
 		spread: 1,
 		power: 1,
 		unlock: 1,
-		ascii: ascii.weapons.grenades
+		ascii: ascii.weapons.slap
+	},
+	{
+		name: "Napalm",
+		description: "Some damage to lots of enemies",
+		spread: 4,
+		power: 2,
+		unlock: 2,
+		ascii: ascii.weapons.napalm
 	},
 	{
 		name: "Grenades",
 		description: "Respectable damage to a few closeby enemies",
 		spread: 1,
 		power: 5,
-		unlock: 2,
+		unlock: 3,
 		ascii: ascii.weapons.grenades
 	},
 	{
@@ -160,16 +168,8 @@ data.weapons = [
 		description: "Huge amount of damage to one enemy",
 		spread: 0,
 		power: 12,
-		unlock: 3,
-		ascii: ascii.weapons.superPunch
-	},
-	{
-		name: "Napalm",
-		description: "Some damage to lots of enemies",
-		spread: 4,
-		power: 2,
 		unlock: 4,
-		ascii: ascii.weapons.napalm
+		ascii: ascii.weapons.superPunch
 	}
 ];
 
