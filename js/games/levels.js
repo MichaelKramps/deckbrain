@@ -28,7 +28,7 @@ var levels = [
 	name: "School fair",
 	unlock: 2,
 	enemies: [
-		[{ // 1.2
+		[{ // 2.1
 			name: "Tick",
 			id: "e0",
 			body: data.enemyBodies.formulaUno,
@@ -36,7 +36,7 @@ var levels = [
 			weapon: data.enemyWeapons.hit,
 			ascii: ascii.enemies.crocodile
 		},
-		{ // 1.1
+		{
 			name: "Tock",
 			id: "e1",
 			body: data.enemyBodies.formulaUno,
@@ -45,7 +45,7 @@ var levels = [
 			ascii: ascii.enemies.crocodile
 		}],
 		[
-		{ // 1.4
+		{ // 2.2
 			name: "Fat Bat",
 			id: "e0",
 			body: data.enemyBodies.standard,
@@ -60,7 +60,62 @@ var levels = [
 	name: "Catastrophic failure!",
 	unlock: 3,
 	enemies: [ 
-		
+		[{ // 3.1
+			name: "Jimmy's creation",
+			id: "e0",
+			body: data.enemyBodies.formulaUno,
+			armor: data.enemyArmors.leatherJacket,
+			weapon: data.enemyWeapons.hit,
+			ascii: ascii.enemies.bat
+		},
+		{
+			name: "Johnny's creation",
+			id: "e1",
+			body: data.enemyBodies.standard,
+			armor: data.enemyArmors.jacket,
+			weapon: data.enemyWeapons.hit,
+			ascii: ascii.enemies.satyr
+		},
+		{
+			name: "Judy's creation",
+			id: "e2",
+			body: data.enemyBodies.formulaUno,
+			armor: data.enemyArmors.leatherJacket,
+			weapon: data.enemyWeapons.slap,
+			ascii: ascii.enemies.bat
+		},
+		{
+			name: "Jill's creation",
+			id: "e3",
+			body: data.enemyBodies.standard,
+			armor: data.enemyArmors.jacket,
+			weapon: data.enemyWeapons.slap,
+			ascii: ascii.enemies.satyr
+		}],
+		[{ // 3.2
+			name: "Vending machine",
+			id: "e0",
+			body: data.enemyBodies.flyer,
+			armor: data.enemyArmors.leatherJacket,
+			weapon: data.enemyWeapons.hardPunch,
+			ascii: ascii.enemies.sodaMachine
+		},
+		{
+			name: "Soda machine",
+			id: "e1",
+			body: data.enemyBodies.scales,
+			armor: data.enemyArmors.jacket,
+			weapon: data.enemyWeapons.hit,
+			ascii: ascii.enemies.sodaMachine
+		}],
+		[{ // 3.3
+			name: "School computer",
+			id: "e0",
+			body: data.enemyBodies.blob,
+			armor: data.enemyArmors.leatherJacket,
+			weapon: data.enemyWeapons.breathFire,
+			ascii: ascii.enemies.computer
+		}]
 	]
 	},
 	{ // level 4

@@ -10,14 +10,12 @@ var challenges = function(myTeam, enemyNum = 0){
 	console.log("challenges");
 	if (enemyNum === level.enemies.length){ // moving on to the next challenge
 		enemyNum = 0;
-		console.log("level complete");
 		// create new unlock code and set cookie
 		var unlockCode = utils.getUnlockCode();
 		var unlockObject = utils.createAndReturnUnlockObject(unlockCode);
 		if ((utils.getActiveLevel() + 1) === unlockObject.level) { // if you just beat the highest unlocked level
 			unlockObject.level += 1;
 			// show reward for defeating this challenge
-			console.log("showing reward");
 			reward.createAndShow(unlockObject);
 		} else {
 			drawMap.draw(levels, unlockCode);
