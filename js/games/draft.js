@@ -36,7 +36,6 @@ var filterLockedCards = function(choice){
 			cardUnlockCode = utils.itemCode();
 			break;
 	}
-	console.log(cardUnlockCode);
 	
 	return unlockedCards.filter(function(card){
 		return card.unlock <= cardUnlockCode;

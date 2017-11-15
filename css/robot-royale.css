@@ -1,5 +1,17 @@
 /* Drafting Phase */
 
+@import url('https://fonts.googleapis.com/css?family=Prompt');
+@import url('https://fonts.googleapis.com/css?family=Orbitron');
+
+body {
+	color: #3a3a3a;
+	font-family: 'Orbitron', sans-serif;
+}
+
+h1, h2 {
+	font-family: 'Prompt', sans-serif;
+}
+
 #cards {
 	display: flex;
 	justify-content: space-around;
@@ -45,4 +57,8 @@
 
 div .damage-dealt {
 	color: tomato;
+}
+
+div .amount-healed {
+	color: green;
 }

@@ -17,7 +17,8 @@ var performAttack = function(attackObject, targetArray, gameObject){
 			var thisUnit = targetArray[i];
 			var attackValue = Math.round(thisUnit.armor.dampen * attackObject.weapon.power); // dampen
 			thisUnit.body.health = (thisUnit.body.health - attackValue) < 0 ? 0 : (thisUnit.body.health - attackValue);
-			attackObject.attacker.body.health += Math.round(attackObject.attacker.armor.scrap * attackValue); // scrap
+			var scrapHealth = attackObject.attacker.body.health + Math.round(attackObject.attacker.armor.scrap * attackValue);
+			attackObject.attacker.body.health = scrapHealth > attackObject.attacker.body.maxHealth ? attackObject.attacker.body.maxHealth : scrapHealth; // scrap
 			
 			attacksArray[i] = {id: thisUnit.id, attackValue: attackValue};
 		}
@@ -28,15 +29,32 @@ var performAttack = function(attackObject, targetArray, gameObject){
 		}
 	};
 	var second = function(){
+		var callbackOnce = 0;
 		for (var i = 0; i < attacksArray.length; i++) {
 			var thisUnit = attacksArray[i];
+			
 			if (thisUnit.id[0] === "r") {
-				$("#" + thisUnit.id + " .robot-health").append("<span class='damage-dealt'> -" + thisUnit.attackValue + "</span>").find(".damage-dealt").fadeOut(3000);
+				$("#" + thisUnit.id + " .robot-health")
+				.append("<span class='damage-dealt'> -" + thisUnit.attackValue + "</span>")
+				.find(".damage-dealt")
+				.fadeOut(3000, function(){
+					if (callbackOnce === 0) {
+						callbackOnce += 1;
+						listenForAttacks(gameObject);
+					}
+				});
 			} else {
-				$("#" + thisUnit.id + " .enemy-health").append("<span class='damage-dealt'> -" + thisUnit.attackValue + "</span>").find(".damage-dealt").fadeOut(3000);
+				$("#" + thisUnit.id + " .enemy-health")
+				.append("<span class='damage-dealt'> -" + thisUnit.attackValue + "</span>")
+				.find(".damage-dealt")
+				.fadeOut(1500, function(){
+					if (callbackOnce === 0) {
+						callbackOnce += 1;
+						listenForAttacks(gameObject);
+					}
+				});
 			}
 		}
-		listenForAttacks(gameObject)
 	};
 	$.when(
 		first()
@@ -55,7 +73,7 @@ var createTargetArray = function(attackObject, gameObject){
 		} else {
 			gameObject.attacker += 1;
 			var callback = function(){listenForAttacks(gameObject)};
-			attackObject.item.action([attackObject.target], callback);
+			attackObject.item.action(gameObject, [attackObject.target], callback);
 		}
 	} else {
 		if (attackObject.weapon.spread === 0) {
