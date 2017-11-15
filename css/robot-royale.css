@@ -62,3 +62,7 @@ div .damage-dealt {
 div .amount-healed {
 	color: green;
 }
+
+div .change-special {
+	color: violet;
+}
