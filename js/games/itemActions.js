@@ -131,15 +131,36 @@ itemActions.chemicals = function(gameObject, targetArray, callback){
 };
 
 itemActions.smellingSalts = function(gameObject, targetArray, callback){
-	if (targetArray[0].body.health < 1) {
-		var revive = Math.random();
-		if (revive > 0.5) {
-			targetArray[0].body.health = 25;
-			callback();
-		} else { // failed to revive
-			callback();
+	var revived = "";
+	var target = targetArray[0];
+	
+	var first = function(){
+		if (target.body.health < 1) {
+			var revive = Math.random();
+			if (revive > 0.5) {
+				target.body.health = target.body.maxHealth * 0.5;
+				revived = "Revived!"
+			} else { // failed to revive
+				revived = "Failed to revive";
+			}
+		} else {
+			revived = "Can't revive";
 		}
-	} else {
-		callback();
-	}
+		showMyTeam.show(gameObject.battlefield.myTeam);
+	};
+	
+	var second = function(){
+		$("#" + target.id + " .robot-name")
+		.append("<span class='change-special'> " + revived + "</span>")
+		.find(".change-special")
+		.fadeOut(1500, function(){
+			callback();
+		});
+	};
+	
+	$.when(
+		first()
+	).then(
+		second()
+	);
 };

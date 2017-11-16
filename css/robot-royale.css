@@ -55,6 +55,10 @@ h1, h2 {
 	color: red;
 }
 
+.legal-friendly-target {
+	color: dodgerblue;
+}
+
 div .damage-dealt {
 	color: tomato;
 }

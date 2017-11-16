@@ -32,4 +32,7 @@ var challenges = function(myTeam, enemyNum = 0){
 	}
 };
 
+console.log("challenges");
+console.log(utils.createAndReturnUnlockCode({level: 4, weapon: 2, armor: 2, body: 2, item: 5}));
+
 module.exports = challenges;
