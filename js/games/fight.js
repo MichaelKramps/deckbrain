@@ -64,7 +64,7 @@ var performAttack = function(attackObject, targetArray, gameObject){
 };
 
 var createTargetArray = function(attackObject, gameObject){
-	$(".attacking").removeClass("attacking");
+	$("robot.attacking").removeClass("attacking");
 	
 	var targetArray = [];
 	if (attackObject.item) {
@@ -216,6 +216,7 @@ var teamIsDead = function(team){
 };
 
 var listenForAttacks = function(gameObject){
+	$(".attacking").removeClass("attacking");
 	
 	if (teamIsDead(gameObject.battlefield.enemyTeam)) { // enemies are dead
 		$(".attack-order").empty();

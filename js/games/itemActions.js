@@ -138,7 +138,7 @@ itemActions.smellingSalts = function(gameObject, targetArray, callback){
 		if (target.body.health < 1) {
 			var revive = Math.random();
 			if (revive > 0.5) {
-				target.body.health = target.body.maxHealth * 0.5;
+				target.body.health = Math.round(target.body.maxHealth * 0.5);
 				revived = "Revived!"
 			} else { // failed to revive
 				revived = "Failed to revive";
