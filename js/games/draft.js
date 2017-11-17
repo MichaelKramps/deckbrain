@@ -18,6 +18,21 @@ var returnCardHTML = function(card, id){
 	return html;
 };
 
+var shuffleAndReturnArray = function (array) {
+    var j, x, i;
+    for (i = array.length - 1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i + 1));
+        x = array[i];
+        array[i] = array[j];
+        array[j] = x;
+    }
+	if (array.length > 3) {
+		return array.slice(0, 3);
+	} else {
+		return array;
+	}
+}
+
 var filterLockedCards = function(choice){
 	var cardUnlockCode;
 	var unlockedCards = choice.cards.slice();
@@ -37,9 +52,9 @@ var filterLockedCards = function(choice){
 			break;
 	}
 	
-	return unlockedCards.filter(function(card){
+	return shuffleAndReturnArray(unlockedCards.filter(function(card){
 		return card.unlock <= cardUnlockCode;
-	});
+	}));
 };
 
 var assignStatsBasedOnPick = function (choices, choiceNumber) {
@@ -71,7 +86,7 @@ var pickPart = function(choices, robotNum){
 	var cardsArray = filterLockedCards(thisPart);
 	for (var i = 0; i < cardsArray.length; i++){
 		var thisCard = cardsArray[i];
-		$("#cards").append(returnCardHTML(thisCard, i)).find("#" + i).on("click", function(){
+		$("#cards").append(returnCardHTML(thisCard, thisCard.id)).find("#" + thisCard.id).on("click", function(){
 			var choiceNumber = parseInt($(this).attr("id"));
 			assignStatsBasedOnPick(choices, choiceNumber);
 			choices.partNum += 1;

@@ -17,6 +17,7 @@ data.bodies = [
 	{
 		name: "Marshmallow",
 		description: "You really need to toughen up",
+		id: 0,
 		health: 30,
 		maxHealth: 30,
 		speed: 1,
@@ -26,6 +27,7 @@ data.bodies = [
 	{
 		name: "Stick Man",
 		description: "You're fast, but you can't take a hit",
+		id: 1,
 		health: 20,
 		maxHealth: 20,
 		speed: 5,
@@ -35,6 +37,7 @@ data.bodies = [
 	{
 		name: "Tank",
 		description: "You can take one heck of a beating",
+		id: 2,
 		health: 200,
 		maxHealth: 200,
 		speed: 1,
@@ -44,6 +47,7 @@ data.bodies = [
 	{
 		name: "Thief",
 		description: "Good luck landing a punch on this guy",
+		id: 3,
 		health: 40,
 		maxHealth: 40,
 		speed: 10,
@@ -53,6 +57,7 @@ data.bodies = [
 	{
 		name: "Fighter",
 		description: "Well rounded fighter. Mobile and tough.",
+		id: 4,
 		health: 100,
 		maxHealth: 100,
 		speed: 4,
@@ -79,6 +84,7 @@ data.armors = [
 	{
 		name: "Baseball hat",
 		description: "At least it keeps the sun out of your eyes",
+		id: 0,
 		dampen: 1,
 		scrap: 0,
 		unlock: 1,
@@ -87,6 +93,7 @@ data.armors = [
 	{
 		name: "Turban",
 		description: "You look tougher",
+		id: 1,
 		dampen: 0.95,
 		scrap: 0,
 		unlock: 1,
@@ -95,6 +102,7 @@ data.armors = [
 	{
 		name: "Scavenger",
 		description: "Use your defeated opponents' scrap metal to repair yourself",
+		id: 2,
 		dampen: 1,
 		scrap: 0.8,
 		unlock: 2,
@@ -103,6 +111,7 @@ data.armors = [
 	{
 		name: "Platinum Plate",
 		description: "Lessens the effect of all attacks against you",
+		id: 3,
 		dampen: 0.4,
 		scrap: 0,
 		unlock: 3,
@@ -111,6 +120,7 @@ data.armors = [
 	{
 		name: "Magnetic Plate",
 		description: "Attacks are slightly less effective and you can sometimes repair yourself",
+		id: 4,
 		dampen: 0.8,
 		scrap: 0.4,
 		unlock: 4,
@@ -134,6 +144,7 @@ data.weapons = [
 	{
 		name: "Punch",
 		description: "Hit an enemy with your brute strength",
+		id: 0,
 		spread: 0,
 		power: 3,
 		unlock: 1,
@@ -142,6 +153,7 @@ data.weapons = [
 	{
 		name: "Slap",
 		description: "Weak attack to a few closeby enemies",
+		id: 1,
 		spread: 1,
 		power: 1,
 		unlock: 1,
@@ -150,6 +162,7 @@ data.weapons = [
 	{
 		name: "Napalm",
 		description: "Some damage to lots of enemies",
+		id: 2,
 		spread: 4,
 		power: 2,
 		unlock: 2,
@@ -158,6 +171,7 @@ data.weapons = [
 	{
 		name: "Grenades",
 		description: "Respectable damage to a few closeby enemies",
+		id: 3,
 		spread: 1,
 		power: 5,
 		unlock: 3,
@@ -166,6 +180,7 @@ data.weapons = [
 	{
 		name: "Super Punch",
 		description: "Huge amount of damage to one enemy",
+		id: 4,
 		spread: 0,
 		power: 12,
 		unlock: 4,
@@ -193,6 +208,7 @@ data.items = [
 	{
 		name: "Sandwiches", // Item to heal target
 		description: "Eat a sandwich to heal yourself",
+		id: 0,
 		action: itemActions.sandwiches,
 		targets: "friendlies",
 		unlock: 1,
@@ -201,6 +217,7 @@ data.items = [
 	{
 		name: "Springs", // Item to improve speed
 		description: "Make sure you are first to attack each round",
+		id: 1,
 		action: itemActions.springs,
 		targets: "friendlies",
 		unlock: 1,
@@ -209,6 +226,7 @@ data.items = [
 	{
 		name: "Nets", // Item to weaken enemy attacks
 		description: "Disrupt your enemies attacks",
+		id: 2,
 		action: itemActions.nets,
 		targets: "enemies",
 		unlock: 2,
@@ -217,6 +235,7 @@ data.items = [
 	{
 		name: "Jackets", // Item to improve defense
 		description: "You can absorb some of your enemies' attacks",
+		id: 3,
 		action: itemActions.jackets,
 		targets: "friendlies",
 		unlock: 3,
@@ -225,6 +244,7 @@ data.items = [
 	{
 		name: "Chemicals", // Item to attack passively
 		description: "Poisons opponents to deal damage each turn",
+		id: 4,
 		action: itemActions.chemicals,
 		targets: "enemies",
 		unlock: 4,
@@ -233,6 +253,7 @@ data.items = [
 	{
 		name: "Smelling Salts", // Item with chance to revive ally
 		description: "Provides a chance to revive an ally",
+		id: 5,
 		action: itemActions.smellingSalts,
 		targets: "friendlies",
 		unlock: 5,
@@ -271,7 +292,7 @@ data.robotNames = [
 	"Pip",
 	"Hot Mama Cheese",
 	"Frodo",
-	"Dominatrices",
+	"Domino",
 	"Tim",
 	"Eloise",
 	"Tuck",
@@ -281,4 +302,28 @@ data.robotNames = [
 	"Holy Binary",
 	"Hex",
 	"Mike Planeswalker",
+	"Keith",
+	"Fritas",
+	"Bob",
+	"Cap",
+	"Dirk",
+	"Mini Optimus",
+	"Prime",
+	"Dethmetal",
+	"Arthur",
+	"Ellie",
+	"Mousemah",
+	"Jean-Luc",
+	"Lt. Liker",
+	"Datum",
+	"Shepard",
+	"Four Dog",
+	"Walawario",
+	"Yoshy",
+	"Shiek",
+	"Ganon in C",
+	"Lavascript",
+	"Malfurious",
+	"Liliana",
+	"The White Rabbit"
 ];
