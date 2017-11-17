@@ -42,12 +42,14 @@ var showReward = function (type, reward) {
 	
 	$("body").append(html).find(".accept-reward").on("click", function(){
 		$(".reward").remove();
+		$("body").removeClass("giving-reward");
 		drawMap.draw(levels, utils.getUnlockCode());
 	});
 };
 
 reward.createAndShow = function(unlockObject){
 	clearScreen();
+	$("body").addClass("giving-reward");
 	
 	var randomNum = Math.random();
 	

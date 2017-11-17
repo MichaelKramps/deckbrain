@@ -222,13 +222,12 @@ var listenForAttacks = function(gameObject){
 		$(".attack-order .attacker-name").remove();
 		$("body").removeClass("fighting");
 		// move to next enemy
-		console.log("enemies are dead");
 		gameObject.enemyNum += 1;
 		gameObject.challenges(gameObject.battlefield.myTeam, gameObject.enemyNum);
 	} else if (teamIsDead(gameObject.battlefield.myTeam)) { // my team is dead
-		// draft again
 		$(".attack-order .attacker-name").remove();
 		$("body").removeClass("fighting");
+		// draft again
 		drawMap.draw(levels, utils.getUnlockCode());
 	} else { // battle is still raging
 		if(gameObject.attacker < gameObject.attackOrder.length){
