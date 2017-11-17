@@ -3,8 +3,14 @@
 @import url('https://fonts.googleapis.com/css?family=Prompt');
 @import url('https://fonts.googleapis.com/css?family=Orbitron');
 
+html, body {
+	margin: 0;
+	padding: 0;
+}
+
 body {
 	color: #3a3a3a;
+	display: flex;
 	font-family: 'Orbitron', sans-serif;
 }
 
@@ -23,7 +29,18 @@ h1, h2 {
 	cursor: pointer;
 	cursor: hand;
 	padding: 1em;
+	text-align: center;
 	width: 15%;
+}
+
+.board {
+	width: 100%;
+}
+
+.fighting .board {
+	display: inline-block;
+	flex: 4;
+	width: 80%;
 }
 
 /* Battle Phase */
@@ -38,9 +55,16 @@ h1, h2 {
 }
 
 .attack-order {
-	position: fixed;
-	top: 0;
-	right: 0;
+	display: none;
+}
+
+.fighting .attack-order {
+	background-color: #cdcdcd;
+	display: inline-block;
+	flex: 1;
+	padding-right: 15px;
+	text-align: right;
+	width: 19%;
 }
 
 .attacking {

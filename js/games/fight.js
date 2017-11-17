@@ -219,14 +219,16 @@ var listenForAttacks = function(gameObject){
 	$(".attacking").removeClass("attacking");
 	
 	if (teamIsDead(gameObject.battlefield.enemyTeam)) { // enemies are dead
-		$(".attack-order").empty();
+		$(".attack-order .attacker-name").remove();
+		$("body").removeClass("fighting");
 		// move to next enemy
 		console.log("enemies are dead");
 		gameObject.enemyNum += 1;
 		gameObject.challenges(gameObject.battlefield.myTeam, gameObject.enemyNum);
 	} else if (teamIsDead(gameObject.battlefield.myTeam)) { // my team is dead
 		// draft again
-		$(".attack-order").empty();
+		$(".attack-order .attacker-name").remove();
+		$("body").removeClass("fighting");
 		drawMap.draw(levels, utils.getUnlockCode());
 	} else { // battle is still raging
 		if(gameObject.attacker < gameObject.attackOrder.length){
@@ -243,7 +245,7 @@ var listenForAttacks = function(gameObject){
 };
 
 var showAttackOrder = function(gameObject){
-	$(".attack-order").empty();
+	$(".attack-order .attacker-name").remove();
 	for(var i = 0; i < gameObject.attackOrder.length; i++){
 		var thisUnit = gameObject.attackOrder[i];
 		var html = '<div class="attacker-name">' + thisUnit.name + '</div>';
@@ -285,6 +287,7 @@ var createAttackOrderArray = function(gameObject){
 };
 
 var fight = function(gameObject){
+	$("body").addClass("fighting");
 	createAttackOrderArray(gameObject);
 };
 
