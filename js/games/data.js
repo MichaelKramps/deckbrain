@@ -38,8 +38,8 @@ data.bodies = [
 		name: "Tank",
 		description: "You can take one heck of a beating",
 		id: 2,
-		health: 200,
-		maxHealth: 200,
+		health: 80,
+		maxHealth: 80,
 		speed: 1,
 		unlock: 2,
 		ascii: ascii.bodies.tank
@@ -50,7 +50,7 @@ data.bodies = [
 		id: 3,
 		health: 40,
 		maxHealth: 40,
-		speed: 10,
+		speed: 8,
 		unlock: 3,
 		ascii: ascii.bodies.thief
 	},
@@ -58,8 +58,8 @@ data.bodies = [
 		name: "Fighter",
 		description: "Well rounded fighter. Mobile and tough.",
 		id: 4,
-		health: 100,
-		maxHealth: 100,
+		health: 60,
+		maxHealth: 60,
 		speed: 4,
 		unlock: 4,
 		ascii: ascii.bodies.fighter
