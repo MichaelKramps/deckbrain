@@ -17,7 +17,7 @@ var returnNameHtml = function(enemy){
 };
 
 var returnEnemyHtml = function(enemy){
-	var html = '<div id="' + enemy.id + '" class="enemy"><pre style=\"font: 10px/8px monospace;\">';
+	var html = '<div id="' + enemy.id + '" class="enemy"><pre style=\"font: 12px/10px monospace;\">';
 	html += enemy.ascii;
 	html += '</pre>';
 	html += returnNameHtml(enemy);

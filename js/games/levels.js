@@ -148,7 +148,7 @@ var levels = [
 		},
 		{ // 4.3
 			name: "Razor",
-			id: "e0",
+			id: "e2",
 			body: data.enemyBodies.pilot,
 			armor: data.enemyArmors.ironMail,
 			weapon: data.enemyWeapons.hardPunch,
@@ -156,7 +156,7 @@ var levels = [
 		},
 		{ // 4.3
 			name: "Pixel",
-			id: "e0",
+			id: "e3",
 			body: data.enemyBodies.guy,
 			armor: data.enemyArmors.jacket,
 			weapon: data.enemyWeapons.slap,
@@ -168,14 +168,100 @@ var levels = [
 	name: "Uprising",
 	unlock: 5,
 	enemies: [ 
-		
+		[{ // 5.1
+			name: "Drone A",
+			id: "e0",
+			body: data.enemyBodies.flyer,
+			armor: data.enemyArmors.leatherJacket,
+			weapon: data.enemyWeapons.kick,
+			ascii: ascii.enemies.drone
+		}],
+		[{ // 5.2
+			name: "Drone B",
+			id: "e0",
+			body: data.enemyBodies.flyer,
+			armor: data.enemyArmors.leatherJacket,
+			weapon: data.enemyWeapons.hardPunch,
+			ascii: ascii.enemies.drone
+		},
+		{
+			name: "Drone C",
+			id: "e1",
+			body: data.enemyBodies.flyer,
+			armor: data.enemyArmors.leatherJacket,
+			weapon: data.enemyWeapons.hardPunch,
+			ascii: ascii.enemies.drone
+		}],
+		[{ // 5.3
+			name: "Drone D",
+			id: "e0",
+			body: data.enemyBodies.flyer,
+			armor: data.enemyArmors.leatherJacket,
+			weapon: data.enemyWeapons.punch,
+			ascii: ascii.enemies.drone
+		},
+		{
+			name: "Drone E",
+			id: "e1",
+			body: data.enemyBodies.flyer,
+			armor: data.enemyArmors.leatherJacket,
+			weapon: data.enemyWeapons.punch,
+			ascii: ascii.enemies.drone
+		},
+		{
+			name: "Drone F",
+			id: "e2",
+			body: data.enemyBodies.flyer,
+			armor: data.enemyArmors.leatherJacket,
+			weapon: data.enemyWeapons.punch,
+			ascii: ascii.enemies.drone
+		}],
+		[{ // 5.4
+			name: "Drone G",
+			id: "e0",
+			body: data.enemyBodies.flyer,
+			armor: data.enemyArmors.leatherJacket,
+			weapon: data.enemyWeapons.punch,
+			ascii: ascii.enemies.drone
+		},
+		{
+			name: "Drone H",
+			id: "e1",
+			body: data.enemyBodies.flyer,
+			armor: data.enemyArmors.leatherJacket,
+			weapon: data.enemyWeapons.punch,
+			ascii: ascii.enemies.drone
+		},
+		{
+			name: "Drone I",
+			id: "e2",
+			body: data.enemyBodies.flyer,
+			armor: data.enemyArmors.leatherJacket,
+			weapon: data.enemyWeapons.punch,
+			ascii: ascii.enemies.drone
+		},
+		{
+			name: "Drone J",
+			id: "e3",
+			body: data.enemyBodies.flyer,
+			armor: data.enemyArmors.leatherJacket,
+			weapon: data.enemyWeapons.punch,
+			ascii: ascii.enemies.drone
+		}]
 	]
 	},
 	{ // level 6
 	name: "Sergeant Dan",
 	unlock: 6,
 	enemies: [ 
-		
+		[{ // 4.2
+			name: "Sergeant Dan",
+			id: "e0",
+			body: data.enemyBodies.blob,
+			armor: data.enemyArmors.magneticMail,
+			weapon: data.enemyWeapons.meteorShower,
+			ascii: ascii.enemies.sergeantDan
+		}]
 	]
 	},
 ];
