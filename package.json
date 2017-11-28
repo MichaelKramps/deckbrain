@@ -1,7 +1,7 @@
 {
-  "name": "asset-manager",
+  "name": "deckbrain",
   "version": "1.0.0",
-  "description": "Web app to manage assets and view cash flow",
+  "description": "Website with game prototypes and games",
   "main": "index.js",
   "dependencies": {
     "express": "^4.15.3",
@@ -16,8 +16,10 @@
     "jquery": "^3.2.1"
   },
   "scripts": {
-    "build-rr": "browserify js/games/robot-royale/robot-royale.js -o js/games/robot-royale/robot-royale-bundle.js",
-	"watch-rr": "watchify js/games/robot-royale/robot-royale.js -o js/games/robot-royale/robot-royale-bundle.js"
+    "build-royale": "browserify js/prototypes/robot-royale/main.js -o js/prototypes/robot-royale/bundle.js",
+	"watch-royale": "watchify js/prototypes/robot-royale/main.js -o js/prototypes/robot-royale/bundle.js",
+	"build-drone": "browserify js/prototypes/godrone/main.js -o js/prototypes/godrone/bundle.js",
+	"watch-drone": "watchify js/prototypes/godrone/main.js -o js/prototypes/godrone/bundle.js"
   },
   "author": "Michael Kramps",
   "license": "ISC"
