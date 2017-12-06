@@ -17,6 +17,10 @@ routes.set = function(app, express){
 		res.render('robot-royale');
 	});
 	
+	app.get('/godrone', function(req, res){
+		res.render('godrone');
+	});
+	
 	app.get('/squad-command', function(req, res){
 		res.render('squad-command');
 	});
