@@ -10,7 +10,7 @@ routes.set = function(app, express){
 	app.use('/js', express.static(path.join(__dirname, '../js')));
 	
 	app.get('/', function(req, res){
-		res.render('static-page');
+		res.render('prototypes');
 	});
 	
 	app.get('/robot-royale', function(req, res){
@@ -19,6 +19,10 @@ routes.set = function(app, express){
 	
 	app.get('/godrone', function(req, res){
 		res.render('godrone');
+	});
+	
+	app.get('/draft-poker-lobby', function(req, res){
+		res.render('draft-poker-lobby');
 	});
 	
 	app.get('/squad-command', function(req, res){
