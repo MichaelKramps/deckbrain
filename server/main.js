@@ -19,12 +19,10 @@ middleware.use(app);
 
 /***** IO *****/
 var socketIO = require('socket.io')(secureServer);
-var io = require('./io.js');
-io.start(socketIO);
 
 /***** Routing *****/
 var routes = require('./routes.js');
-routes.set(app, express);
+routes.set(app, express, socketIO); // separate socket functionality files used depending on the route
 
 
 server.listen(config.ports.http, function(){

@@ -11,7 +11,7 @@
 	<div class="two-person-games">
 		<h2>Two-Person Games</h2>
 		<ul id="two-person-game-list">
-		
+			
 		</ul>
 		<div id="new-two-person-game">Start New Game</div>
 	</div>
@@ -25,7 +25,13 @@
 </body>
 
 </html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
 <script>
-  var socket = io();
+$(document).ready(function(){
+	var socket = io();
+	$("#new-two-person-game").on("click", function(){
+		socket.emit("draftPokerTwoPerson");
+	});
+}); 
 </script>
