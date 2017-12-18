@@ -21,7 +21,7 @@
 // Full House: 700 ((triple card * 4/5) + (pair card * 1/5)) // 700:1
 // Flush: 500 * highest card // 500:1
 // Straight: 250 * highest card // 250:1
-// Three of a kind: 25 * card value // 50:1
+// Three of a kind: 50 * card value // 50:1
 // Two pair: 10 * (sum of card values) // 20:1
 // One pair: 2 * card value // 2:1(ish)
 // Nothing: 1 // 1:1

@@ -7,13 +7,14 @@
     "express": "^4.15.3",
     "jquery": "^3.2.1",
     "socket.io": "^2.0.3",
-    "watchify": "^3.9.0"
+	"mongoose": "^4.13.7"
   },
   "devDependencies": {
     "browserify": "^14.4.0",
     "ejs": "^2.5.7",
     "express": "^4.15.3",
-    "jquery": "^3.2.1"
+    "jquery": "^3.2.1",
+    "watchify": "^3.9.0"
   },
   "scripts": {
     "build-royale": "browserify js/prototypes/robot-royale/main.js -o js/prototypes/robot-royale/bundle.js",
