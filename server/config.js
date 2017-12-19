@@ -15,3 +15,7 @@ config.ports = {
 	http: 80,
 	https: 443
 }
+
+config.mongo = {
+	draftPoker: "mongodb://localhost/draftPoker"
+}
