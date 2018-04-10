@@ -33,5 +33,17 @@ $(document).ready(function(){
 	$("#new-two-person-game").on("click", function(){
 		socket.emit("draftPokerTwoPerson");
 	});
+	socket.on("listOpenTwoPlayerGames", function(games){
+		// clear list
+		$("#two-person-game-list").empty();
+		
+		for (var i = 0; i < games.length; i++) {
+			var game = games[i];
+			var gameListHtml = '<li id="' + game._id + '">Join Game ' + game._id.substring(game._id.length - 4) + '</li>';
+			$("#two-person-game-list").append(gameListHtml).find("#" + game._id).on("click", function(){
+				console.log("clicked on " + game._id);
+			});
+		}
+	});
 }); 
 </script>

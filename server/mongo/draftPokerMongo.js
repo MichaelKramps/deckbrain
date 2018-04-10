@@ -76,6 +76,13 @@ var fullDeck = [
 
 /*** Exported Functions ***/
 
+draftPokerMongo.returnOpenTwoPlayerGames = function(callback){
+	twoPlayerModel.find({pl: 1}, "_id", function(err, game){
+		console.log(game);
+		callback(game);
+	});
+};
+
 draftPokerMongo.newGame = function(callback){
 	var newGame = new twoPlayerModel({
 		pl: 1,
@@ -85,13 +92,14 @@ draftPokerMongo.newGame = function(callback){
 		un: [],
 	});
 	newGame.save(function(err, game){
-		callback(game._id);
+		// may need to return all open two-player games
+		//callback(game._id);
 	});
 };
 
 draftPokerMongo.joinGame = function(gameId){
 	var id = mongoose.Types.ObjectId(gameId);
-	 demoGameModel.findOne({"_id": id, pl: 1}, function(err, game){
+	 twoPlayerModel.findOne({"_id": id, pl: 1}, function(err, game){
         if (err) {return err};
         if (game) {
 			// game is open
@@ -101,4 +109,4 @@ draftPokerMongo.joinGame = function(gameId){
             // callback(0);
         }
     });
-}
+};
