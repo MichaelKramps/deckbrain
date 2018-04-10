@@ -8,6 +8,7 @@ var db = mongoose.createConnection(config.mongo.draftPoker);
 /*** Schemas/Models ***/
 
 var twoPlayerSchema = mongoose.Schema({
+	pl: Number,
 	p1: [{value: Number, suit: String, id: String}], // list of cards chosen by player 1
 	p2: [{value: Number, suit: String, id: String}], // list of cards chosen by player 2
 	av: [{value: Number, suit: String, id: String}], // list of cards that are still available to draft from
@@ -77,12 +78,27 @@ var fullDeck = [
 
 draftPokerMongo.newGame = function(callback){
 	var newGame = new twoPlayerModel({
+		pl: 1,
 		p1: [],
 		p2: [],
 		av: fullDeck,
 		un: [],
 	});
-	newGame.save(function(err, newGame){
-		callback(newGame._id);
+	newGame.save(function(err, game){
+		callback(game._id);
 	});
 };
+
+draftPokerMongo.joinGame = function(gameId){
+	var id = mongoose.Types.ObjectId(gameId);
+	 demoGameModel.findOne({"_id": id, pl: 1}, function(err, game){
+        if (err) {return err};
+        if (game) {
+			// game is open
+            // callback(game._id);
+        } else {
+			// game is no longer open
+            // callback(0);
+        }
+    });
+}
