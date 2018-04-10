@@ -7,20 +7,21 @@
     "express": "^4.15.3",
     "jquery": "^3.2.1",
     "socket.io": "^2.0.3",
-	"mongoose": "^4.13.7"
+    "mongoose": "^4.13.7"
   },
   "devDependencies": {
     "browserify": "^14.4.0",
     "ejs": "^2.5.7",
     "express": "^4.15.3",
     "jquery": "^3.2.1",
+    "mongoose": "^4.13.12",
     "watchify": "^3.9.0"
   },
   "scripts": {
     "build-royale": "browserify js/prototypes/robot-royale/main.js -o js/prototypes/robot-royale/bundle.js",
-	"watch-royale": "watchify js/prototypes/robot-royale/main.js -o js/prototypes/robot-royale/bundle.js",
-	"build-drone": "browserify js/prototypes/godrone/main.js -o js/prototypes/godrone/bundle.js",
-	"watch-drone": "watchify js/prototypes/godrone/main.js -o js/prototypes/godrone/bundle.js"
+    "watch-royale": "watchify js/prototypes/robot-royale/main.js -o js/prototypes/robot-royale/bundle.js",
+    "build-drone": "browserify js/prototypes/godrone/main.js -o js/prototypes/godrone/bundle.js",
+    "watch-drone": "watchify js/prototypes/godrone/main.js -o js/prototypes/godrone/bundle.js"
   },
   "author": "Michael Kramps",
   "license": "ISC"
