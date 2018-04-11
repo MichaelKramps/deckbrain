@@ -102,9 +102,12 @@ draftPokerMongo.joinGame = function(gameId){
         if (err) {return err};
         if (game) {
 			// game is open
+			// update db to indicate player has joined game
+			// send game id back to player
             // callback(game._id);
         } else {
 			// game is no longer open
+			// tell player that they are attempting to join a game that is no longer open
             // callback(0);
         }
     });

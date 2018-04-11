@@ -12,7 +12,7 @@ var draftPokerMongo = require("../mongo/draftPokerMongo.js");
 
 draftPokerIO.start = function(io){
 	io.on('connection', function(socket){
-		console.log('a user connected to the draft poker lobby');
+		// a user connected to the draft poker lobby
 		
 		draftPokerMongo.returnOpenTwoPlayerGames(function(games){
 			socket.emit("listOpenTwoPlayerGames", games)
@@ -25,5 +25,6 @@ draftPokerIO.start = function(io){
 				});
 			});
 		});
+		
 	});
 };
