@@ -92,8 +92,7 @@ draftPokerMongo.newGame = function(callback){
 		un: [],
 	});
 	newGame.save(function(err, game){
-		// may need to return all open two-player games
-		//callback(game._id);
+		draftPokerMongo.returnOpenTwoPlayerGames(callback);
 	});
 };
 

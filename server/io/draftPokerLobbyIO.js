@@ -6,9 +6,7 @@ var draftPokerMongo = require("../mongo/draftPokerMongo.js");
 
 /*** Local Functions ***/
 
-var listTwoPlayerGames = function(games){
-	socket.emit("listOpenTwoPlayerGames", games);
-};
+
 
 /*** Exported Functions ***/
 
@@ -21,7 +19,11 @@ draftPokerIO.start = function(io){
 		});
 		
 		socket.on("draftPokerTwoPerson", function(){
-			draftPokerMongo.newGame(listTwoPlayerGames);
+			draftPokerMongo.newGame(function(){
+				draftPokerMongo.returnOpenTwoPlayerGames(function(games){
+					socket.emit("listOpenTwoPlayerGames", games)
+				});
+			});
 		});
 	});
-}
+};
