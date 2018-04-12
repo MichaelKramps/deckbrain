@@ -3,10 +3,10 @@ var routes = {};
 module.exports = routes;
 
 var path = require('path');
-var io = require('./io.js');
 
 /*** Route specific socket.io files ***/
 var draftPokerLobbyIO = require("./io/draftPokerLobbyIO.js");
+var squadCommandLobbyIO = require("./io/squadCommandLobbyIO.js");
 
 /*** Routes ***/
 routes.set = function(app, express, socketIO){
@@ -32,6 +32,7 @@ routes.set = function(app, express, socketIO){
 	});
 	
 	app.get('/squad-command', function(req, res){
-		res.render('squad-command');
+		res.render('squad-command-lobby');
+		squadCommandLobbyIO.start(socketIO);
 	});
 }

@@ -17,5 +17,6 @@ config.ports = {
 }
 
 config.mongo = {
-	draftPoker: "mongodb://localhost/draftPoker"
+	draftPoker: "mongodb://localhost/draftPoker",
+	squadCommand: "mongodb://localhost/squadCommand"
 }
