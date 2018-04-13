@@ -19,10 +19,17 @@ middleware.use(app);
 
 /***** IO *****/
 var socketIO = require('socket.io')(secureServer);
+var draftPokerLobbyIO = require("./io/draftPokerLobbyIO.js");
+var squadCommandLobbyIO = require("./io/squadCommandLobbyIO.js");
+
+socketIO.on('connection', function(socket){
+	draftPokerLobbyIO.start(socket);
+	squadCommandLobbyIO.start(socket);
+});
 
 /***** Routing *****/
 var routes = require('./routes.js');
-routes.set(app, express, socketIO); // separate socket functionality files used depending on the route
+routes.set(app, express); // separate socket functionality files used depending on the route
 
 
 server.listen(config.ports.http, function(){

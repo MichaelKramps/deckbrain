@@ -9,11 +9,10 @@ var squadCommandMongo = require("../mongo/squadCommandMongo.js");
 
 /*** Exported Functions ***/
 
-squadCommandIO.start = function(io){
-	io.on('connection', function(socket){
-		// a user connected to the draft poker lobby
-		socket.on("request-quick-match", function(){
-			console.log("quick match requested");
-		});
+squadCommandIO.start = function(socket){
+	
+	socket.on("request-quick-match", function(){
+		console.log("quick match requested");
 	});
+	
 };

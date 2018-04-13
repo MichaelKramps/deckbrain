@@ -10,21 +10,18 @@ var draftPokerMongo = require("../mongo/draftPokerMongo.js");
 
 /*** Exported Functions ***/
 
-draftPokerIO.start = function(io){
-	io.on('connection', function(socket){
-		// a user connected to the draft poker lobby
-		
-		draftPokerMongo.returnOpenTwoPlayerGames(function(games){
-			socket.emit("listOpenTwoPlayerGames", games)
-		});
-		
-		socket.on("draftPokerTwoPerson", function(){
-			draftPokerMongo.newGame(function(){
-				draftPokerMongo.returnOpenTwoPlayerGames(function(games){
-					socket.emit("listOpenTwoPlayerGames", games)
-				});
+draftPokerIO.start = function(socket){
+	
+	draftPokerMongo.returnOpenTwoPlayerGames(function(games){
+		socket.emit("listOpenTwoPlayerGames", games)
+	});
+	
+	socket.on("draftPokerTwoPerson", function(){
+		draftPokerMongo.newGame(function(){
+			draftPokerMongo.returnOpenTwoPlayerGames(function(games){
+				socket.emit("listOpenTwoPlayerGames", games)
 			});
 		});
-		
 	});
+		
 };
