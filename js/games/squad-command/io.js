@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	var socket = io({transports: ['websocket'], upgrade: false});
+	var socket = io.connect("/squad-command");
 	
 	$("#quick-match").on("click", function(){
 		console.log(socket.connected);

@@ -22,9 +22,11 @@ var socketIO = require('socket.io')(secureServer);
 var draftPokerLobbyIO = require("./io/draftPokerLobbyIO.js");
 var squadCommandLobbyIO = require("./io/squadCommandLobbyIO.js");
 
-socketIO.on('connection', function(socket){
-	draftPokerLobbyIO.start(socket);
+socketIO.of("/squad-command").on('connection', function(socket){
 	squadCommandLobbyIO.start(socket);
+});
+socketIO.of("/draft-poker").on('connection', function(socket){
+	draftPokerLobbyIO.start(socket);
 });
 
 /***** Routing *****/
