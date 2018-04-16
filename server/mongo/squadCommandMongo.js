@@ -20,8 +20,28 @@ var quickMatchModel = db.model("quickMatches", gameSchema);
 /*** Exported Functions ***/
 
 squadCommandMongo.searchForQuickMatch = function(callback){
-	quickMatchModel.find({pl: 1}, "_id", function(err, game){
-		console.log(game);
-		callback(game);
+	quickMatchModel.findOne({pl: 1}, "_id, pl", function(err, game){
+		if (err) {return err};
+		if (game) {
+			squadCommandMongo.joinQuickMatch(game, callback);
+		} else {
+			squadCommandMongo.newQuickMatch(game, callback);
+		}
+	});
+};
+
+squadCommandMongo.newQuickMatch = function(game, callback){
+	var newGame = new quickMatchModel({
+		pl: 1,
+	});
+	newGame.save(function(err, game){
+		callback(game._id);
+	});
+};
+
+squadCommandMongo.joinQuickMatch = function(game, callback){
+	// if players = 1, then join
+	quickMatchModel.findOneAndUpdate({_id: game._id}, {$set: {"pl": 2}}, function(err, game){
+		callback(game._id);
 	});
 };
