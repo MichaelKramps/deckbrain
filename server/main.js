@@ -19,15 +19,9 @@ middleware.use(app);
 
 /***** IO *****/
 var socketIO = require('socket.io')(secureServer);
-var draftPokerLobbyIO = require("./io/draftPokerLobbyIO.js");
-var squadCommandLobbyIO = require("./io/squadCommandLobbyIO.js");
+var socketRoutes = require('./socketRoutes');
+socketRoutes.start(socketIO);
 
-socketIO.of("/squad-command").on('connection', function(socket){
-	squadCommandLobbyIO.start(socket);
-});
-socketIO.of("/draft-poker").on('connection', function(socket){
-	draftPokerLobbyIO.start(socket);
-});
 
 /***** Routing *****/
 var routes = require('./routes.js');
