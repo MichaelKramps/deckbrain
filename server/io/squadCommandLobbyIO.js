@@ -13,7 +13,7 @@ squadCommandIO.start = function(socket){
 	
 	socket.on("request-quick-match", function(){
 		squadCommandMongo.searchForQuickMatch(function(gameId){
-			socket.emit("join-quick-match", {gameId: gameId});
+			socket.emit("join-quick-match", gameId);
 		});
 	});
 	
