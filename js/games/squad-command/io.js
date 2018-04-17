@@ -5,4 +5,8 @@ $(document).ready(function(){
 		console.log(socket.connected);
 		socket.emit("request-quick-match");
 	});
+	
+	socket.on("join-quick-match", function(gameIdObject){
+		alert("joined game: " + gameIdObject.gameId);
+	});
 }); 

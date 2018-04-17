@@ -12,8 +12,8 @@ var squadCommandMongo = require("../mongo/squadCommandMongo.js");
 squadCommandIO.start = function(socket){
 	
 	socket.on("request-quick-match", function(){
-		squadCommandMongo.searchForQuickMatch(function(game){
-			console.log(game);
+		squadCommandMongo.searchForQuickMatch(function(gameId){
+			socket.emit("join-quick-match", {gameId: gameId});
 		});
 	});
 	
