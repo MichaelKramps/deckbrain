@@ -24,3 +24,5 @@ utilities.getCookie = function(name) {
 utilities.eraseCookie = function(name) {   
     document.cookie = name+'=; Max-Age=-99999999;';  
 }
+
+module.exports = utilities;

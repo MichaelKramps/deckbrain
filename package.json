@@ -21,7 +21,9 @@
     "build-royale": "browserify js/prototypes/robot-royale/main.js -o js/prototypes/robot-royale/bundle.js",
     "watch-royale": "watchify js/prototypes/robot-royale/main.js -o js/prototypes/robot-royale/bundle.js",
     "build-drone": "browserify js/prototypes/godrone/main.js -o js/prototypes/godrone/bundle.js",
-    "watch-drone": "watchify js/prototypes/godrone/main.js -o js/prototypes/godrone/bundle.js"
+    "watch-drone": "watchify js/prototypes/godrone/main.js -o js/prototypes/godrone/bundle.js",
+	"build-squad": "browserify js/games/squad-command/main.js -o js/games/squad-command/bundle.js",
+    "watch-squad": "watchify js/games/squad-command/main.js -o js/games/squad-command/bundle.js"
   },
   "author": "Michael Kramps",
   "license": "ISC"
