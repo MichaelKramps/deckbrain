@@ -18,9 +18,9 @@ middleware.use(app);
 
 
 /***** IO *****/
-var socketIO = require('socket.io')(secureServer);
+var io = require('socket.io')(secureServer);
 var socketRoutes = require('./socketRoutes');
-socketRoutes.start(socketIO);
+socketRoutes.start(io);
 
 
 /***** Routing *****/

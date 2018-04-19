@@ -9,12 +9,15 @@ var squadCommandMongo = require("../mongo/squadCommandMongo.js");
 
 /*** Exported Functions ***/
 
-squadCommandIO.start = function(socket){
+squadCommandIO.start = function(io, socket){
 	
 	socket.on("request-quick-match", function(){
-		squadCommandMongo.searchForQuickMatch(function(gameId){
-			socket.emit("join-quick-match", gameId);
+		squadCommandMongo.searchForQuickMatch(function(game){
+			socket.join(game._id, function(){
+				if (game.pl === 2){
+					io.to(game._id).emit("start-game");
+				}
+			});
 		});
 	});
-	
 };

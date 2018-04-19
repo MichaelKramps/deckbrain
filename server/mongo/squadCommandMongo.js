@@ -35,13 +35,17 @@ squadCommandMongo.newQuickMatch = function(game, callback){
 		pl: 1,
 	});
 	newGame.save(function(err, game){
-		callback(game._id);
+		callback({gameId: game._id, pl: 1});
 	});
 };
 
 squadCommandMongo.joinQuickMatch = function(game, callback){
 	// if players = 1, then join
-	quickMatchModel.findOneAndUpdate({_id: game._id}, {$set: {"pl": 2}}, function(err, game){
-		callback(game._id);
+	quickMatchModel.findOneAndUpdate({_id: game._id, pl: 1}, {$set: {"pl": 2}}, function(err, game){
+		if (game) {
+			callback({gameId: game._id, pl: 2});
+		} else {
+			searchForQuickMatch(callback);
+		}
 	});
 };
