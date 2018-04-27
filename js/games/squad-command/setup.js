@@ -1,10 +1,13 @@
 var setup = {}
 
 var io = require("./io.js");
+var pickHand = require("./pickHand.js");
 
 setup.initiate = function(){
-	console.log("setup");
 	io.start();
+	// create all graphics, sounds
+	// all environment setup
+	g.state = pickHand.deal;
 };
 
 module.exports = setup;
