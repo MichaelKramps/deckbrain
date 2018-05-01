@@ -1,7 +1,11 @@
 var setup = require("./setup.js");
+var utilities = require("../utilities.js");
+
+// maybe pull this out to a settings file
+var screenSize = utilities.returnFullScreen();
 
 var g = ga(
-  512, 512, setup.initiate
+  screenSize.width, screenSize.height, setup.initiate
 );
 
 //Start the Ga engine.

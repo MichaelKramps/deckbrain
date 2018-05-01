@@ -1,6 +1,8 @@
 var utilities = {};
 
-utilities.setCookie = function(name,value,days) {
+/*** Cookies ***/
+
+utilities.setCookie = function(name,value,days){
     var expires = "";
     if (days) {
         var date = new Date();
@@ -10,7 +12,7 @@ utilities.setCookie = function(name,value,days) {
     document.cookie = name + "=" + (value || "")  + expires + "; path=/";
 }
 
-utilities.getCookie = function(name) {
+utilities.getCookie = function(name){
     var nameEQ = name + "=";
     var ca = document.cookie.split(';');
     for(var i=0;i < ca.length;i++) {
@@ -21,8 +23,17 @@ utilities.getCookie = function(name) {
     return null;
 }
 
-utilities.eraseCookie = function(name) {   
+utilities.eraseCookie = function(name){   
     document.cookie = name+'=; Max-Age=-99999999;';  
+}
+
+/*** Screen Resolution ***/
+
+utilities.returnFullScreen = function(){
+	var size = {};
+	size.height = window.innerHeight;
+	size.width = window.innerWidth;
+	return size;
 }
 
 module.exports = utilities;
