@@ -1,0 +1,20 @@
+/* Drafting Phase */
+
+@import url('https://fonts.googleapis.com/css?family=Prompt');
+@import url('https://fonts.googleapis.com/css?family=Orbitron');
+
+html, body {
+	margin: 0;
+	padding: 0;
+	min-height: 100%;
+}
+
+body {
+	color: #3a3a3a;
+	font-family: 'Orbitron', sans-serif;
+}
+
+h1, h2 {
+	font-family: 'Prompt', sans-serif;
+	text-align: center;
+}
