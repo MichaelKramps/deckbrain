@@ -1,10 +1,8 @@
 var setup = {}
 
-var io = require("./io.js");
 var pickHand = require("./pickHand.js");
 
 setup.initiate = function(){
-	io.start();
 	// create all graphics, sounds
 	// all environment setup
 	g.state = pickHand.deal;
